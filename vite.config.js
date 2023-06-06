@@ -7,4 +7,5 @@ export default defineConfig({
     build: {
         exitDir: resolve(__dirname, 'dist'),
     },
+    plugins: [handlebars()]
 });
