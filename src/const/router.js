@@ -10,4 +10,25 @@ export const pages = {
     '/register': register,
     '/login': login,
     '/settings': settings,
+};
+
+export const onNavigate = (path) => {
+    const template = pages[path];
+    window.history.pushState(
+        {}, path, window.location.origin + path
+    );
+    const root = document.querySelector('#app');
+    root.innerHTML = template();
+    enableNavigation();
+}
+
+export const enableNavigation = () => {
+    const links = document.querySelectorAll('a');
+    [...links].forEach((link) => {
+        link.addEventListener('click', (event) => {
+            const path = `/${event.currentTarget.id}`;
+            event.preventDefault();
+            onNavigate(path);
+        })
+    })
 }

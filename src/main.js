@@ -1,8 +1,9 @@
-import {pages} from "./const/router.js";
+import {pages, onNavigate, enableNavigation} from "./const/router.js";
+import login from './templates/login.hbs';
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('here');
     const root = document.querySelector('#app');
-    const path = window.location.pathname;
-    console.log(path);
-    root.innerHTML = path === '/' ? pages['/login']() : pages[path]();
+    root.innerHTML = login();
+    enableNavigation();
 });
