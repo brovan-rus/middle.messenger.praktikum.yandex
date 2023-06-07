@@ -1,0 +1,19 @@
+# Global settings applied to the whole site.
+#
+# “base” is the directory to change to before starting build. If you set base:
+#        that is where we will look for package.json/.nvmrc/etc, not repo root!
+# “command” is your build command.
+# “publish” is the directory to publish (relative to the root of your repo).
+
+[build]
+  publish = "dist"
+
+# Redirects and headers are GLOBAL for all builds – they do not
+# get scoped to contexts no matter where you define them in the file.
+# For context-specific rules, use _headers or _redirects files,
+# which are PER-DEPLOY.
+
+# A basic redirect rule
+[[redirects]]
+  from = "/*"
+  to = "/"
