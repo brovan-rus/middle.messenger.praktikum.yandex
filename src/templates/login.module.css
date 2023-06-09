@@ -1,0 +1,23 @@
+.list1 {
+    background: green;
+}
+
+.list2 {
+    background: red;
+}
+
+
+$lastChildColor: blue;
+
+.nav {
+    >a {
+        color: yellow;
+    }
+
+    &:last-child {
+        color: $lastChildColor !important;
+    }
+}
+
+
+
