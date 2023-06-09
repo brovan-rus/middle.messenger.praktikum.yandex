@@ -15,17 +15,24 @@ export const pages = {
 
 export const renderPage = (path, context) => {
     const template = pages[path] || pages["/login"];
-    window.history.pushState(
-        {}, path, window.location.origin + path
-    );
     const root = document.querySelector('#app');
     root.innerHTML = template(context);
+    enableNavigation();
 }
 
 export const onNavigate = (path, context) => {
+    window.history.pushState(
+        {}, path, window.location.origin + path
+    );
     renderPage(path, context);
-    enableNavigation();
 }
+
+export const registerBrowserBackAndForward = () => {
+    window.onpopstate = function () {
+        const currentPath = window.location.pathname;
+        renderPage(currentPath, props[currentPath.slice(1)]);
+    };
+};
 
 export const enableNavigation = () => {
     const links = document.querySelectorAll('a');
@@ -38,4 +45,5 @@ export const enableNavigation = () => {
             onNavigate(path, props[pageName]);
         })
     });
-}
+};
+

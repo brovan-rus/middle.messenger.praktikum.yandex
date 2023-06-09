@@ -1,4 +1,7 @@
-import {enableNavigation, renderPage} from "./const/router.js";
+import {
+    renderPage,
+    registerBrowserBackAndForward
+} from "./const/router.js";
 import login from './templates/login.hbs';
 import {props} from './const/props'
 
@@ -7,5 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     root.innerHTML = login(props.login);
     const currentPath = window.location.pathname;
     renderPage(currentPath, props[currentPath.slice(1)]);
-    enableNavigation();
+    registerBrowserBackAndForward();
+
 });
