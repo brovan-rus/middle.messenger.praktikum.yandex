@@ -13,24 +13,29 @@ export const pages = {
     '/settings': settings,
 };
 
-export const onNavigate = (path, context) => {
-    const template = pages[path];
+export const renderPage = (path, context) => {
+    const template = pages[path] || pages["/login"];
     window.history.pushState(
         {}, path, window.location.origin + path
     );
     const root = document.querySelector('#app');
     root.innerHTML = template(context);
+}
+
+export const onNavigate = (path, context) => {
+    renderPage(path, context);
     enableNavigation();
 }
 
 export const enableNavigation = () => {
     const links = document.querySelectorAll('a');
-    [...links].forEach((link) => {
+    const buttons = document.querySelectorAll('button');
+    [...links, ...buttons].forEach((link) => {
         link.addEventListener('click', (event) => {
             const pageName = event.currentTarget.id;
             const path = `/${pageName}`;
             event.preventDefault();
             onNavigate(path, props[pageName]);
         })
-    })
+    });
 }

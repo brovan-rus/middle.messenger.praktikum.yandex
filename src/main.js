@@ -1,11 +1,11 @@
-import {enableNavigation} from "./const/router.js";
+import {enableNavigation, renderPage} from "./const/router.js";
 import login from './templates/login.hbs';
-import {props} from '../src/const/props'
+import {props} from './const/props'
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('here');
     const root = document.querySelector('#app');
     root.innerHTML = login(props.login);
-    console.log(root);
+    const currentPath = window.location.pathname;
+    renderPage(currentPath, props[currentPath.slice(1)]);
     enableNavigation();
 });
