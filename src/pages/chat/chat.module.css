@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    width: 100vw;
+}
+
+.chatListContainer {
+    width: 25%;
+}
+
+.chatContainer {
+    width: 75%;
+}

@@ -1,8 +1,8 @@
-import chat from '../templates/chat.hbs';
-import register from '../templates/register.hbs';
-import error from '../templates/error.hbs';
-import login from '../templates/login.hbs';
-import settings from '../templates/settings.hbs';
+import chat from '../pages/chat/chat.hbs';
+import register from '../pages/register.hbs';
+import error from '../pages/error.hbs';
+import login from '../pages/login.hbs';
+import settings from '../pages/profile.hbs';
 import {props} from "./props";
 
 export const pages = {
