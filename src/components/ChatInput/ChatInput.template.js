@@ -1,4 +1,4 @@
-<form id="searchForm" class="{{styles.searchForm}}">
+export default `<form id="searchForm" class="{{styles.searchForm}}">
     <input class="{{styles.input}} {{#if
             searchBar}} {{styles.searchBar}}{{else}} {{styles.messageInput}} {{/if}}" {{#unless
             searchBar}} placeholder="{{placeholder}} {{/unless}} </"/>
@@ -7,4 +7,4 @@
             <div class="{{styles.placeholderIcon}}"></div>
             <span class="{{styles.placeholderText}}">{{placeholder}}</span>
         </div>{{/if}}
-</form>
+</form>`

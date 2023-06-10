@@ -1,16 +1,23 @@
-import chat from '../pages/chat/chat.hbs';
-import register from '../pages/register.hbs';
-import error from '../pages/error.hbs';
-import login from '../pages/login.hbs';
-import settings from '../pages/profile.hbs';
+import chat from '../pages/chat/chat.template';
+import register from '../pages/regitster.template';
+import error from '../pages/error.template';
+import login from '../pages/login.template';
+import settings from '../pages/profile.template';
 import {props} from "./props";
+import Handlebars from "handlebars";
+
+const chatTemplate = Handlebars.compile(chat);
+const registerTemplate = Handlebars.compile(register);
+const errorTemplate = Handlebars.compile(error);
+const loginTemplate = Handlebars.compile(login);
+const settingsTemplate = Handlebars.compile(settings);
 
 export const pages = {
-    '/chat': chat,
-    '/error': error,
-    '/register': register,
-    '/login': login,
-    '/settings': settings,
+    '/chat': chatTemplate,
+    '/error': errorTemplate,
+    '/register': registerTemplate,
+    '/login': loginTemplate,
+    '/settings': settingsTemplate,
 };
 
 export const renderPage = (path, context) => {

@@ -1,4 +1,4 @@
-<html lang="en">
+export default `<html lang="en">
 <head>
     <style>
             {{styles}}
@@ -18,4 +18,4 @@
     </ul>
 </nav>
 </body>
-</html>
+</html>`

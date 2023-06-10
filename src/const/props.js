@@ -1,12 +1,20 @@
+import Handlebars from "handlebars";
 import loginStyles from '../pages/login.module.css';
 import chatStyles from '../pages/chat/chat.module.css';
-import Placeholder from '../components/Placeholder/Placeholder.hbs';
+import Placeholder from '../components/Placeholder/Placeholder.template';
 import PlaceholderStyles from '../components/Placeholder/Placeholder.module.css'
-import ChatList from '../components/ChatList/ChatList.hbs';
+import ChatList from '../components/ChatList/ChatList.template';
 import chatListStyles from '../components/ChatList/ChatList.module.css'
-import ChatInput from '../components/ChatInput/ChatInput.hbs'
+import ChatInput from '../components/ChatInput/ChatInput.template'
 import ChatInputStyles from '../components/ChatInput/ChatInput.module.css';
-import ChatCard from '../components/ChatCard/ChatCard.hbs'
+import ChatCard from '../components/ChatCard/ChatCard.template'
+
+
+const placeholderTemplate = Handlebars.compile(Placeholder);
+const chatListTemplate = Handlebars.compile(ChatList);
+const chatInputTemplate = Handlebars.compile(ChatInput);
+const chatCardTemplate = Handlebars.compile(ChatCard);
+Handlebars.registerPartial('card', chatCardTemplate);
 
 const cards = [
     {
@@ -41,12 +49,11 @@ export const props = {
     },
     chat: {
         styles: chatStyles,
-        Placeholder: Placeholder({text: 'Выберите чат чтобы отправить сообщение', styles: PlaceholderStyles}),
-        ChatList: ChatList({
+        Placeholder: placeholderTemplate({text: 'Выберите чат чтобы отправить сообщение', styles: PlaceholderStyles}),
+        ChatList: chatListTemplate({
             styles: chatListStyles,
             profile_link_text: 'Профиль',
-            ChatInput: ChatInput({styles: ChatInputStyles, searchBar: true, placeholder: 'Поиск'}),
-            ChatCard: ChatCard(),
+            ChatInput: chatInputTemplate({styles: ChatInputStyles, searchBar: true, placeholder: 'Поиск'}),
             cards: cards,
         }),
     },

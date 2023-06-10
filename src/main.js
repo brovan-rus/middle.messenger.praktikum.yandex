@@ -2,16 +2,15 @@ import {
     renderPage,
     registerBrowserBackAndForward
 } from "./const/router.js";
-import login from './pages/login.hbs';
+import login from './pages/login.template';
 import {props} from './const/props'
-import Handlebars from 'handlebars/runtime';
-import card from './components/ChatCard/ChatCard.hbs'
+import Handlebars from 'handlebars';
 
 document.addEventListener('DOMContentLoaded', () => {
-    Handlebars.registerPartial('card', card);
-    console.log(Handlebars.partials)
+
     const root = document.querySelector('#app');
-    root.innerHTML = login(props.login);
+    const loginTemplate = Handlebars.compile(login);
+    root.innerHTML = loginTemplate(props.login);
     const currentPath = window.location.pathname;
     renderPage(currentPath, props[currentPath.slice(1)]);
     registerBrowserBackAndForward();
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // turn off default form submitting
     const searchForm = document.querySelector('#searchForm');
-    searchForm.addEventListener('submit', (e) => {
+    searchForm && searchForm.addEventListener('submit', (e) => {
         e.preventDefault()
     })
 
