@@ -39,4 +39,14 @@
     }
 }
 
+.chatListHeader {
+    margin-bottom: $spacing_ml;
+}
+
+.chatList {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
 

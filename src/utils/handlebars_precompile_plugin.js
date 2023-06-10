@@ -1,4 +1,5 @@
 import Handlebars from 'handlebars';
+
 export default function handlebars() {
     const fileRegexp = /\.hbs$|\.handlebars$/;
 
@@ -11,6 +12,7 @@ export default function handlebars() {
             //language=javascript
             const code = `
                 import Handlebars from 'handlebars/runtime';
+
                 export default Handlebars.template(${Handlebars.precompile(src)});
             `
 
