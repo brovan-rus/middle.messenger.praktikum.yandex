@@ -1,3 +1,4 @@
+// language=hbs
 export default `<html lang="en">
 <head>
     <style>

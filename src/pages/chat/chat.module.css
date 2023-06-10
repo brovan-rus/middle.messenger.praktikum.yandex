@@ -3,9 +3,10 @@
 }
 
 .chatListContainer {
-    width: 25%;
+    min-width: 310px;
 }
 
 .chatContainer {
-    width: 75%;
+    width: 100%;
+    min-width: 310px;
 }

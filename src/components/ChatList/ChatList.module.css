@@ -6,7 +6,7 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding: $spacing_l $spacing_s 0 $spacing_s;
+    padding: $spacing_l 0 0 0;
     border-right: 1px solid $medium_gray;
     background: $light_gray;
 }
@@ -40,6 +40,7 @@
 }
 
 .chatListHeader {
+    padding: 0 $spacing_s;
     margin-bottom: $spacing_ml;
 }
 

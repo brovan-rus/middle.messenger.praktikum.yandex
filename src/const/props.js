@@ -8,7 +8,7 @@ import chatListStyles from '../components/ChatList/ChatList.module.css'
 import ChatInput from '../components/ChatInput/ChatInput.template'
 import ChatInputStyles from '../components/ChatInput/ChatInput.module.css';
 import ChatCard from '../components/ChatCard/ChatCard.template'
-
+import chatCardStyles from '../components/ChatCard/ChatCard.module.css';
 
 const placeholderTemplate = Handlebars.compile(Placeholder);
 const chatListTemplate = Handlebars.compile(ChatList);
@@ -23,7 +23,9 @@ const cards = [
         image: false,
         avatar: '',
         newMessages: 4,
-        timeDay: '12:00'
+        timeDay: '12:00',
+        styles: chatCardStyles,
+        active: false,
     },
     {
         name: 'Константин',
@@ -31,15 +33,49 @@ const cards = [
         image: false,
         avatar: '',
         newMessages: 2,
-        timeDay: '15:00'
+        timeDay: '15:00',
+        styles: chatCardStyles,
+        active: false,
     },
     {
         name: 'Виктор',
-        text: 'Пиьмсо',
+        text: 'Письмо',
         image: false,
         avatar: '',
         newMessages: 0,
-        timeDay: 'Пт'
+        timeDay: 'Пт',
+        styles: chatCardStyles,
+        active: false,
+    },
+    {
+        name: 'Виктор',
+        text: 'Очень длинный тест. Очень длинный тест. Очень длинный тест. Очень длинный тест.  Очень длинный тест. ',
+        image: false,
+        avatar: '',
+        newMessages: 0,
+        timeDay: 'Пт',
+        styles: chatCardStyles,
+        active: true,
+    },
+    {
+        name: 'Виктор',
+        text: 'Письмо',
+        image: false,
+        avatar: '',
+        newMessages: 0,
+        timeDay: 'Пт',
+        styles: chatCardStyles,
+        active: false,
+    },
+    {
+        name: 'Виктор',
+        text: 'Очень длинный тест. Очень длинный тест. Очень длинный тест. Очень длинный тест.  Очень длинный тест. ',
+        image: false,
+        avatar: '',
+        newMessages: 0,
+        timeDay: '12 апреля 2020',
+        styles: chatCardStyles,
+        active: false,
     },
 ]
 
