@@ -8,7 +8,11 @@
     padding: $spacing_s 0;
     font-size: $font_size_m;
     line-height: $title_line_height_s;
-    color: $blue
+    color: $blue;
+
+    &:last-child {
+        border: 0;
+    }
 }
 
 .red {
