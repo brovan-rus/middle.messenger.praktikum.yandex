@@ -1,0 +1,16 @@
+@import url('../../styles/_colors.css');
+
+$button_size: 28px;
+
+.button {
+    width: $button_size;
+    height: $button_size;
+    border-radius: 50%;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+.backIcon {
+    background: url("../../../images/icons/arrow_back_button.svg") no-repeat;
+}

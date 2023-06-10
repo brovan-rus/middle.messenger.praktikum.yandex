@@ -14,13 +14,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentPath = window.location.pathname;
     renderPage(currentPath, props[currentPath.slice(1)]);
     registerBrowserBackAndForward();
-
-
-    // turn off default form submitting
-    const searchForm = document.querySelector('#searchForm');
-    searchForm && searchForm.addEventListener('submit', (e) => {
-        e.preventDefault()
-    })
-
-
+    
 });
