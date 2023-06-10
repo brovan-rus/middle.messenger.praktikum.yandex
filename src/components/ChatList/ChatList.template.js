@@ -9,7 +9,7 @@ export default `
         </header>
         <ul class="{{styles.chatList}}">
             {{#each cards}}
-                {{>card this styles=styles}}
+                {{>card this}}
             {{/each}}
         </ul>
     </div>`
