@@ -8,8 +8,27 @@
     justify-content: space-between;
     border-bottom: 1px solid $medium_gray;
 
-    &:last-child {
+    &:last-of-type {
         border: 0;
+        margin-bottom: $spacing_xxxl;
+    }
+}
+
+.input {
+    border: 0;
+    cursor: pointer;
+    outline: 0;
+    text-align: right;
+
+
+    &::placeholder {
+        text-align: right;
+    }
+
+    &:focus {
+        &::placeholder {
+            color: transparent;
+        }
     }
 }
 

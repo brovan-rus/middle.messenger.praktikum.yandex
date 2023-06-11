@@ -5,28 +5,28 @@ $avatar-size: 140px;
 $table-width: 510px;
 
 .container {
+    display: flex;
     width: 100%;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .table {
     display: flex;
+    width: $table-width;
     flex-direction: column;
     align-items: center;
-    width: $table-width;
 }
 
 .avatar {
     width: $avatar-size;
     height: $avatar-size;
     border-radius: 50%;
+    margin-bottom: $spacing_xxxxl;
     background: $dark_gray url("../../../images/icons/no-avatar.svg") no-repeat center;
     cursor: pointer;
-    margin-bottom: $spacing_xxxxl;
 }
 
 .fields {
@@ -35,7 +35,7 @@ $table-width: 510px;
 }
 
 .links {
-    width: 100%;
     display: flex;
+    width: 100%;
     flex-direction: column;
 }

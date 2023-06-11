@@ -2,7 +2,7 @@ import {
     renderPage,
     registerBrowserBackAndForward
 } from "./const/router.js";
-import login from './pages/login.template';
+import login from './pages/Login.template';
 import {props} from './const/props'
 import Handlebars from 'handlebars';
 
@@ -14,5 +14,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentPath = window.location.pathname;
     renderPage(currentPath, props[currentPath.slice(1)]);
     registerBrowserBackAndForward();
-    
+
 });

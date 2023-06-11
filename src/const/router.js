@@ -1,17 +1,19 @@
-import chat from '../pages/chat/chat.template';
-import register from '../pages/regitster.template';
-import error from '../pages/error.template';
-import login from '../pages/login.template';
-import profile from '../pages/profile/profile.template';
+import Chat from '../pages/Chat/Chat.template';
+import Register from '../pages/Regitster.template';
+import Error from '../pages/Error.template';
+import Login from '../pages/Login.template';
+import Profile from '../pages/Profile/Profile.template';
+import EditProfile from "../pages/EditProfile/EditProfile.template";
 import {props} from "./props";
 import Handlebars from "handlebars";
 import {init} from "../utils/init";
 
-const chatTemplate = Handlebars.compile(chat);
-const registerTemplate = Handlebars.compile(register);
-const errorTemplate = Handlebars.compile(error);
-const loginTemplate = Handlebars.compile(login);
-const profileTemplate = Handlebars.compile(profile);
+const chatTemplate = Handlebars.compile(Chat);
+const registerTemplate = Handlebars.compile(Register);
+const errorTemplate = Handlebars.compile(Error);
+const loginTemplate = Handlebars.compile(Login);
+const profileTemplate = Handlebars.compile(Profile);
+const editProfileTemplate = Handlebars.compile(EditProfile);
 
 export const pages = {
     '/chat': chatTemplate,
@@ -19,6 +21,7 @@ export const pages = {
     '/register': registerTemplate,
     '/login': loginTemplate,
     '/profile': profileTemplate,
+    '/editProfile': editProfileTemplate
 };
 
 export const renderPage = (path, context) => {

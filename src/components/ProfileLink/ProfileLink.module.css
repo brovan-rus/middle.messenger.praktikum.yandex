@@ -3,12 +3,12 @@
 @import url("../../styles/_sizes.css");
 
 .link {
-    text-decoration: none;
-    border-bottom: 1px solid $medium_gray;
     padding: $spacing_s 0;
+    border-bottom: 1px solid $medium_gray;
+    color: $blue;
     font-size: $font_size_m;
     line-height: $title_line_height_s;
-    color: $blue;
+    text-decoration: none;
 
     &:last-child {
         border: 0;
