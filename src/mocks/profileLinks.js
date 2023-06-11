@@ -1,4 +1,4 @@
-import profileLinkStyles from '../components/ProfileLink/ProfileLink.module.css';
+import profileLinkStyles from '../components/Link/Link.module.css';
 
 export const profileLinks = [
     {text: 'Изменить данные', id: 'editProfile', red: false, styles: profileLinkStyles},

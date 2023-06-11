@@ -2,7 +2,7 @@ import Handlebars from "handlebars";
 import {cards} from "../mocks/cards";
 import {profile, profileInputs, profilePasswordInputs} from "../mocks/profile";
 import {profileLinks} from "../mocks/profileLinks";
-import loginStyles from '../pages/Login.module.css';
+import loginStyles from '../pages/Login/Login.module.css';
 import chatStyles from '../pages/Chat/Chat.module.css';
 import Placeholder from '../components/Placeholder/Placeholder.template';
 import PlaceholderStyles from '../components/Placeholder/Placeholder.module.css'
@@ -19,11 +19,11 @@ import buttonStyles from '../components/Button/Button.module.css';
 import ProfileTable from '../components/ProfileTable/ProfileTable.template'
 import profileTableStyles from '../components/ProfileTable/ProfileTable.module.css';
 import ProfileFiled from '../components/ProfileField/ProfileField.template';
-import ProfileLink from '../components/ProfileLink/ProfileLink.template';
+import Link from '../components/Link/Link.template';
 import editProfileStyles from '../pages/EditProfile/EditProfile.module.css';
-import EditProfileForm from '../components/EditProfileForm/ProfileForm.template';
-import editProfileFormStyles from '../components/EditProfileForm/ProfileForm.module.css';
-import EditProfileInput from '../components/ProfileInput/ProfileInput.template';
+import ProfileForm from '../components/ProfileForm/ProfileForm.template';
+import editProfileFormStyles from '../components/ProfileForm/ProfileForm.module.css';
+import FormInput from '../components/FormInput/FormInput.template';
 import editPasswordStyles from '../pages/EidtPassword/EditPassword.module.css';
 
 const placeholderTemplate = Handlebars.compile(Placeholder);
@@ -34,14 +34,14 @@ const backButtonTemplate = Handlebars.compile(BackButton);
 const buttonTemplate = Handlebars.compile(Button);
 const profileTableTemplate = Handlebars.compile(ProfileTable);
 const profileFieldTemplate = Handlebars.compile(ProfileFiled);
-const profileLinkTemplate = Handlebars.compile(ProfileLink);
-const editProfileFormTemplate = Handlebars.compile(EditProfileForm);
-const editProfileInputTemplate = Handlebars.compile(EditProfileInput);
+const linkTemplate = Handlebars.compile(Link);
+const profileForm = Handlebars.compile(ProfileForm);
+const formInput = Handlebars.compile(FormInput);
 
 Handlebars.registerPartial('card', chatCardTemplate);
 Handlebars.registerPartial('profileField', profileFieldTemplate);
-Handlebars.registerPartial('profileLink', profileLinkTemplate);
-Handlebars.registerPartial('profileInput', editProfileInputTemplate);
+Handlebars.registerPartial('link', linkTemplate);
+Handlebars.registerPartial('formInput', formInput);
 
 const profileBackButtonProps = {
     styles: backButtonStyles,
@@ -81,7 +81,7 @@ export const props = {
         ProfileTable: profileTableTemplate({
             styles: profileTableStyles,
             form: true,
-            EditProfileForm: editProfileFormTemplate({
+            EditProfileForm: profileForm({
                 styles: editProfileFormStyles,
                 fields: profileInputs,
                 Button: buttonTemplate({
@@ -100,7 +100,7 @@ export const props = {
             styles: profileTableStyles,
             fields: profile,
             form: true,
-            EditProfileForm: editProfileFormTemplate({
+            EditProfileForm: profileForm({
                 styles: editProfileFormStyles,
                 fields: profilePasswordInputs,
                 Button: buttonTemplate({

@@ -30,8 +30,8 @@
     line-height: $line_height_s;
 
     &::after {
-        width: 8px;
-        height: 4px;
+        width: 12px;
+        height: 8px;
         background: url("../../../images/icons/arrow_right.svg") no-repeat center;
         background-size: cover;
         content: '';

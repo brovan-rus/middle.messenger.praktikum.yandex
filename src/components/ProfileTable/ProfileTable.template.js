@@ -14,7 +14,7 @@ export default `
             {{/if}}
             <div class="{{styles.links}}">
                 {{#each links}}
-                    {{>profileLink}}
+                    {{>link}}
                 {{/each}}
             </div>
         </div>

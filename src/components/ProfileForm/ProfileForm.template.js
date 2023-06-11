@@ -2,7 +2,7 @@
 export default `
     <form class="{{styles.form}}" type="submit" id="profileEditForm">
         {{#each fields}}
-            {{>profileInput this}}
+            {{>formInput this}}
         {{/each}}
         {{{Button}}}
     </form>
