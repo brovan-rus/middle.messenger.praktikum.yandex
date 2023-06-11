@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
 import {cards} from "../mocks/cards";
-import {profile, profileInputs} from "../mocks/profile";
+import {profile, profileInputs, profilePasswordInputs} from "../mocks/profile";
 import {profileLinks} from "../mocks/profileLinks";
 import loginStyles from '../pages/Login.module.css';
 import chatStyles from '../pages/Chat/Chat.module.css';
@@ -24,6 +24,7 @@ import editProfileStyles from '../pages/EditProfile/EditProfile.module.css';
 import EditProfileForm from '../components/EditProfileForm/ProfileForm.template';
 import editProfileFormStyles from '../components/EditProfileForm/ProfileForm.module.css';
 import EditProfileInput from '../components/ProfileInput/ProfileInput.template';
+import editPasswordStyles from '../pages/EidtPassword/EditPassword.module.css';
 
 const placeholderTemplate = Handlebars.compile(Placeholder);
 const chatListTemplate = Handlebars.compile(ChatList);
@@ -79,11 +80,29 @@ export const props = {
         BackButton: backButtonTemplate(profileBackButtonProps),
         ProfileTable: profileTableTemplate({
             styles: profileTableStyles,
-            fields: profile,
             form: true,
             EditProfileForm: editProfileFormTemplate({
                 styles: editProfileFormStyles,
                 fields: profileInputs,
+                Button: buttonTemplate({
+                    styles: buttonStyles,
+                    formButton: true,
+                    id: 'formButton',
+                    text: 'Сохранить'
+                }),
+            })
+        })
+    },
+    editPassword: {
+        styles: editPasswordStyles,
+        BackButton: backButtonTemplate(profileBackButtonProps),
+        ProfileTable: profileTableTemplate({
+            styles: profileTableStyles,
+            fields: profile,
+            form: true,
+            EditProfileForm: editProfileFormTemplate({
+                styles: editProfileFormStyles,
+                fields: profilePasswordInputs,
                 Button: buttonTemplate({
                     styles: buttonStyles,
                     formButton: true,

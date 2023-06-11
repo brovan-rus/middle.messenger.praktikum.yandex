@@ -7,6 +7,7 @@ import EditProfile from "../pages/EditProfile/EditProfile.template";
 import {props} from "./props";
 import Handlebars from "handlebars";
 import {init} from "../utils/init";
+import EditPassword from "../pages/EidtPassword/EditPassword.template";
 
 const chatTemplate = Handlebars.compile(Chat);
 const registerTemplate = Handlebars.compile(Register);
@@ -14,6 +15,7 @@ const errorTemplate = Handlebars.compile(Error);
 const loginTemplate = Handlebars.compile(Login);
 const profileTemplate = Handlebars.compile(Profile);
 const editProfileTemplate = Handlebars.compile(EditProfile);
+const editPasswordTemplate = Handlebars.compile(EditPassword);
 
 export const pages = {
     '/chat': chatTemplate,
@@ -21,7 +23,8 @@ export const pages = {
     '/register': registerTemplate,
     '/login': loginTemplate,
     '/profile': profileTemplate,
-    '/editProfile': editProfileTemplate
+    '/editProfile': editProfileTemplate,
+    '/editPassword': editPasswordTemplate
 };
 
 export const renderPage = (path, context) => {

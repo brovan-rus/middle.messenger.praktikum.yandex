@@ -10,10 +10,20 @@ const profileInfo = [
     {fieldName: 'Телефон', fieldValue: '+7 (909) 967 30 30', name: 'phone', type: 'text'},
 ];
 
+const changePassword = [
+    {fieldName: 'Старый пароль', name: 'oldPassword', type: 'password'},
+    {fieldName: 'Новый пароль', name: 'newPassword', type: 'password'},
+    {fieldName: 'Повторите новый пароль', name: 'newPasswordRepeat', type: 'password'},
+]
+
 export const profile = profileInfo.map((item) => {
     return {...item, styles: profileFieldStyles}
 });
 
 export const profileInputs = profileInfo.map((item) => {
+    return {...item, styles: profileInputStyles}
+});
+
+export const profilePasswordInputs = changePassword.map((item) => {
     return {...item, styles: profileInputStyles}
 });
