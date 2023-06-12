@@ -30,6 +30,10 @@ import editPasswordStyles from '../pages/EidtPassword/EditPassword.module.css';
 import UserForm from '../components/UserFrom/UserForm.template';
 import userFormStyles from '../components/UserFrom/UserForm.module.css';
 import registerStyles from '../pages/Register/Register.module.css'
+import error404Styles from '../pages/Error404/Error404.module.css';
+import error503Styles from '../pages/Error503/Error503.module.css';
+import Error from '../components/Error/Error.template';
+import ErrorStyles from '../components/Error/Error.module.css';
 
 const placeholderTemplate = Handlebars.compile(Placeholder);
 const chatListTemplate = Handlebars.compile(ChatList);
@@ -43,6 +47,7 @@ const linkTemplate = Handlebars.compile(Link);
 const profileFormTemplate = Handlebars.compile(ProfileForm);
 const formInputTemplate = Handlebars.compile(FormInput);
 const userFromTemplate = Handlebars.compile(UserForm);
+const error = Handlebars.compile(Error);
 
 Handlebars.registerPartial('card', chatCardTemplate);
 Handlebars.registerPartial('profileField', profileFieldTemplate);
@@ -132,6 +137,34 @@ export const props = {
                 fields: profilePasswordInputs,
                 Button: buttonTemplate(formButtonProps({id: 'formButtonChangePassword'})),
             })
+        })
+    },
+    error404: {
+        styles: error404Styles,
+        Error: error({
+            styles: ErrorStyles,
+            code: '404',
+            description: 'Не туда попали'
+        }),
+        Link: linkTemplate({
+            styles: linkStyles,
+            text: 'Назад к чатам',
+            id: 'chat',
+            small: true
+        })
+    },
+    error503: {
+        styles: error503Styles,
+        Error: error({
+            styles: ErrorStyles,
+            code: '503',
+            description: 'Мы уже фиксим'
+        }),
+        Link: linkTemplate({
+            styles: linkStyles,
+            text: 'Назад к чатам',
+            id: 'chat',
+            small: true
         })
     }
 }

@@ -6,6 +6,7 @@ $font_size_m: 13px;
 $title_font_size_s: 15px;
 $title_font_size_m: 16px;
 $title_font_size_l: 20px;
+$title_font_size_xl: 40px;
 
 $line_height_xxs: 9px;
 $line_height_xs: 11px;
@@ -15,3 +16,4 @@ $line_height_m: 15px;
 $title_line_height_s: 13px;
 $title_line_height_m: 16px;
 $title_line_height_l: 20px;
+$title_line_height_xl: 40px;
