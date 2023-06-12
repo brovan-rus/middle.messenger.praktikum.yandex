@@ -1,5 +1,5 @@
 import Chat from '../pages/Chat/Chat.template';
-import Register from '../pages/Regitster.template';
+import Register from '../pages/Register/Regitster.template';
 import Error from '../pages/Error.template';
 import Login from '../pages/Login/Login.template';
 import Profile from '../pages/Profile/Profile.template';
@@ -35,7 +35,7 @@ export const renderPage = (path, context) => {
     init();
 }
 
-export const onNavigate = (path, context) => {
+export const onNavigate = (path, context = props[path.slice(1)]) => {
     window.history.pushState(
         {}, path, window.location.origin + path
     );

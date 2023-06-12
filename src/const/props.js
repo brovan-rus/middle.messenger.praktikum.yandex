@@ -2,7 +2,7 @@ import Handlebars from "handlebars";
 import {cards} from "../mocks/cards";
 import {profile, profileInputs, profilePasswordInputs} from "../mocks/profile";
 import {profileLinks} from "../mocks/profileLinks";
-import {loginInputs} from "../mocks/userForm";
+import {loginInputs, registerInputs} from "../mocks/userForm";
 import loginStyles from '../pages/Login/Login.module.css';
 import chatStyles from '../pages/Chat/Chat.module.css';
 import Placeholder from '../components/Placeholder/Placeholder.template';
@@ -29,6 +29,7 @@ import FormInput from '../components/FormInput/FormInput.template';
 import editPasswordStyles from '../pages/EidtPassword/EditPassword.module.css';
 import UserForm from '../components/UserFrom/UserForm.template';
 import userFormStyles from '../components/UserFrom/UserForm.module.css';
+import registerStyles from '../pages/Register/Register.module.css'
 
 const placeholderTemplate = Handlebars.compile(Placeholder);
 const chatListTemplate = Handlebars.compile(ChatList);
@@ -74,7 +75,17 @@ export const props = {
             title: 'Вход',
             fields: loginInputs,
             Button: buttonTemplate(formButtonProps({id: 'formButtonLogin', text: 'Авторизоваться'})),
-            Link: linkTemplate({text: 'Нет аккаунта?', styles: linkStyles, small: true})
+            Link: linkTemplate({text: 'Нет аккаунта?', styles: linkStyles, small: true, id: 'register'})
+        }),
+    },
+    register: {
+        styles: registerStyles,
+        UserForm: userFromTemplate({
+            styles: userFormStyles,
+            title: 'Регистрация',
+            fields: registerInputs,
+            Button: buttonTemplate(formButtonProps({id: 'formButtonRegister', text: 'Зарегистрироваться'})),
+            Link: linkTemplate({text: 'Войти?', styles: linkStyles, small: true, id: 'login'})
         }),
     },
     chat: {

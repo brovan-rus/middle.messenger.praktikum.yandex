@@ -22,6 +22,7 @@
     &:last-of-type {
         border: 0;
         border-bottom: 1px solid $blue;
+        margin-bottom: $spacing_4xl;
     }
 
 
@@ -46,7 +47,7 @@
     }
 
     &.inputUserForm {
-        padding: 0 0 $spacing_xs;
+        padding: 0 0 $spacing_xxs 0;
         color: $black;
         text-align: left;
     }
@@ -61,7 +62,7 @@
 
     &.labelUserForm {
         padding: 0;
-        margin-bottom: $spacing_xs;
+        margin-bottom: $spacing_xxs;
         color: $gray;
         font-size: $font_size_xxs;
         line-height: $line_height_xxs;
