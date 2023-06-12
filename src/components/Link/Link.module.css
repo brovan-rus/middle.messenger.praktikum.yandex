@@ -13,8 +13,17 @@
     &:last-child {
         border: 0;
     }
+
+    &:visited {
+        color: $blue;
+    }
 }
 
 .red {
     color: $red;
+}
+
+.small {
+    font-size: $font_size_xs;
+    line-height: $line_height_xs;
 }

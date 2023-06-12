@@ -1,6 +1,6 @@
 import {
     renderPage,
-    registerBrowserBackAndForward
+    registerBrowserBackAndForward, onNavigate,
 } from "./const/router.js";
 import login from './pages/Login/Login.template';
 import {props} from './const/props'
@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginTemplate = Handlebars.compile(login);
     root.innerHTML = loginTemplate(props.login);
     const currentPath = window.location.pathname;
-    renderPage(currentPath, props[currentPath.slice(1)]);
+    if (currentPath === '/') {
+        onNavigate('/login', props['login'])
+    } else {
+        renderPage(currentPath, props[currentPath.slice(1)]);
+    }
     registerBrowserBackAndForward();
 });

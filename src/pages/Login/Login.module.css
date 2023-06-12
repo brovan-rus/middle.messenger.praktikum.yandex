@@ -1,23 +1,7 @@
-.list1 {
-    background: green;
+.container {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
 }
-
-.list2 {
-    background: red;
-}
-
-
-$lastChildColor: blue;
-
-.nav {
-    >a {
-        color: yellow;
-    }
-
-    &:last-child {
-        color: $lastChildColor !important;
-    }
-}
-
-
 

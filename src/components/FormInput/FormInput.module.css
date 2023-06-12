@@ -10,8 +10,21 @@
 
     &:last-of-type {
         border: 0;
-        margin-bottom: $spacing_xxxl;
+        margin-bottom: $spacing_5xl;
     }
+}
+
+.containerUserFrom {
+    flex-direction: column;
+    border-bottom: 1px solid $blue;
+    margin-bottom: $spacing_mxl;
+
+    &:last-of-type {
+        border: 0;
+        border-bottom: 1px solid $blue;
+    }
+
+
 }
 
 .input {
@@ -31,13 +44,30 @@
             color: transparent;
         }
     }
+
+    &.inputUserForm {
+        padding: 0 0 $spacing_xs;
+        color: $black;
+        text-align: left;
+    }
 }
+
 
 .text {
     padding: $spacing_s 0;
     margin: 0;
     font-size: $font_size_m;
     line-height: $title_line_height_s;
+
+    &.labelUserForm {
+        padding: 0;
+        margin-bottom: $spacing_xs;
+        color: $gray;
+        font-size: $font_size_xxs;
+        line-height: $line_height_xxs;
+
+
+    }
 }
 
 .fieldName {

@@ -24,14 +24,14 @@ $table-width: 510px;
     width: $avatar-size;
     height: $avatar-size;
     border-radius: 50%;
-    margin-bottom: $spacing_xxxxl;
+    margin-bottom: $spacing_6xl;
     background: $dark_gray url("../../../images/icons/no-avatar.svg") no-repeat center;
     cursor: pointer;
 }
 
 .fields {
     width: 100%;
-    margin-bottom: $spacing_xxxl;
+    margin-bottom: $spacing_5xl;
 }
 
 .links {

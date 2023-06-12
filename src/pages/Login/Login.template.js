@@ -1,6 +1,6 @@
 // language=hbs
 export default `
-    <div class="container">
+    <div class="{{styles.container}}">
         {{{UserForm}}}
     </div>
 `

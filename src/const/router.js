@@ -28,7 +28,7 @@ export const pages = {
 };
 
 export const renderPage = (path, context) => {
-    const template = pages[path] || pages["/login"];
+    const template = pages[path];
     const root = document.querySelector('#app');
     root.innerHTML = template(context);
     enableNavigation();

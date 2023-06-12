@@ -2,6 +2,7 @@ import Handlebars from "handlebars";
 import {cards} from "../mocks/cards";
 import {profile, profileInputs, profilePasswordInputs} from "../mocks/profile";
 import {profileLinks} from "../mocks/profileLinks";
+import {loginInputs} from "../mocks/userForm";
 import loginStyles from '../pages/Login/Login.module.css';
 import chatStyles from '../pages/Chat/Chat.module.css';
 import Placeholder from '../components/Placeholder/Placeholder.template';
@@ -20,11 +21,14 @@ import ProfileTable from '../components/ProfileTable/ProfileTable.template'
 import profileTableStyles from '../components/ProfileTable/ProfileTable.module.css';
 import ProfileFiled from '../components/ProfileField/ProfileField.template';
 import Link from '../components/Link/Link.template';
+import linkStyles from '../components/Link/Link.module.css'
 import editProfileStyles from '../pages/EditProfile/EditProfile.module.css';
 import ProfileForm from '../components/ProfileForm/ProfileForm.template';
 import editProfileFormStyles from '../components/ProfileForm/ProfileForm.module.css';
 import FormInput from '../components/FormInput/FormInput.template';
 import editPasswordStyles from '../pages/EidtPassword/EditPassword.module.css';
+import UserForm from '../components/UserFrom/UserForm.template';
+import userFormStyles from '../components/UserFrom/UserForm.module.css';
 
 const placeholderTemplate = Handlebars.compile(Placeholder);
 const chatListTemplate = Handlebars.compile(ChatList);
@@ -35,13 +39,14 @@ const buttonTemplate = Handlebars.compile(Button);
 const profileTableTemplate = Handlebars.compile(ProfileTable);
 const profileFieldTemplate = Handlebars.compile(ProfileFiled);
 const linkTemplate = Handlebars.compile(Link);
-const profileForm = Handlebars.compile(ProfileForm);
-const formInput = Handlebars.compile(FormInput);
+const profileFormTemplate = Handlebars.compile(ProfileForm);
+const formInputTemplate = Handlebars.compile(FormInput);
+const userFromTemplate = Handlebars.compile(UserForm);
 
 Handlebars.registerPartial('card', chatCardTemplate);
 Handlebars.registerPartial('profileField', profileFieldTemplate);
 Handlebars.registerPartial('link', linkTemplate);
-Handlebars.registerPartial('formInput', formInput);
+Handlebars.registerPartial('formInput', formInputTemplate);
 
 const profileBackButtonProps = {
     styles: backButtonStyles,
@@ -52,9 +57,25 @@ const profileBackButtonProps = {
     }),
 }
 
+const formButtonProps = ({id, text = 'Сохранить'}) => {
+    return ({
+        styles: buttonStyles,
+        formButton: true,
+        id: id,
+        text: text
+    });
+}
+
 export const props = {
     login: {
-        styles: loginStyles
+        styles: loginStyles,
+        UserForm: userFromTemplate({
+            styles: userFormStyles,
+            title: 'Вход',
+            fields: loginInputs,
+            Button: buttonTemplate(formButtonProps({id: 'formButtonLogin', text: 'Авторизоваться'})),
+            Link: linkTemplate({text: 'Нет аккаунта?', styles: linkStyles, small: true})
+        }),
     },
     chat: {
         styles: chatStyles,
@@ -81,15 +102,10 @@ export const props = {
         ProfileTable: profileTableTemplate({
             styles: profileTableStyles,
             form: true,
-            EditProfileForm: profileForm({
+            EditProfileForm: profileFormTemplate({
                 styles: editProfileFormStyles,
                 fields: profileInputs,
-                Button: buttonTemplate({
-                    styles: buttonStyles,
-                    formButton: true,
-                    id: 'formButton',
-                    text: 'Сохранить'
-                }),
+                Button: buttonTemplate(formButtonProps({id: 'formButtonEditProfile'})),
             })
         })
     },
@@ -100,15 +116,10 @@ export const props = {
             styles: profileTableStyles,
             fields: profile,
             form: true,
-            EditProfileForm: profileForm({
+            EditProfileForm: profileFormTemplate({
                 styles: editProfileFormStyles,
                 fields: profilePasswordInputs,
-                Button: buttonTemplate({
-                    styles: buttonStyles,
-                    formButton: true,
-                    id: 'formButton',
-                    text: 'Сохранить'
-                }),
+                Button: buttonTemplate(formButtonProps({id: 'formButtonChangePassword'})),
             })
         })
     }
