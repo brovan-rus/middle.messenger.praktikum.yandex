@@ -1,0 +1,40 @@
+@import url("../../styles/_spacings.css");
+@import url("../../styles/_colors.css");
+@import url("../../styles/_sizes.css");
+
+$user-form-border-radius: 12px;
+$user-form-width: 340px;
+$user-form-min-height: 450px;
+
+.container {
+    display: flex;
+    width: $user-form-width;
+    min-height: $user-form-min-height;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing_4xl $spacing_xxl $spacing_xxl $spacing_xxl;
+    border-radius: $user-form-border-radius;
+    box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+}
+
+.title {
+    margin: 0 0 $spacing_3xl 0;
+    color: $black;
+    font-size: $title_font_size_l;
+    font-weight: 500;
+    line-height: $title_line_height_l;
+    text-align: center;
+}
+
+.titleContainer {
+    width: 100%;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing_ml
+}
