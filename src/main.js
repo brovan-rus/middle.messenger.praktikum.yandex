@@ -1,9 +1,14 @@
-import {pages, onNavigate, enableNavigation} from "./const/router.js";
-import login from './templates/login.hbs';
+import {
+    registerBrowserBackAndForward, enableRouting,
+} from "./const/router.js";
+import login from './pages/Login/Login.template';
+import {props} from './const/props'
+import Handlebars from 'handlebars';
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('here');
     const root = document.querySelector('#app');
-    root.innerHTML = login();
-    enableNavigation();
+    const loginTemplate = Handlebars.compile(login);
+    root.innerHTML = loginTemplate(props.login);
+    enableRouting();
+    registerBrowserBackAndForward();
 });

@@ -1,0 +1,13 @@
+@import url('../../styles/_colors.css');
+@import url('../../styles/_sizes.css');
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $gray;
+    font-size: $font_size_s;
+    line-height: $line_height_s;
+}
