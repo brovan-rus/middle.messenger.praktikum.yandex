@@ -3,20 +3,20 @@
 @import url("../../styles/_colors.css");
 
 .container {
-    text-align: center;
+  text-align: center;
 }
 
 .title {
-    margin: 0 0 $spacing_l 0;
-    color: $black;
-    font-size: $title_font_size_xl;
-    font-weight: 500;
-    line-height: $title_line_height_xl;
+  margin: 0 0 $spacing_l 0;
+  color: $black;
+  font-size: $title_font_size_xl;
+  font-weight: 500;
+  line-height: $title_line_height_xl;
 }
 
 .description {
-    margin: 0 0 $spacing_5xl 0;
-    color: $black;
-    font-size: $title_font_size_l;
-    line-height: $title_line_height_l;
+  margin: 0 0 $spacing_5xl 0;
+  color: $black;
+  font-size: $title_font_size_l;
+  line-height: $title_line_height_l;
 }

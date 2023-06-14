@@ -5,53 +5,53 @@
 $inputHeight: 32px;
 
 .searchForm {
-    position: relative;
-    display: flex;
+  position: relative;
+  display: flex;
 }
 
 .input {
-    height: $inputHeight;
-    padding: $spacing_s $spacing_l;
-    border: 0;
-    border-radius: 5px;
-    background-color: $dark_gray;
-    outline: none;
+  height: $inputHeight;
+  padding: $spacing_s $spacing_l;
+  border: 0;
+  border-radius: 5px;
+  background-color: $dark_gray;
+  outline: none;
 }
 
 .placeholderContainer {
-    position: absolute;
-    top: 50%;
-    right: 50%;
-    display: flex;
-    align-items: center;
-    gap: $spacing_xxxs;
-    transform: translate(50%, -50%);
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  display: flex;
+  align-items: center;
+  gap: $spacing_xxxs;
+  transform: translate(50%, -50%);
 }
 
 .placeholderIcon {
-    width: $spacing_l;
-    height: $spacing_l;
-    background: url("../../../images/icons/loupe.svg");
+  width: $spacing_l;
+  height: $spacing_l;
+  background: url("../../../images/icons/loupe.svg");
 }
 
 .placeholderText {
-    color: $gray;
-    font-size: $font_size_s;
-    line-height: $line_height_s;
+  color: $gray;
+  font-size: $font_size_s;
+  line-height: $line_height_s;
 }
 
 .searchBar {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 
 
-    &:focus::placeholder {
-        color: transparent;
-    }
+  &:focus::placeholder {
+    color: transparent;
+  }
 
-    &:focus + .placeholderContainer {
-        display: none;
-    }
+  &:focus + .placeholderContainer {
+    display: none;
+  }
 }
 
 
