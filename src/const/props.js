@@ -55,117 +55,117 @@ Handlebars.registerPartial('link', linkTemplate);
 Handlebars.registerPartial('formInput', formInputTemplate);
 
 const profileBackButtonProps = {
-    styles: backButtonStyles,
-    Button: buttonTemplate({
-        styles: buttonStyles,
-        backButton: true,
-        id: 'backButton'
-    }),
+  styles: backButtonStyles,
+  Button: buttonTemplate({
+    styles: buttonStyles,
+    backButton: true,
+    id: 'backButton'
+  }),
 }
 
 const formButtonProps = ({id, text = 'Сохранить'}) => {
-    return ({
-        styles: buttonStyles,
-        formButton: true,
-        id: id,
-        text: text
-    });
+  return ({
+    styles: buttonStyles,
+    formButton: true,
+    id: id,
+    text: text
+  });
 }
 
 export const props = {
-    login: {
-        styles: loginStyles,
-        UserForm: userFromTemplate({
-            styles: userFormStyles,
-            title: 'Вход',
-            fields: loginInputs,
-            Button: buttonTemplate(formButtonProps({id: 'formButtonLogin', text: 'Авторизоваться'})),
-            Link: linkTemplate({text: 'Нет аккаунта?', styles: linkStyles, small: true, id: 'register'})
-        }),
-    },
-    register: {
-        styles: registerStyles,
-        UserForm: userFromTemplate({
-            styles: userFormStyles,
-            title: 'Регистрация',
-            fields: registerInputs,
-            Button: buttonTemplate(formButtonProps({id: 'formButtonRegister', text: 'Зарегистрироваться'})),
-            Link: linkTemplate({text: 'Войти?', styles: linkStyles, small: true, id: 'login'})
-        }),
-    },
-    chat: {
-        styles: chatStyles,
-        Placeholder: placeholderTemplate({text: 'Выберите чат чтобы отправить сообщение', styles: PlaceholderStyles}),
-        ChatList: chatListTemplate({
-            styles: chatListStyles,
-            profile_link_text: 'Профиль',
-            ChatInput: chatInputTemplate({styles: ChatInputStyles, searchBar: true, placeholder: 'Поиск'}),
-            cards: cards,
-        }),
-    },
-    profile: {
-        styles: profileStyles,
-        BackButton: backButtonTemplate(profileBackButtonProps),
-        ProfileTable: profileTableTemplate({
-            styles: profileTableStyles,
-            fields: profile,
-            links: profileLinks,
-        })
-    },
-    editProfile: {
-        styles: editProfileStyles,
-        BackButton: backButtonTemplate(profileBackButtonProps),
-        ProfileTable: profileTableTemplate({
-            styles: profileTableStyles,
-            form: true,
-            EditProfileForm: profileFormTemplate({
-                styles: editProfileFormStyles,
-                fields: profileInputs,
-                Button: buttonTemplate(formButtonProps({id: 'formButtonEditProfile'})),
-            })
-        })
-    },
-    editPassword: {
-        styles: editPasswordStyles,
-        BackButton: backButtonTemplate(profileBackButtonProps),
-        ProfileTable: profileTableTemplate({
-            styles: profileTableStyles,
-            fields: profile,
-            form: true,
-            EditProfileForm: profileFormTemplate({
-                styles: editProfileFormStyles,
-                fields: profilePasswordInputs,
-                Button: buttonTemplate(formButtonProps({id: 'formButtonChangePassword'})),
-            })
-        })
-    },
-    error404: {
-        styles: error404Styles,
-        Error: error({
-            styles: ErrorStyles,
-            code: '404',
-            description: 'Не туда попали'
-        }),
-        Link: linkTemplate({
-            styles: linkStyles,
-            text: 'Назад к чатам',
-            id: 'chat',
-            small: true
-        })
-    },
-    error503: {
-        styles: error503Styles,
-        Error: error({
-            styles: ErrorStyles,
-            code: '503',
-            description: 'Мы уже фиксим'
-        }),
-        Link: linkTemplate({
-            styles: linkStyles,
-            text: 'Назад к чатам',
-            id: 'chat',
-            small: true
-        })
-    }
+  login: {
+    styles: loginStyles,
+    UserForm: userFromTemplate({
+      styles: userFormStyles,
+      title: 'Вход',
+      fields: loginInputs,
+      Button: buttonTemplate(formButtonProps({id: 'formButtonLogin', text: 'Авторизоваться'})),
+      Link: linkTemplate({text: 'Нет аккаунта?', styles: linkStyles, small: true, id: 'register'})
+    }),
+  },
+  register: {
+    styles: registerStyles,
+    UserForm: userFromTemplate({
+      styles: userFormStyles,
+      title: 'Регистрация',
+      fields: registerInputs,
+      Button: buttonTemplate(formButtonProps({id: 'formButtonRegister', text: 'Зарегистрироваться'})),
+      Link: linkTemplate({text: 'Войти?', styles: linkStyles, small: true, id: 'login'})
+    }),
+  },
+  chat: {
+    styles: chatStyles,
+    Placeholder: placeholderTemplate({text: 'Выберите чат чтобы отправить сообщение', styles: PlaceholderStyles}),
+    ChatList: chatListTemplate({
+      styles: chatListStyles,
+      profile_link_text: 'Профиль',
+      ChatInput: chatInputTemplate({styles: ChatInputStyles, searchBar: true, placeholder: 'Поиск'}),
+      cards: cards,
+    }),
+  },
+  profile: {
+    styles: profileStyles,
+    BackButton: backButtonTemplate(profileBackButtonProps),
+    ProfileTable: profileTableTemplate({
+      styles: profileTableStyles,
+      fields: profile,
+      links: profileLinks,
+    })
+  },
+  editProfile: {
+    styles: editProfileStyles,
+    BackButton: backButtonTemplate(profileBackButtonProps),
+    ProfileTable: profileTableTemplate({
+      styles: profileTableStyles,
+      form: true,
+      EditProfileForm: profileFormTemplate({
+        styles: editProfileFormStyles,
+        fields: profileInputs,
+        Button: buttonTemplate(formButtonProps({id: 'formButtonEditProfile'})),
+      })
+    })
+  },
+  editPassword: {
+    styles: editPasswordStyles,
+    BackButton: backButtonTemplate(profileBackButtonProps),
+    ProfileTable: profileTableTemplate({
+      styles: profileTableStyles,
+      fields: profile,
+      form: true,
+      EditProfileForm: profileFormTemplate({
+        styles: editProfileFormStyles,
+        fields: profilePasswordInputs,
+        Button: buttonTemplate(formButtonProps({id: 'formButtonChangePassword'})),
+      })
+    })
+  },
+  error404: {
+    styles: error404Styles,
+    Error: error({
+      styles: ErrorStyles,
+      code: '404',
+      description: 'Не туда попали'
+    }),
+    Link: linkTemplate({
+      styles: linkStyles,
+      text: 'Назад к чатам',
+      id: 'chat',
+      small: true
+    })
+  },
+  error503: {
+    styles: error503Styles,
+    Error: error({
+      styles: ErrorStyles,
+      code: '503',
+      description: 'Мы уже фиксим'
+    }),
+    Link: linkTemplate({
+      styles: linkStyles,
+      text: 'Назад к чатам',
+      id: 'chat',
+      small: true
+    })
+  }
 }
 

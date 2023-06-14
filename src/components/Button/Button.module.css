@@ -7,26 +7,26 @@ $form-button-height: 37px;
 $form-button-border-radius: 8px;
 
 .button {
-    border: 0;
-    cursor: pointer;
-    font-family: Inter, sans-serif;
-    outline: 0;
+  border: 0;
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+  outline: 0;
 }
 
 .backButton {
-    width: $back-button-size;
-    height: $back-button-size;
-    border-radius: 50%;
-    background: url("../../../images/icons/arrow_back_button.svg") no-repeat;
+  width: $back-button-size;
+  height: $back-button-size;
+  border-radius: 50%;
+  background: url("../../../images/icons/arrow_back_button.svg") no-repeat;
 }
 
 .formButton {
-    width: $form-button-width;
-    height: $form-button-height;
-    border-radius: $form-button-border-radius;
-    background-color: $blue;
-    color: $white;
-    font-size: $font_size_m;
-    justify-self: center;
-    line-height: $title_line_height_s;
+  width: $form-button-width;
+  height: $form-button-height;
+  border-radius: $form-button-border-radius;
+  background-color: $blue;
+  color: $white;
+  font-size: $font_size_m;
+  justify-self: center;
+  line-height: $title_line_height_s;
 }

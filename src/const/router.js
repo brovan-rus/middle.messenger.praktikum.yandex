@@ -20,58 +20,58 @@ const editProfileTemplate = Handlebars.compile(EditProfile);
 const editPasswordTemplate = Handlebars.compile(EditPassword);
 
 export const pages = {
-    '/chat': chatTemplate,
-    '/error404': error404Template,
-    '/error503': error503Template,
-    '/register': registerTemplate,
-    '/login': loginTemplate,
-    '/profile': profileTemplate,
-    '/editProfile': editProfileTemplate,
-    '/editPassword': editPasswordTemplate
+  '/chat': chatTemplate,
+  '/error404': error404Template,
+  '/error503': error503Template,
+  '/register': registerTemplate,
+  '/login': loginTemplate,
+  '/profile': profileTemplate,
+  '/editProfile': editProfileTemplate,
+  '/editPassword': editPasswordTemplate
 };
 
 export const renderPage = (path, context) => {
-    const template = pages[path];
-    const root = document.querySelector('#app');
-    root.innerHTML = template(context);
-    enableNavigation();
-    init();
+  const template = pages[path];
+  const root = document.querySelector('#app');
+  root.innerHTML = template(context);
+  enableNavigation();
+  init();
 }
 
 export const onNavigate = (path, context = props[path.slice(1)]) => {
-    window.history.pushState(
-        {}, path, window.location.origin + path
-    );
-    renderPage(path, context);
+  window.history.pushState(
+    {}, path, window.location.origin + path
+  );
+  renderPage(path, context);
 }
 
 export const registerBrowserBackAndForward = () => {
-    window.onpopstate = function () {
-        const currentPath = window.location.pathname;
-        renderPage(currentPath, props[currentPath.slice(1)]);
-    };
+  window.onpopstate = function () {
+    const currentPath = window.location.pathname;
+    renderPage(currentPath, props[currentPath.slice(1)]);
+  };
 };
 
 export const enableNavigation = () => {
-    const links = document.querySelectorAll('a');
-    [...links].forEach((link) => {
-        link.addEventListener('click', (event) => {
-            const pageName = event.currentTarget.id;
-            const path = `/${pageName}`;
-            event.preventDefault();
-            onNavigate(path, props[pageName]);
-        })
-    });
+  const links = document.querySelectorAll('a');
+  [...links].forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const pageName = event.currentTarget.id;
+      const path = `/${pageName}`;
+      event.preventDefault();
+      onNavigate(path, props[pageName]);
+    })
+  });
 };
 
 export const enableRouting = () => {
-    const currentPath = window.location.pathname;
-    const validPageRoute = Object.keys(props).some((page) => page === currentPath.slice(1));
-    if (currentPath === '/') {
-        onNavigate('/login', props['login'])
-    } else if (validPageRoute) {
-        renderPage(currentPath, props[currentPath.slice(1)]);
-    } else {
-        onNavigate('/error404', props['error404'])
-    }
+  const currentPath = window.location.pathname;
+  const validPageRoute = Object.keys(props).some((page) => page === currentPath.slice(1));
+  if (currentPath === '/') {
+    onNavigate('/login', props['login'])
+  } else if (validPageRoute) {
+    renderPage(currentPath, props[currentPath.slice(1)]);
+  } else {
+    onNavigate('/error404', props['error404'])
+  }
 }
