@@ -1,6 +1,6 @@
-import chatCardStyles from "../components/ChatCard/ChatCard.module.css";
+import chatCardStyles from '../components/ChatCard/ChatCard.module.css';
 
-export const cards = [
+export default [
   {
     name: 'Андрей',
     text: 'Текст',
@@ -33,7 +33,7 @@ export const cards = [
   },
   {
     name: 'Виктор',
-    text: 'Очень длинный тест. Очень длинный тест. Очень длинный тест. Очень длинный тест.  Очень длинный тест. ',
+    text: 'Очень длинный тест. Очень длинный тест. Очень длинный тест. Очень длинный тест. ',
     image: false,
     avatar: '',
     newMessages: 0,
@@ -53,7 +53,7 @@ export const cards = [
   },
   {
     name: 'Виктор',
-    text: 'Очень длинный тест. Очень длинный тест. Очень длинный тест. Очень длинный тест.  Очень длинный тест. ',
+    text: 'Очень длинный тест. Очень длинный тест. Очень длинный тест. Очень длинный тест.',
     image: false,
     avatar: '',
     newMessages: 0,
@@ -61,4 +61,4 @@ export const cards = [
     styles: chatCardStyles,
     active: false,
   },
-]
+];

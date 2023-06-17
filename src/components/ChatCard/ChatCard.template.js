@@ -18,4 +18,4 @@ export default `
             {{/if}}
         </div>
     </div>
-`
+`;

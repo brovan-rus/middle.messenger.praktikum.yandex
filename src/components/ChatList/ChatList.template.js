@@ -12,4 +12,4 @@ export default `
                 {{>card this}}
             {{/each}}
         </ul>
-    </div>`
+    </div>`;

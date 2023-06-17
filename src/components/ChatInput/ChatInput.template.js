@@ -20,4 +20,4 @@ export default `
                 <span class="{{styles.placeholderText}}">{{placeholder}}</span>
             </div>
         {{/if}}
-    </form>`
+    </form>`;

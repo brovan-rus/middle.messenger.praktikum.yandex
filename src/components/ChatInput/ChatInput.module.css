@@ -2,19 +2,21 @@
 @import url('../../styles/_spacings.css');
 @import url('../../styles/_sizes.css');
 
-$inputHeight: 32px;
+$input-height: 32px;
 
 .searchForm {
   position: relative;
+
   display: flex;
 }
 
 .input {
-  height: $inputHeight;
-  padding: $spacing_s $spacing_l;
+  height: $input-height;
+  padding: $spacing-s $spacing-l;
+
+  background-color: $dark-gray;
   border: 0;
   border-radius: 5px;
-  background-color: $dark_gray;
   outline: none;
 }
 
@@ -22,26 +24,32 @@ $inputHeight: 32px;
   position: absolute;
   top: 50%;
   right: 50%;
+
   display: flex;
+
+  gap: $spacing-3xs;
+
   align-items: center;
-  gap: $spacing_xxxs;
+
   transform: translate(50%, -50%);
 }
 
 .placeholderIcon {
-  width: $spacing_l;
-  height: $spacing_l;
+  width: $spacing-l;
+  height: $spacing-l;
+
   background: url("../../../images/icons/loupe.svg");
 }
 
 .placeholderText {
+  font-size: $font-size-s;
+  line-height: $line-height-s;
   color: $gray;
-  font-size: $font_size_s;
-  line-height: $line_height_s;
 }
 
 .searchBar {
   width: 100%;
+
   text-align: center;
 
 

@@ -4,4 +4,4 @@ export default `
         {{{BackButton}}}
         {{{ProfileTable}}}
     </div>
-`
+`;

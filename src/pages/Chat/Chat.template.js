@@ -5,4 +5,4 @@ export default `<div class="{{styles.container}}">
     <div class="{{styles.chatContainer}}">
         {{{Placeholder}}}
     </div>
-</div>`
+</div>`;

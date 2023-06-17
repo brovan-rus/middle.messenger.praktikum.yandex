@@ -4,4 +4,4 @@ export default `
         {{{Error}}}
         {{{Link}}}
     </div>
-`
+`;
