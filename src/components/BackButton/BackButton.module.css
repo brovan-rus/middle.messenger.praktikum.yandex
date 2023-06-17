@@ -1,0 +1,13 @@
+@import url("../../styles/_colors.css");
+
+$back-button-container-width: 64px;
+
+.container {
+  display: flex;
+  width: $back-button-container-width;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid $medium_gray;
+  background-color: $light_gray;
+}

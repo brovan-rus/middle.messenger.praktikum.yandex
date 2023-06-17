@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+}
+
+.chatListContainer {
+  min-width: 310px;
+}
+
+.chatContainer {
+  width: 100%;
+  min-width: 310px;
+}

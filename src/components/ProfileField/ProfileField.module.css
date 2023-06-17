@@ -1,0 +1,29 @@
+@import url("../../styles/_colors.css");
+@import url("../../styles/_spacings.css");
+@import url("../../styles/_sizes.css");
+
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 1px solid $medium_gray;
+
+  &:last-child {
+    border: 0;
+  }
+}
+
+.text {
+  padding: $spacing_s 0;
+  margin: 0;
+  font-size: $font_size_m;
+  line-height: $title_line_height_s;
+}
+
+.fieldName {
+  color: $black;
+}
+
+.fieldValue {
+  color: $gray;
+}
