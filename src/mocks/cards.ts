@@ -1,6 +1,17 @@
 import chatCardStyles from '../components/ChatCard/ChatCard.module.css';
 
-export default [
+export type Card = {
+  name: string;
+  text: string;
+  image: boolean;
+  avatar: string;
+  newMessages: number;
+  timeDay: string;
+  active: boolean;
+  styles: typeof chatCardStyles;
+};
+
+export const cards: Card[] = [
   {
     name: 'Андрей',
     text: 'Текст',

@@ -1,11 +1,11 @@
 import Handlebars from 'handlebars';
-import cards from '../mocks/cards';
+import { cards } from '../mocks/cards';
 import {
   profile,
   profileInputs,
   profilePasswordInputs,
 } from '../mocks/profile';
-import profileLinks from '../mocks/profileLinks';
+import { profileLinks } from '../mocks/profileLinks';
 import { loginInputs, registerInputs } from '../mocks/userForm';
 import loginStyles from '../pages/Login/Login.module.css';
 import chatStyles from '../pages/Chat/Chat.module.css';
@@ -38,13 +38,27 @@ import error404Styles from '../pages/Error404/Error404.module.css';
 import error503Styles from '../pages/Error503/Error503.module.css';
 import Error from '../components/Error/Error.template';
 import ErrorStyles from '../components/Error/Error.module.css';
+import {
+  ButtonContext,
+  ButtonTemplateContext,
+  ChatContext,
+  EditPasswordContext,
+  EditProfileContext,
+  Error404Context,
+  Error503Context,
+  ProfileContext,
+  LoginContext,
+  RegisterContext,
+} from '../types/contexts';
 
 const placeholderTemplate = Handlebars.compile(Placeholder);
 const chatListTemplate = Handlebars.compile(ChatList);
 const chatInputTemplate = Handlebars.compile(ChatInput);
 const chatCardTemplate = Handlebars.compile(ChatCard);
-const backButtonTemplate = Handlebars.compile(BackButton);
-const buttonTemplate = Handlebars.compile(Button);
+const backButtonTemplate: HandlebarsTemplateDelegate<ButtonTemplateContext> =
+  Handlebars.compile(BackButton);
+const buttonTemplate: HandlebarsTemplateDelegate<ButtonContext> =
+  Handlebars.compile(Button);
 const profileTableTemplate = Handlebars.compile(ProfileTable);
 const profileFieldTemplate = Handlebars.compile(ProfileFiled);
 const linkTemplate = Handlebars.compile(Link);
@@ -58,7 +72,7 @@ Handlebars.registerPartial('profileField', profileFieldTemplate);
 Handlebars.registerPartial('link', linkTemplate);
 Handlebars.registerPartial('formInput', formInputTemplate);
 
-const profileBackButtonProps = {
+const profileBackButtonProps: ButtonTemplateContext = {
   styles: backButtonStyles,
   Button: buttonTemplate({
     styles: buttonStyles,
@@ -67,7 +81,13 @@ const profileBackButtonProps = {
   }),
 };
 
-const formButtonProps = ({ id, text = 'Сохранить' }) => {
+const formButtonProps = ({
+  id,
+  text = 'Сохранить',
+}: {
+  id: string;
+  text?: string;
+}): ButtonContext => {
   return {
     styles: buttonStyles,
     formButton: true,
@@ -76,7 +96,18 @@ const formButtonProps = ({ id, text = 'Сохранить' }) => {
   };
 };
 
-export default {
+type Props = {
+  login: LoginContext;
+  register: RegisterContext;
+  chat: ChatContext;
+  profile: ProfileContext;
+  editProfile: EditProfileContext;
+  editPassword: EditPasswordContext;
+  error404: Error404Context;
+  error503: Error503Context;
+};
+
+export const props: Props = {
   login: {
     styles: loginStyles,
     UserForm: userFromTemplate({
@@ -122,7 +153,7 @@ export default {
     }),
     ChatList: chatListTemplate({
       styles: chatListStyles,
-      profile_link_text: 'Профиль',
+      profileLinkText: 'Профиль',
       ChatInput: chatInputTemplate({
         styles: ChatInputStyles,
         searchBar: true,
@@ -138,6 +169,7 @@ export default {
       styles: profileTableStyles,
       fields: profile,
       links: profileLinks,
+      form: false,
     }),
   },
   editProfile: {

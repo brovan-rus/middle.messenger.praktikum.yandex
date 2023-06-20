@@ -1,7 +1,17 @@
 import profileFieldStyles from '../components/ProfileField/ProfileField.module.css';
 import fromInputStyles from '../components/FormInput/FormInput.module.css';
 
-const profileInfo = [
+type ProfileStyles = typeof profileFieldStyles | typeof fromInputStyles;
+
+export type ProfileInfo = {
+  fieldName: string;
+  fieldValue?: string;
+  name: string;
+  type: string;
+  styles?: ProfileStyles;
+};
+
+const profileInfo: ProfileInfo[] = [
   {
     fieldName: 'Почта',
     fieldValue: 'pochta@yandex.ru',
@@ -30,7 +40,7 @@ const profileInfo = [
   },
 ];
 
-const changePassword = [
+const changePassword: ProfileInfo[] = [
   { fieldName: 'Старый пароль', name: 'oldPassword', type: 'password' },
   { fieldName: 'Новый пароль', name: 'newPassword', type: 'password' },
   {
@@ -40,14 +50,14 @@ const changePassword = [
   },
 ];
 
-export const profile = profileInfo.map(item => {
+export const profile: ProfileInfo[] = profileInfo.map(item => {
   return { ...item, styles: profileFieldStyles };
 });
 
-export const profileInputs = profileInfo.map(item => {
+export const profileInputs: ProfileInfo[] = profileInfo.map(item => {
   return { ...item, styles: fromInputStyles };
 });
 
-export const profilePasswordInputs = changePassword.map(item => {
+export const profilePasswordInputs: ProfileInfo[] = changePassword.map(item => {
   return { ...item, styles: fromInputStyles };
 });

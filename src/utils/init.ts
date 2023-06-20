@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../const/router';
+import { Path } from '../types/path';
 
 export default () => {
   // turn off default form submitting
@@ -31,7 +32,7 @@ export default () => {
   if (loginButton) {
     loginButton.addEventListener('click', e => {
       e.preventDefault();
-      onNavigate('/chat');
+      onNavigate(Path.CHAT);
     });
   }
 
@@ -39,7 +40,7 @@ export default () => {
   if (registerButton) {
     registerButton.addEventListener('click', e => {
       e.preventDefault();
-      onNavigate('/chat');
+      onNavigate(Path.REGISTER);
     });
   }
 };

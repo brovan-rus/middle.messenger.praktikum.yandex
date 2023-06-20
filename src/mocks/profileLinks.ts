@@ -1,6 +1,13 @@
 import profileLinkStyles from '../components/Link/Link.module.css';
 
-export default [
+export type ProfileLink = {
+  text: string;
+  id: string;
+  red: boolean;
+  styles: typeof profileLinkStyles;
+};
+
+export const profileLinks: ProfileLink[] = [
   {
     text: 'Изменить данные',
     id: 'editProfile',
