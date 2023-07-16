@@ -21,6 +21,7 @@ import editPasswordStyles from '../pages/EidtPassword/EditPassword.module.css';
 import errorStyles from '../components/Error/Error.module.css';
 import error404Styles from '../pages/Error404/Error404.module.css';
 import error503Styles from '../pages/Error404/Error503.module.css';
+import chatTapeStyles from '../components/ChatTape/ChatTape.module.css';
 
 type ButtonTemplate = Template;
 type LinkTemplate = Template;
@@ -28,6 +29,7 @@ type LinkTemplate = Template;
 export type ButtonContext = {
   styles: typeof buttonStyles;
   backButton?: boolean;
+  sendButton?: boolean;
   id: string;
   text?: string;
   formButton?: boolean;
@@ -62,6 +64,10 @@ type ChatInputContext = {
   styles: typeof chatInputStyles;
   searchBar: boolean;
   placeholder: string;
+};
+
+type ChatTapeContext = {
+  styles: typeof chatTapeStyles;
 };
 
 type ChatListContext = {
@@ -123,6 +129,8 @@ export type EditPasswordContext = {
 
 export type ChatContext = {
   styles: typeof chatStyles;
+  chatSelected: boolean;
+  ChatTape: HandlebarsTemplateDelegate<ChatTapeContext> | Template;
   Placeholder: HandlebarsTemplateDelegate<PlaceholderContext> | Template;
   ChatList: HandlebarsTemplateDelegate<ChatListContext> | Template;
 };

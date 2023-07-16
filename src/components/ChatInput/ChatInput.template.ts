@@ -1,7 +1,8 @@
 // language=hbs
 export default `
     <form id="searchForm" class="{{styles.searchForm}}">
-        <input 
+        <input
+                name="{{name}}"
                 class="
                     {{styles.input}}
                     {{#if searchBar}}
@@ -13,7 +14,7 @@ export default `
                 placeholder="{{placeholder}}"
             {{/unless}}
         />
-        
+
         {{#if searchBar}}
             <div class="{{styles.placeholderContainer}}">
                 <div class="{{styles.placeholderIcon}}"></div>

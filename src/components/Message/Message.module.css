@@ -1,0 +1,74 @@
+@import url('../../styles/_colors.css');
+@import url('../../styles/_spacings.css');
+@import url('../../styles/_sizes.css');
+
+$border-radius-message: 15px;
+$message-max-width: 400px;
+$message-min-width: 114px;
+$highlighted-icon-width: 10px;
+$highlighted-icon-height: 6px;
+
+.container {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: $message-min-width;
+  max-width: $message-max-width;
+  padding: $spacing-s;
+  margin-bottom: $spacing-s;
+
+  background: $light-gray;
+  border-radius: 0 $border-radius-message $border-radius-message;
+
+  &.containerHighlighted {
+    align-self: flex-end;
+
+    background-color: $light-blue;
+    border-radius: $border-radius-message $border-radius-message 0;
+  }
+}
+
+.text {
+  padding: 0;
+  margin: 0;
+
+  font-size: $font-size-s;
+  font-weight: 500;
+  line-height: $line-height-m;
+  color: $black;
+}
+
+.time {
+  align-self: flex-end;
+
+  padding: 0;
+  margin: 0;
+
+  font-size: $font-size-xxs;
+  line-height: $line-height-xxs;
+  color: $gray;
+
+
+  &.serviceInfoHighlighted {
+    display: flex;
+
+    gap: $spacing-3xs;
+
+    align-items: center;
+
+    color: $blue;
+
+    &::before {
+      display: block;
+
+      width: $highlighted-icon-width;
+      height: $highlighted-icon-height;
+
+      content: '';
+
+      background: url("../../../images/icons/delivered_icon.svg") no-repeat;
+    }
+  }
+}
+

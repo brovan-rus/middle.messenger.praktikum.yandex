@@ -3,11 +3,17 @@
 @import url('../../styles/_sizes.css');
 
 $input-height: 32px;
+$border-radius-search-bar: 5px;
+$border-radius-message: 30px;
 
 .searchForm {
   position: relative;
 
   display: flex;
+}
+
+.messageInput {
+  width: 100%;
 }
 
 .input {
@@ -16,7 +22,7 @@ $input-height: 32px;
 
   background-color: $dark-gray;
   border: 0;
-  border-radius: 5px;
+  border-radius: $border-radius-message;
   outline: none;
 }
 
@@ -51,6 +57,8 @@ $input-height: 32px;
   width: 100%;
 
   text-align: center;
+
+  border-radius: $border-radius-search-bar;
 
 
   &:focus::placeholder {

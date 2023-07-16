@@ -1,7 +1,7 @@
 @import url('../../styles/_colors.css');
 @import url('../../styles/_sizes.css');
 
-$back-button-size: 28px;
+$round-button-size: 28px;
 $form-button-width: 280px;
 $form-button-height: 37px;
 $form-button-border-radius: 8px;
@@ -16,10 +16,19 @@ $form-button-border-radius: 8px;
 }
 
 .backButton {
-  width: $back-button-size;
-  height: $back-button-size;
+  width: $round-button-size;
+  height: $round-button-size;
 
   background: url("../../../images/icons/arrow_back_button.svg") no-repeat;
+  border-radius: 50%;
+}
+
+.sendButton {
+  width: $round-button-size;
+  height: $round-button-size;
+
+  background: url("../../../images/icons/arrow_send_button.svg") no-repeat;
+
   border-radius: 50%;
 }
 
@@ -34,5 +43,7 @@ $form-button-border-radius: 8px;
   color: $white;
 
   background-color: $blue;
+
+
   border-radius: $form-button-border-radius;
 }

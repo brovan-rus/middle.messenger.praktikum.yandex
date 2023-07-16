@@ -1,6 +1,6 @@
 // language=hbs
 export default `
-    <div class="{{styles.container}}">
+    <section class="{{styles.container}}">
         <header class="{{styles.chatListHeader}}">
             <a href="#" id="profile" class="{{styles.profileLink}}">
                 <span class="{{styles.profileLinkText}}">{{profileLinkText}}</span>
@@ -12,4 +12,4 @@ export default `
                 {{>card this}}
             {{/each}}
         </ul>
-    </div>`;
+    </section>`;

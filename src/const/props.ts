@@ -1,5 +1,6 @@
 import Handlebars from 'handlebars';
 import { cards } from '../mocks/cards';
+import { messages } from '../mocks/messages';
 import {
   profile,
   profileInputs,
@@ -11,6 +12,8 @@ import loginStyles from '../pages/Login/Login.module.css';
 import chatStyles from '../pages/Chat/Chat.module.css';
 import Placeholder from '../components/Placeholder/Placeholder.template';
 import PlaceholderStyles from '../components/Placeholder/Placeholder.module.css';
+import ChatTape from '../components/ChatTape/ChatTape.template';
+import chatTapeStyles from '../components/ChatTape/ChatTape.module.css';
 import ChatList from '../components/ChatList/ChatList.template';
 import chatListStyles from '../components/ChatList/ChatList.module.css';
 import ChatInput from '../components/ChatInput/ChatInput.template';
@@ -22,6 +25,7 @@ import backButtonStyles from '../components/BackButton/BackButton.module.css';
 import Button from '../components/Button/Button.template';
 import buttonStyles from '../components/Button/Button.module.css';
 import ProfileTable from '../components/ProfileTable/ProfileTable.template';
+
 import profileTableStyles from '../components/ProfileTable/ProfileTable.module.css';
 import ProfileFiled from '../components/ProfileField/ProfileField.template';
 import Link from '../components/Link/Link.template';
@@ -38,6 +42,8 @@ import error404Styles from '../pages/Error404/Error404.module.css';
 import error503Styles from '../pages/Error503/Error503.module.css';
 import Error from '../components/Error/Error.template';
 import ErrorStyles from '../components/Error/Error.module.css';
+import Message from '../components/Message/Message.template';
+
 import {
   ButtonContext,
   ButtonTemplateContext,
@@ -55,6 +61,7 @@ const placeholderTemplate = Handlebars.compile(Placeholder);
 const chatListTemplate = Handlebars.compile(ChatList);
 const chatInputTemplate = Handlebars.compile(ChatInput);
 const chatCardTemplate = Handlebars.compile(ChatCard);
+
 const backButtonTemplate: HandlebarsTemplateDelegate<ButtonTemplateContext> =
   Handlebars.compile(BackButton);
 const buttonTemplate: HandlebarsTemplateDelegate<ButtonContext> =
@@ -66,11 +73,14 @@ const profileFormTemplate = Handlebars.compile(ProfileForm);
 const formInputTemplate = Handlebars.compile(FormInput);
 const userFromTemplate = Handlebars.compile(UserForm);
 const error = Handlebars.compile(Error);
+const chatTapeTemplate = Handlebars.compile(ChatTape);
+const messageTemplate = Handlebars.compile(Message);
 
 Handlebars.registerPartial('card', chatCardTemplate);
 Handlebars.registerPartial('profileField', profileFieldTemplate);
 Handlebars.registerPartial('link', linkTemplate);
 Handlebars.registerPartial('formInput', formInputTemplate);
+Handlebars.registerPartial('message', messageTemplate);
 
 const profileBackButtonProps: ButtonTemplateContext = {
   styles: backButtonStyles,
@@ -147,9 +157,25 @@ export const props: Props = {
   },
   chat: {
     styles: chatStyles,
+    chatSelected: true,
     Placeholder: placeholderTemplate({
       text: 'Выберите чат чтобы отправить сообщение',
       styles: PlaceholderStyles,
+    }),
+    ChatTape: chatTapeTemplate({
+      chatName: 'Виктор',
+      ChatInput: chatInputTemplate({
+        styles: ChatInputStyles,
+        searchBar: false,
+        name: 'message',
+      }),
+      Button: buttonTemplate({
+        id: 'sendButton',
+        styles: buttonStyles,
+        sendButton: true,
+      }),
+      styles: chatTapeStyles,
+      messages,
     }),
     ChatList: chatListTemplate({
       styles: chatListStyles,
@@ -158,6 +184,7 @@ export const props: Props = {
         styles: ChatInputStyles,
         searchBar: true,
         placeholder: 'Поиск',
+        name: 'search',
       }),
       cards,
     }),
