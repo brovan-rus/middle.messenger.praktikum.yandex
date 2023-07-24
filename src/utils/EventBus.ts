@@ -1,6 +1,4 @@
-type Args = unknown[];
-
-type Callback = (...args: Args) => void;
+import { Callback } from '../types/callback';
 
 type Listeners = {
   [key: string]: Callback[];
@@ -30,7 +28,7 @@ export class EventBus {
     );
   }
 
-  emit(event: string, ...args: unknown[]) {
+  emit(event: string, ...args: object[]) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
@@ -39,4 +37,4 @@ export class EventBus {
   }
 }
 
-export default new EventBus();
+export default EventBus;
