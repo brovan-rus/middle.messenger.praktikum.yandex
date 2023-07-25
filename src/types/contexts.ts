@@ -1,6 +1,5 @@
 import userFormStyles from '../components/UserFrom/UserForm.module.css';
 import { FormInputProps } from '../mocks/userForm';
-import type { Template } from './template';
 import buttonStyles from '../components/Button/Button.module.css';
 import backButtonStyles from '../components/BackButton/BackButton.module.css';
 import linkStyles from '../components/Link/Link.module.css';
@@ -22,37 +21,36 @@ import errorStyles from '../components/Error/Error.module.css';
 import error404Styles from '../pages/Error404/Error404.module.css';
 import error503Styles from '../pages/Error404/Error503.module.css';
 import chatTapeStyles from '../components/ChatTape/ChatTape.module.css';
-
-type ButtonTemplate = Template;
-type LinkTemplate = Template;
+import { ButtonType } from '../components/Button/Button';
+import { Message } from '../mocks/messages';
 
 export type ButtonContext = {
   styles: typeof buttonStyles;
   backButton?: boolean;
   sendButton?: boolean;
-  id: string;
   text?: string;
-  formButton?: boolean;
+  type?: ButtonType;
 };
 
-export type ButtonTemplateContext = {
+export type BackButtonContext = {
   styles: typeof backButtonStyles;
-  Button: ButtonTemplate;
+  button: ButtonContext;
 };
 
 type UserFormContext = {
   styles: typeof userFormStyles;
   title: string;
+  button: ButtonContext;
+  link: LinkContext;
   fields: FormInputProps[];
-  Button: ButtonTemplate;
-  Link: LinkTemplate;
 };
 
 type LinkContext = {
-  text: string;
   styles: typeof linkStyles;
-  small: boolean;
-  id: string;
+  text: string;
+  size: string;
+  color?: string;
+  events?: Record<string, () => void>;
 };
 
 type PlaceholderContext = {
@@ -60,27 +58,24 @@ type PlaceholderContext = {
   styles: typeof placeholderStyles;
 };
 
-type ChatInputContext = {
-  styles: typeof chatInputStyles;
-  searchBar: boolean;
-  placeholder: string;
-};
-
-type ChatTapeContext = {
-  styles: typeof chatTapeStyles;
-};
-
 type ChatListContext = {
   styles: typeof chatListStyles;
   profileLinkText: string;
-  chatInput: HandlebarsTemplateDelegate<ChatInputContext>;
+  chatInput: ChatInputContext;
   cards: Card[];
 };
 
-type EditProfileFormContext = {
+type ChatInputContext = {
+  styles: typeof chatInputStyles;
+  searchBar: boolean;
+  placeholder?: string;
+  name: string;
+};
+
+type ProfileFormContext = {
   styles: typeof profileFormStyles;
-  fields: ProfileInfo;
-  Button: HandlebarsTemplateDelegate<ButtonContext>;
+  fields: ProfileInfo[];
+  button: ButtonContext;
 };
 
 type ProfileTableContext = {
@@ -88,7 +83,7 @@ type ProfileTableContext = {
   fields?: ProfileInfo[];
   links?: ProfileLink[];
   form: boolean;
-  EditProfileForm?: HandlebarsTemplateDelegate<EditProfileFormContext>;
+  profileForm?: ProfileFormContext;
 };
 
 type ErrorContext = {
@@ -99,60 +94,54 @@ type ErrorContext = {
 
 export type ProfileContext = {
   styles: typeof profileStyles;
-  BackButton: HandlebarsTemplateDelegate<ButtonContext> | Template;
-  ProfileTable: HandlebarsTemplateDelegate<ProfileTableContext> | Template;
+  backButton: BackButtonContext;
+  profileTable: ProfileTableContext;
 };
 
 export type EditProfileContext = {
   styles: typeof editProfileStyles;
-  BackButton: HandlebarsTemplateDelegate<ButtonContext> | Template;
-  ProfileTable: HandlebarsTemplateDelegate<ProfileTableContext> | Template;
+  backButton: BackButtonContext;
+  profileTable: ProfileTableContext;
 };
 
 export type Error404Context = {
   styles: typeof error404Styles;
-  Error: HandlebarsTemplateDelegate<ErrorContext> | Template;
-  Link: HandlebarsTemplateDelegate<LinkContext> | Template;
+  error: ErrorContext;
+  link: LinkContext;
 };
 
 export type Error503Context = {
   styles: typeof error503Styles;
-  Error: HandlebarsTemplateDelegate<ErrorContext> | Template;
-  Link: HandlebarsTemplateDelegate<LinkContext> | Template;
+  error: ErrorContext;
+  link: LinkContext;
 };
 
 export type EditPasswordContext = {
   styles: typeof editPasswordStyles;
-  BackButton: HandlebarsTemplateDelegate<ButtonContext> | Template;
-  ProfileTable: HandlebarsTemplateDelegate<ProfileTableContext> | Template;
+  backButton: BackButtonContext;
+  profileTable: ProfileTableContext;
 };
 
 export type ChatContext = {
   styles: typeof chatStyles;
   chatSelected: boolean;
-  ChatTape: HandlebarsTemplateDelegate<ChatTapeContext> | Template;
-  Placeholder: HandlebarsTemplateDelegate<PlaceholderContext> | Template;
-  ChatList: HandlebarsTemplateDelegate<ChatListContext> | Template;
+  chatTape: {
+    chatName: string;
+    styles: typeof chatTapeStyles;
+    chatInput: ChatInputContext;
+    button: ButtonContext;
+    messages: Message[];
+  };
+  placeholder: PlaceholderContext;
+  chatList: ChatListContext;
 };
 
 export type LoginContext = {
   styles: typeof loginStyles;
-  UserForm: HandlebarsTemplateDelegate<UserFormContext> | Template;
-  Link?: HandlebarsTemplateDelegate<LinkContext> | Template;
+  userForm: UserFormContext;
 };
 
 export type RegisterContext = {
   styles: typeof registerStyles;
-  UserForm: HandlebarsTemplateDelegate<UserFormContext> | Template;
-  Link?: HandlebarsTemplateDelegate<LinkContext> | Template;
+  userForm: UserFormContext;
 };
-
-export type PageContext =
-  | LoginContext
-  | ProfileContext
-  | RegisterContext
-  | ChatContext
-  | EditPasswordContext
-  | EditProfileContext
-  | Error404Context
-  | Error503Context;

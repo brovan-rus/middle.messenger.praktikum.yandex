@@ -19,8 +19,10 @@
 
   flex-direction: row;
 
+  align-self: flex-end;
   justify-content: right;
 
+  width: max-content;
   margin-bottom: $spacing-xl;
 
   text-decoration: none;
@@ -38,6 +40,8 @@
   line-height: $line-height-s;
   color: $gray;
 
+  pointer-events: none;
+
   &::after {
     width: 12px;
     height: 8px;
@@ -51,6 +55,10 @@
 }
 
 .chatListHeader {
+  display: flex;
+
+  flex-direction: column;
+
   padding: 0 $spacing-s;
   margin-bottom: $spacing-ml;
 }

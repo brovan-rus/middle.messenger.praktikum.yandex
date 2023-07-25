@@ -1,4 +1,3 @@
-import Handlebars from 'handlebars';
 import { cards } from '../mocks/cards';
 import { messages } from '../mocks/messages';
 import {
@@ -10,103 +9,59 @@ import { profileLinks } from '../mocks/profileLinks';
 import { loginInputs, registerInputs } from '../mocks/userForm';
 import loginStyles from '../pages/Login/Login.module.css';
 import chatStyles from '../pages/Chat/Chat.module.css';
-import Placeholder from '../components/Placeholder/Placeholder.template';
 import PlaceholderStyles from '../components/Placeholder/Placeholder.module.css';
-import ChatTape from '../components/ChatTape/ChatTape.template';
 import chatTapeStyles from '../components/ChatTape/ChatTape.module.css';
-import ChatList from '../components/ChatList/ChatList.template';
 import chatListStyles from '../components/ChatList/ChatList.module.css';
-import ChatInput from '../components/ChatInput/ChatInput.template';
 import ChatInputStyles from '../components/ChatInput/ChatInput.module.css';
-import ChatCard from '../components/ChatCard/ChatCard.template';
 import profileStyles from '../pages/Profile/Profile.module.css';
-import BackButton from '../components/BackButton/BackButton.template';
 import backButtonStyles from '../components/BackButton/BackButton.module.css';
-import Button from '../components/Button/Button.template';
 import buttonStyles from '../components/Button/Button.module.css';
-import ProfileTable from '../components/ProfileTable/ProfileTable.template';
-
 import profileTableStyles from '../components/ProfileTable/ProfileTable.module.css';
-import ProfileFiled from '../components/ProfileField/ProfileField.template';
-import Link from '../components/Link/Link.template';
 import linkStyles from '../components/Link/Link.module.css';
 import editProfileStyles from '../pages/EditProfile/EditProfile.module.css';
-import ProfileForm from '../components/ProfileForm/ProfileForm.template';
 import editProfileFormStyles from '../components/ProfileForm/ProfileForm.module.css';
-import FormInput from '../components/FormInput/FormInput.template';
 import editPasswordStyles from '../pages/EidtPassword/EditPassword.module.css';
-import UserForm from '../components/UserFrom/UserForm.template';
 import userFormStyles from '../components/UserFrom/UserForm.module.css';
 import registerStyles from '../pages/Register/Register.module.css';
 import error404Styles from '../pages/Error404/Error404.module.css';
 import error503Styles from '../pages/Error503/Error503.module.css';
-import Error from '../components/Error/Error.template';
 import ErrorStyles from '../components/Error/Error.module.css';
-import Message from '../components/Message/Message.template';
 
 import {
+  BackButtonContext,
   ButtonContext,
-  ButtonTemplateContext,
   ChatContext,
   EditPasswordContext,
   EditProfileContext,
   Error404Context,
   Error503Context,
-  ProfileContext,
   LoginContext,
+  ProfileContext,
   RegisterContext,
 } from '../types/contexts';
+import { ButtonType } from '../components/Button/Button';
+import { onNavigate } from './router';
+import { Path } from '../types/path';
+import { Props } from '../types/props';
 
-const placeholderTemplate = Handlebars.compile(Placeholder);
-const chatListTemplate = Handlebars.compile(ChatList);
-const chatInputTemplate = Handlebars.compile(ChatInput);
-const chatCardTemplate = Handlebars.compile(ChatCard);
-
-const backButtonTemplate: HandlebarsTemplateDelegate<ButtonTemplateContext> =
-  Handlebars.compile(BackButton);
-const buttonTemplate: HandlebarsTemplateDelegate<ButtonContext> =
-  Handlebars.compile(Button);
-const profileTableTemplate = Handlebars.compile(ProfileTable);
-const profileFieldTemplate = Handlebars.compile(ProfileFiled);
-const linkTemplate = Handlebars.compile(Link);
-const profileFormTemplate = Handlebars.compile(ProfileForm);
-const formInputTemplate = Handlebars.compile(FormInput);
-const userFromTemplate = Handlebars.compile(UserForm);
-const error = Handlebars.compile(Error);
-const chatTapeTemplate = Handlebars.compile(ChatTape);
-const messageTemplate = Handlebars.compile(Message);
-
-Handlebars.registerPartial('card', chatCardTemplate);
-Handlebars.registerPartial('profileField', profileFieldTemplate);
-Handlebars.registerPartial('link', linkTemplate);
-Handlebars.registerPartial('formInput', formInputTemplate);
-Handlebars.registerPartial('message', messageTemplate);
-
-const profileBackButtonProps: ButtonTemplateContext = {
+const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
-  Button: buttonTemplate({
+  button: {
     styles: buttonStyles,
-    backButton: true,
-    id: 'backButton',
-  }),
+    type: ButtonType.BACK_BUTTON,
+  },
 };
 
-const formButtonProps = ({
-  id,
-  text = 'Сохранить',
-}: {
-  id: string;
-  text?: string;
-}): ButtonContext => {
+const formButtonProps = (props: Props): ButtonContext => {
   return {
     styles: buttonStyles,
-    formButton: true,
-    id,
-    text,
+    type: ButtonType.FORM_BUTTON,
+    text: 'Сохранить',
+    ...props,
   };
 };
 
-type Props = {
+type GlobalProps = {
   login: LoginContext;
   register: RegisterContext;
   chat: ChatContext;
@@ -117,145 +72,150 @@ type Props = {
   error503: Error503Context;
 };
 
-export const props: Props = {
+export const props: GlobalProps = {
   login: {
     styles: loginStyles,
-    UserForm: userFromTemplate({
+    userForm: {
       styles: userFormStyles,
       title: 'Вход',
       fields: loginInputs,
-      Button: buttonTemplate(
-        formButtonProps({ id: 'formButtonLogin', text: 'Авторизоваться' }),
-      ),
-      Link: linkTemplate({
+      button: formButtonProps({
+        text: 'Авторизоваться',
+        events: {
+          click: () => onNavigate(Path.CHAT),
+        },
+      }),
+      link: {
         text: 'Нет аккаунта?',
         styles: linkStyles,
-        small: true,
-        id: 'register',
-      }),
-    }),
+        size: 'small',
+        events: {
+          click: () => onNavigate(Path.REGISTER),
+        },
+      },
+    },
   },
   register: {
     styles: registerStyles,
-    UserForm: userFromTemplate({
+    userForm: {
       styles: userFormStyles,
       title: 'Регистрация',
       fields: registerInputs,
-      Button: buttonTemplate(
-        formButtonProps({
-          id: 'formButtonRegister',
-          text: 'Зарегистрироваться',
-        }),
-      ),
-      Link: linkTemplate({
+      button: formButtonProps({
+        text: 'Зарегистрироваться',
+      }),
+      link: {
         text: 'Войти?',
         styles: linkStyles,
-        small: true,
-        id: 'login',
-      }),
-    }),
+        size: 'small',
+        events: {
+          click: () => onNavigate(Path.LOGIN),
+        },
+      },
+    },
   },
   chat: {
     styles: chatStyles,
     chatSelected: true,
-    Placeholder: placeholderTemplate({
+    placeholder: {
       text: 'Выберите чат чтобы отправить сообщение',
       styles: PlaceholderStyles,
-    }),
-    ChatTape: chatTapeTemplate({
+    },
+    chatTape: {
       chatName: 'Виктор',
-      ChatInput: chatInputTemplate({
+      chatInput: {
         styles: ChatInputStyles,
         searchBar: false,
         name: 'message',
-      }),
-      Button: buttonTemplate({
-        id: 'sendButton',
+      },
+      button: {
         styles: buttonStyles,
-        sendButton: true,
-      }),
+        type: ButtonType.SEND_BUTTON,
+      },
       styles: chatTapeStyles,
       messages,
-    }),
-    ChatList: chatListTemplate({
+    },
+    chatList: {
       styles: chatListStyles,
       profileLinkText: 'Профиль',
-      ChatInput: chatInputTemplate({
+      chatInput: {
         styles: ChatInputStyles,
         searchBar: true,
         placeholder: 'Поиск',
         name: 'search',
-      }),
+      },
       cards,
-    }),
+    },
   },
   profile: {
     styles: profileStyles,
-    BackButton: backButtonTemplate(profileBackButtonProps),
-    ProfileTable: profileTableTemplate({
+    backButton: profileBackButtonProps,
+    profileTable: {
       styles: profileTableStyles,
       fields: profile,
       links: profileLinks,
       form: false,
-    }),
+    },
   },
   editProfile: {
     styles: editProfileStyles,
-    BackButton: backButtonTemplate(profileBackButtonProps),
-    ProfileTable: profileTableTemplate({
+    backButton: profileBackButtonProps,
+    profileTable: {
       styles: profileTableStyles,
       form: true,
-      EditProfileForm: profileFormTemplate({
+      profileForm: {
         styles: editProfileFormStyles,
         fields: profileInputs,
-        Button: buttonTemplate(
-          formButtonProps({ id: 'formButtonEditProfile' }),
-        ),
-      }),
-    }),
+        button: formButtonProps({ id: 'formButtonEditProfile' }),
+      },
+    },
   },
   editPassword: {
     styles: editPasswordStyles,
-    BackButton: backButtonTemplate(profileBackButtonProps),
-    ProfileTable: profileTableTemplate({
+    backButton: profileBackButtonProps,
+    profileTable: {
       styles: profileTableStyles,
       fields: profile,
       form: true,
-      EditProfileForm: profileFormTemplate({
+      profileForm: {
         styles: editProfileFormStyles,
         fields: profilePasswordInputs,
-        Button: buttonTemplate(
-          formButtonProps({ id: 'formButtonChangePassword' }),
-        ),
-      }),
-    }),
+        button: formButtonProps({ id: 'formButtonChangePassword' }),
+      },
+    },
   },
   error404: {
     styles: error404Styles,
-    Error: error({
+    error: {
       styles: ErrorStyles,
       code: '404',
       description: 'Не туда попали',
-    }),
-    Link: linkTemplate({
+    },
+    link: {
       styles: linkStyles,
       text: 'Назад к чатам',
-      id: 'chat',
-      small: true,
-    }),
+      size: 'small',
+      color: 'blue',
+      events: {
+        click: () => onNavigate(Path.CHAT),
+      },
+    },
   },
   error503: {
     styles: error503Styles,
-    Error: error({
+    error: {
       styles: ErrorStyles,
       code: '503',
       description: 'Мы уже фиксим',
-    }),
-    Link: linkTemplate({
+    },
+    link: {
       styles: linkStyles,
       text: 'Назад к чатам',
-      id: 'chat',
-      small: true,
-    }),
+      size: 'small',
+      color: 'blue',
+      events: {
+        click: () => onNavigate(Path.CHAT),
+      },
+    },
   },
 };

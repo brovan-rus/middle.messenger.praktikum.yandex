@@ -91,7 +91,7 @@ class Block {
     const fillStub = (child: Block) => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
       if (!stub) {
-        throw new Error(`${child._id} stub is empty`);
+        return;
       }
       stub.replaceWith(child.getContent());
     };
@@ -131,7 +131,6 @@ class Block {
   }
 
   public init() {
-    console.log('init');
     this._createResources();
     this.emit(EVENTS.FLOW_RENDER);
   }
