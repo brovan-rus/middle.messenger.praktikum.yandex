@@ -1,8 +1,8 @@
 import Handlebars from 'handlebars';
+import Login from '../pages/Login';
+import Error404 from '../pages/Error404/Error404';
+import Register from '../pages/Register';
 import Chat from '../pages/Chat/Chat.template';
-import Register from '../pages/Register/Regitster.template';
-import Error404 from '../pages/Error404/Error404.template';
-import Login from '../pages/Login/Login.template';
 import Profile from '../pages/Profile/Profile.template';
 import EditProfile from '../pages/EditProfile/EditProfile.template';
 import { props } from './props';
@@ -14,48 +14,43 @@ import { Path } from '../types/path';
 import { PageContext } from '../types/contexts';
 import { isObjectKey } from '../utils/isObjectKey';
 import { isEnumValue } from '../utils/isEnumValue';
+import Block from '../utils/Block';
+import { renderDom } from '../utils/renderDom';
 
-const chatTemplate = Handlebars.compile(Chat);
-const registerTemplate = Handlebars.compile(Register);
-const error404Template = Handlebars.compile(Error404);
-const error503Template = Handlebars.compile(Error503);
-const loginTemplate = Handlebars.compile(Login);
-const profileTemplate = Handlebars.compile(Profile);
-const editProfileTemplate = Handlebars.compile(EditProfile);
-const editPasswordTemplate = Handlebars.compile(EditPassword);
+// const chatTemplate = Handlebars.compile(Chat);
+// const registerTemplate = Handlebars.compile(Register);
+// const error404Template = Handlebars.compile(Error404);
+// const error503Template = Handlebars.compile(Error503);
+// const loginTemplate = Handlebars.compile(Login);
+// const profileTemplate = Handlebars.compile(Profile);
+// const editProfileTemplate = Handlebars.compile(EditProfile);
+// const editPasswordTemplate = Handlebars.compile(EditPassword);
 
-type Page = { [key in Path]: HandlebarsTemplateDelegate };
+type Page = { [key in Path]: Block };
 
 export const pages: Page = {
-  '/chat': chatTemplate,
-  '/error404': error404Template,
-  '/error503': error503Template,
-  '/register': registerTemplate,
-  '/login': loginTemplate,
-  '/profile': profileTemplate,
-  '/editProfile': editProfileTemplate,
-  '/editPassword': editPasswordTemplate,
+  // '/chat': chatTemplate,
+  // '/error404': error404Template,
+  // '/error503': error503Template,
+  '/register': Register,
+  '/login': Login,
+  '/error404': Error404,
+  // '/profile': profileTemplate,
+  // '/editProfile': editProfileTemplate,
+  // '/editPassword': editPasswordTemplate,
 };
 
-export const renderPage = (path: Path, context: PageContext) => {
-  const root = document.querySelector('#app');
-  if (!root) {
-    return;
-  }
-  const template = pages[path];
-  root.innerHTML = template(context);
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  enableNavigation();
-  init();
+export const renderPage = (path: Path) => {
+  renderDom('#app', pages[path]);
 };
 
-export const onNavigate = (path: Path, context?: PageContext) => {
+export const onNavigate = (path: Path) => {
   const currentPage = path.slice(1);
   if (!isObjectKey(currentPage, props)) {
     return;
   }
   window.history.pushState({}, path, window.location.origin + path);
-  renderPage(path, context ?? props[currentPage]);
+  renderPage(path);
 };
 
 export const enableNavigation = () => {
@@ -81,7 +76,7 @@ export const registerBrowserBackAndForward = () => {
     if (!isEnumValue(currentPath, Path) || !isObjectKey(pageName, props)) {
       return;
     }
-    renderPage(currentPath, props[pageName]);
+    renderPage(currentPath);
   });
 };
 
@@ -96,7 +91,7 @@ export const enableRouting = () => {
     isEnumValue(currentPath, Path) &&
     isObjectKey(pageName, props)
   ) {
-    renderPage(currentPath, props[pageName]);
+    renderPage(currentPath);
   } else {
     onNavigate(Path.ERROR_404);
   }

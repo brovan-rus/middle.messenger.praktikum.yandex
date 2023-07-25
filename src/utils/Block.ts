@@ -3,6 +3,7 @@ import EventBus from './EventBus';
 import { Callback } from '../types/callback';
 import { Props } from '../types/props';
 import { v4 } from 'uuid';
+import isArray = Handlebars.Utils.isArray;
 
 type Meta = {
   tagName: string;
@@ -79,34 +80,29 @@ class Block {
   public compile(template: string, props: Props) {
     const propsAndStubs = { ...props };
     for (const [key, child] of Object.entries(this.children)) {
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
-    }
-
-    if (this.props.items) {
-      propsAndStubs.items = this.props.items.map(
-        (item: Block) => `<div data-id="${item._id}"></div>`,
-      );
+      propsAndStubs[key] = isArray(child)
+        ? child.map((item: Block) => `<div data-id="${item._id}"></div>`)
+        : `<div data-id="${child._id}"></div>`;
     }
 
     const fragment = this._createDocumentElement('template');
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
-    for (const [key, child] of Object.entries(this.children)) {
+
+    const fillStub = (child: Block) => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
       if (!stub) {
-        throw new Error(`${key} stub is empty`);
+        throw new Error(`${child._id} stub is empty`);
       }
       stub.replaceWith(child.getContent());
-    }
+    };
 
-    if (this.props.items) {
-      for (const item of this.props.items) {
-        const itemStub = fragment.content.querySelector(
-          `[data-id="${item._id}"]`,
-        );
-        if (!itemStub) {
-          throw new Error(`item stub is empty`);
+    for (const [, child] of Object.entries(this.children)) {
+      if (isArray(child)) {
+        for (const item of child) {
+          fillStub(item);
         }
-        itemStub.replaceWith(item.getContent());
+      } else {
+        fillStub(child);
       }
     }
 
@@ -120,12 +116,11 @@ class Block {
   public dispatchComponentDidMount() {
     this._eventBus().emit(EVENTS.FLOW_CDM);
     for (const child of Object.values(this.children))
-      child.dispatchComponentDidMount();
-    if (this.props.items) {
-      for (const item of this.props.items) {
-        item.dispatchComponentDidMount();
+      if (this._isArrayOfComponents(child)) {
+        for (const item of child) item.dispatchComponentDidMount();
+      } else {
+        child.dispatchComponentDidMount();
       }
-    }
   }
 
   public getContent() {
@@ -168,7 +163,6 @@ class Block {
 
   private _addEvents() {
     const { events = {} as Event } = this.props;
-    console.log('adding events', events);
     for (const eventName of Object.keys(events)) {
       if (!this._element) {
         throw new Error('There is no element');
@@ -180,8 +174,6 @@ class Block {
   private _removeEvents() {
     const { events = {} as Event } = this.props;
     const { oldEvents = {} as Event } = this.oldProps.events || {};
-    console.log('removing events', events);
-    console.log('removing events', oldEvents);
 
     for (const eventName of Object.keys(events)) {
       if (!this._element) {
@@ -197,11 +189,17 @@ class Block {
     }
   }
 
+  private _isArrayOfComponents(value: Props[]) {
+    return isArray(value)
+      ? value.every((item: Props) => item instanceof Block)
+      : false;
+  }
+
   private _detectChildren(propsAndChildren: Props) {
     const children: Props = {};
     const props: Props = {};
     for (const [key, value] of Object.entries(propsAndChildren)) {
-      if (value instanceof Block) {
+      if (this._isArrayOfComponents(value) || value instanceof Block) {
         children[key] = value;
       } else {
         props[key] = value;
