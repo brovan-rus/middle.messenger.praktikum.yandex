@@ -7,6 +7,14 @@ $header-button-width: 3px;
 $header-button-height: 16px;
 $attach-button-size: 32px;
 
+.form {
+  display: grid;
+
+  grid-template-columns: 1fr max-content;
+
+  gap: $spacing-s;
+}
+
 .avatar {
   width: $avatar-size;
   height: $avatar-size;
@@ -84,7 +92,7 @@ $attach-button-size: 32px;
   display: grid;
 
   grid-template-rows: max-content;
-  grid-template-columns: max-content 1fr max-content;
+  grid-template-columns: max-content 1fr;
 
   gap: $spacing-s;
 

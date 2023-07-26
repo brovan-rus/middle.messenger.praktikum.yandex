@@ -2,10 +2,11 @@
 export default `
     <div class="{{styles.titleContainer}}">
         <h1 class="{{styles.title}}">{{title}}</h1>
-        <form id="loginForm" class="{{styles.form}}">
+        <div class="{{styles.form}}">
             {{#each fields}}
                 {{{this}}}
             {{/each}}
+        </div>
     </div>
     <div class="{{styles.buttonContainer}}">
         {{{Button}}}

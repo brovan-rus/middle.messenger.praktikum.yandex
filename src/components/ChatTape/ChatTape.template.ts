@@ -14,7 +14,9 @@ export default `
     </ul>
     <footer class="{{styles.footer}}">
         <button class="{{styles.attachButton}}"></button>
-        <form>{{{ChatInput}}}</form>
-        {{{Button}}}
+        <form class="{{styles.form}}">
+            {{{ChatInput}}}
+            {{{Button}}}
+        </form>
     </footer>
 `;

@@ -45,11 +45,6 @@ const profileForm = new ProfileForm({
   fields: fields.map((field: Props) => new FormInput(field)),
   Button: new Button({
     ...button,
-    events: {
-      click: (e: Event) => {
-        e.preventDefault();
-      },
-    },
   }),
 });
 

@@ -81,9 +81,9 @@ export const props: GlobalProps = {
       fields: loginInputs,
       button: formButtonProps({
         text: 'Авторизоваться',
-        events: {
-          click: () => onNavigate(Path.CHAT),
-        },
+        // events: {
+        //   click: () => onNavigate(Path.CHAT),
+        // },
       }),
       link: {
         text: 'Нет аккаунта?',
@@ -166,7 +166,7 @@ export const props: GlobalProps = {
       profileForm: {
         styles: editProfileFormStyles,
         fields: profileInputs,
-        button: formButtonProps({ id: 'formButtonEditProfile' }),
+        button: formButtonProps({}),
       },
     },
   },
@@ -180,7 +180,7 @@ export const props: GlobalProps = {
       profileForm: {
         styles: editProfileFormStyles,
         fields: profilePasswordInputs,
-        button: formButtonProps({ id: 'formButtonChangePassword' }),
+        button: formButtonProps({}),
       },
     },
   },

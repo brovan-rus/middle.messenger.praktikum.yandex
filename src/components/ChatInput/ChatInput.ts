@@ -5,7 +5,7 @@ import chatInputStyles from './ChatInput.module.css';
 
 class ChatInput extends Block {
   constructor(props: Props) {
-    super('form', props);
+    super('div', props);
   }
 
   render() {
