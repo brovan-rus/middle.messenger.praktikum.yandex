@@ -190,7 +190,7 @@ export const validate = (data: FormData) => {
     }
   }
 
-  if (data.message.length === 0) {
+  if (data.message?.length === 0) {
     makeErrorsArray('message');
     validationErrors.message.push(`message is empty validation error`);
   }
