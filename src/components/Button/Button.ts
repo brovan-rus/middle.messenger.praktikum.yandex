@@ -35,6 +35,12 @@ class Button extends Block {
           ${
             props.type === ButtonType.FORM_BUTTON ? buttonStyles.formButton : ''
           }`,
+      type: `${
+        props.type === ButtonType.FORM_BUTTON ||
+        props.type === ButtonType.SEND_BUTTON
+          ? 'submit'
+          : 'button'
+      }`,
     };
   }
 
