@@ -7,16 +7,18 @@
 }
 
 .title {
-  margin: 0 0 $spacing_l 0;
-  color: $black;
-  font-size: $title_font_size_xl;
+  margin: 0 0 $spacing-l 0;
+
+  font-size: $title-font-size-xl;
   font-weight: 500;
-  line-height: $title_line_height_xl;
+  line-height: $title-line-height-xl;
+  color: $black;
 }
 
 .description {
-  margin: 0 0 $spacing_5xl 0;
+  margin: 0 0 $spacing-5xl 0;
+
+  font-size: $title-font-size-l;
+  line-height: $title-line-height-l;
   color: $black;
-  font-size: $title_font_size_l;
-  line-height: $title_line_height_l;
 }

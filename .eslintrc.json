@@ -1,0 +1,46 @@
+{
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "unicorn",
+    "import"
+  ],
+  "extends": [
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "@typescript-eslint/no-var-requires": 0,
+    "unicorn/prefer-module": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/filename-case": "off",
+    "max-len": [
+      2,
+      100
+    ],
+    "max-params": [
+      2,
+      4
+    ]
+  }
+}

@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 #stylelint
-.stylelintrc.json
+stylelint.config.js
