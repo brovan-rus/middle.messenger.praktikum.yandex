@@ -16,8 +16,13 @@ type Options =
     }
   | EmptyObject;
 
+type FetchMethod = (
+  url: URL | string,
+  options: Options | EmptyObject,
+) => Promise<unknown>;
+
 class Fetch {
-  get = (url: URL, options: Options | EmptyObject = {}) => {
+  get: FetchMethod = (url, options = {}) => {
     return this.request(
       `${url}${queryStringify(options.data)}`,
       { ...options },
@@ -26,15 +31,15 @@ class Fetch {
     );
   };
 
-  put = (url: URL, options: Options | EmptyObject = {}) => {
+  put: FetchMethod = (url, options = {}) => {
     return this.request(url, { ...options }, METHODS.PUT, options.timeout);
   };
 
-  post = (url: URL, options: Options | EmptyObject = {}) => {
+  post: FetchMethod = (url, options = {}) => {
     return this.request(url, { ...options }, METHODS.POST, options.timeout);
   };
 
-  delete = (url: URL, options: Options | EmptyObject = {}) => {
+  delete: FetchMethod = (url, options = {}) => {
     return this.request(url, { ...options }, METHODS.DELETE, options.timeout);
   };
 

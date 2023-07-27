@@ -21,7 +21,7 @@ const enum EVENTS {
   FLOW_CDU = 'flow:component-did-update',
 }
 
-class Block {
+abstract class Block {
   public props: Props;
 
   public children: Props;
@@ -34,7 +34,7 @@ class Block {
 
   private readonly oldProps: Props;
 
-  constructor(tagName = 'div', propsAndChildren = {}) {
+  protected constructor(tagName = 'div', propsAndChildren = {}) {
     const eventBus = new EventBus();
 
     this._meta = {
