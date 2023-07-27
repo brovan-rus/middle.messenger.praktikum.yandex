@@ -4,6 +4,8 @@ type Listeners = {
   [key: string]: Callback[];
 };
 
+type RegisterEvent = (event: string, callback: Callback) => void;
+
 export class EventBus {
   private readonly listeners: Listeners;
 
@@ -11,14 +13,14 @@ export class EventBus {
     this.listeners = {};
   }
 
-  on(event: string, callback: Callback) {
+  on: RegisterEvent = (event, callback) => {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
     this.listeners[event].push(callback);
-  }
+  };
 
-  off(event: string, callback: Callback) {
+  off: RegisterEvent = (event, callback) => {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
@@ -26,7 +28,7 @@ export class EventBus {
     this.listeners[event] = this.listeners[event].filter(
       element => element !== callback,
     );
-  }
+  };
 
   emit(event: string, ...args: object[]) {
     if (!this.listeners[event]) {
