@@ -6,6 +6,19 @@ $input-height: 32px;
 $border-radius-search-bar: 5px;
 $border-radius-message: 30px;
 
+.validationError {
+  position: absolute;
+  bottom: -$spacing-s;
+
+  width: 100%;
+
+  font-size: $font-size-xxxs;
+  font-weight: 400;
+
+  color: $red;
+  text-align: right;
+}
+
 .searchForm {
   position: relative;
 
