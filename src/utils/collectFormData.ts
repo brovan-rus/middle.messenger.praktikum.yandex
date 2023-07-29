@@ -1,8 +1,8 @@
 import { FormData } from '../types/formData';
 
-const formData: FormData = {};
-
 export const collectFormData = (element: HTMLElement): FormData => {
+  const formData: FormData = {};
+
   const inputs = element.querySelectorAll('input');
   if (!inputs) {
     return formData;

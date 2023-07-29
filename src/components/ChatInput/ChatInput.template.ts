@@ -2,6 +2,7 @@
 export default `
     <input
             name="{{name}}"
+            value="{{value}}"
             class="
                     {{styles.input}}
                 {{#if searchBar}}
@@ -13,6 +14,9 @@ export default `
             placeholder="{{placeholder}}"
         {{/unless}}
     />
+    {{#if validationError}}
+        <span class="{{styles.validationError}}">{{validationError}}</span>
+    {{/if}}
 
     {{#if searchBar}}
         <div class="{{styles.placeholderContainer}}">
