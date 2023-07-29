@@ -3,6 +3,8 @@
 @import url("../../styles/_sizes.css");
 
 .container {
+  position: relative;
+
   display: flex;
 
   justify-content: space-between;
@@ -76,9 +78,25 @@
     font-size: $font-size-xxs;
     line-height: $line-height-xxs;
     color: $gray;
-
-
   }
+}
+
+.validationError {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+
+  font-size: $font-size-xxxs;
+  font-weight: 400;
+
+  color: $red;
+  text-align: right;
+}
+
+.validationErrorUserForm {
+  bottom: -$spacing-l;
 }
 
 .fieldName {

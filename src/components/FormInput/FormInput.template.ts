@@ -14,9 +14,20 @@ export default `
             name={{name}}
             id={{name}}
             type="{{type}}"
+            value="{{value}}"
             class="
                     {{styles.text}}
                 {{styles.input}} {{#if userForm}} {{styles.inputUserForm}} {{/if}}"
             placeholder="{{fieldValue}}"
     >
+    {{#if validationError}}
+        <span class="
+            {{styles.validationError}}
+            {{#if userForm}}
+                {{styles.validationErrorUserForm}}
+            {{/if}}"
+        >
+            {{validationError}}
+        </span>
+    {{/if}}
 `;
