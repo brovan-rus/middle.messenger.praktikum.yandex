@@ -1,21 +1,8 @@
-import Block from '../../utils/Block';
-import { Props } from '../../types/props';
+import Form from '../../utils/Form';
 import template from './UserForm.template';
 import userFormStyles from './UserForm.module.css';
-import { assertIsDefined } from '../../utils/assertIsDefined';
-import { addValidationEvents } from '../../utils/addValidationEvents';
 
-class UserForm extends Block {
-  constructor(props: Props) {
-    super('form', props);
-    assertIsDefined(this.element);
-    const validationEvents = addValidationEvents(this.element);
-    this.props.events = {
-      ...this.props.events,
-      ...validationEvents,
-    };
-  }
-
+class UserForm extends Form {
   render() {
     return this.compile(template, this.props);
   }
