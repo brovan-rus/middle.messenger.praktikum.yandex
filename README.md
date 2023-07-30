@@ -22,7 +22,17 @@ Pages
 * error404 page /error404
 * error503 /error503
 
-### Commands
+## Sprint_2
+
+* Made custom reactive class
+* All pages and components are based on reactive class
+* Added *stylelint* and *eslint* linters
+* Added typescript
+* Added custom fetch class over XMLHttpRequest
+* Added chat tape component
+* Refactored code
+
+## Commands
 
 * ``npm run start`` Builds prod version of project to /dist dir and starts express server on 3000 port
 * ``npm run dev`` Makes project development start available on 5173 port

@@ -8,22 +8,27 @@ $user-form-min-height: 450px;
 
 .container {
   display: flex;
-  width: $user-form-width;
-  min-height: $user-form-min-height;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: space-between;
-  padding: $spacing_4xl $spacing_xxl $spacing_xxl $spacing_xxl;
+
+  width: $user-form-width;
+  min-height: $user-form-min-height;
+  padding: $spacing-4xl $spacing-xxl $spacing-xxl $spacing-xxl;
+
   border-radius: $user-form-border-radius;
   box-shadow: 0 0 6px rgb(0 0 0 / 14%);
 }
 
 .title {
-  margin: 0 0 $spacing_3xl 0;
-  color: $black;
-  font-size: $title_font_size_l;
+  margin: 0 0 $spacing-3xl 0;
+
+  font-size: $title-font-size-l;
   font-weight: 500;
-  line-height: $title_line_height_l;
+  line-height: $title-line-height-l;
+  color: $black;
   text-align: center;
 }
 
@@ -33,8 +38,11 @@ $user-form-min-height: 450px;
 
 .buttonContainer {
   display: flex;
+
   flex-direction: column;
+
+  gap: $spacing-ml;
+
   align-items: center;
-  justify-content: center;
-  gap: $spacing_ml
+  justify-content: center
 }

@@ -1,19 +1,17 @@
-$font_size_xxs: 9px;
-$font_size_xs: 11px;
-$font_size_s: 12px;
-$font_size_m: 13px;
+$font-size-xxxs: 8px;
+$font-size-xxs: 9px;
+$font-size-xs: 11px;
+$font-size-s: 12px;
+$font-size-m: 13px;
 
-$title_font_size_s: 15px;
-$title_font_size_m: 16px;
-$title_font_size_l: 20px;
-$title_font_size_xl: 40px;
+$title-font-size-l: 20px;
+$title-font-size-xl: 40px;
 
-$line_height_xxs: 9px;
-$line_height_xs: 11px;
-$line_height_s: 12px;
-$line_height_m: 15px;
+$line-height-xxs: 9px;
+$line-height-xs: 11px;
+$line-height-s: 12px;
+$line-height-m: 15px;
 
-$title_line_height_s: 13px;
-$title_line_height_m: 16px;
-$title_line_height_l: 20px;
-$title_line_height_xl: 40px;
+$title-line-height-s: 13px;
+$title-line-height-l: 20px;
+$title-line-height-xl: 40px;

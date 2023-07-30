@@ -6,36 +6,46 @@ $table-width: 510px;
 
 .container {
   display: flex;
-  width: 100%;
-  height: 100vh;
+
   flex-direction: row;
+
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  height: 100vh;
 }
 
 .table {
   display: flex;
-  width: $table-width;
+
   flex-direction: column;
+
   align-items: center;
+
+  width: $table-width;
 }
 
 .avatar {
   width: $avatar-size;
   height: $avatar-size;
-  border-radius: 50%;
-  margin-bottom: $spacing_6xl;
-  background: $dark_gray url("../../../images/icons/no-avatar.svg") no-repeat center;
+  margin-bottom: $spacing-6xl;
+
   cursor: pointer;
+
+  background: $dark-gray url("../../../images/icons/no-avatar.svg") no-repeat center;
+  border-radius: 50%;
 }
 
 .fields {
   width: 100%;
-  margin-bottom: $spacing_5xl;
+  margin-bottom: $spacing-5xl;
 }
 
 .links {
   display: flex;
-  width: 100%;
+
   flex-direction: column;
+
+  width: 100%;
 }

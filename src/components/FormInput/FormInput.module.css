@@ -3,37 +3,46 @@
 @import url("../../styles/_sizes.css");
 
 .container {
+  position: relative;
+
   display: flex;
-  width: 100%;
+
   justify-content: space-between;
-  border-bottom: 1px solid $medium_gray;
+
+  width: 100%;
+
+  border-bottom: 1px solid $medium-gray;
 
   &:last-of-type {
+    margin-bottom: $spacing-5xl;
+
     border: 0;
-    margin-bottom: $spacing_5xl;
   }
 }
 
 .containerUserFrom {
   flex-direction: column;
+
+  margin-bottom: $spacing-mxl;
+
   border-bottom: 1px solid $blue;
-  margin-bottom: $spacing_mxl;
 
   &:last-of-type {
+    margin-bottom: $spacing-4xl;
+
     border: 0;
     border-bottom: 1px solid $blue;
-    margin-bottom: $spacing_4xl;
   }
-
-
 }
 
 .input {
-  border: 0;
   color: $gray;
-  cursor: pointer;
-  outline: 0;
   text-align: right;
+
+  cursor: pointer;
+
+  border: 0;
+  outline: 0;
 
 
   &::placeholder {
@@ -47,7 +56,8 @@
   }
 
   &.inputUserForm {
-    padding: 0 0 $spacing_xxs 0;
+    padding: 0 0 $spacing-xxs 0;
+
     color: $black;
     text-align: left;
   }
@@ -55,20 +65,38 @@
 
 
 .text {
-  padding: $spacing_s 0;
+  padding: $spacing-s 0;
   margin: 0;
-  font-size: $font_size_m;
-  line-height: $title_line_height_s;
+
+  font-size: $font-size-m;
+  line-height: $title-line-height-s;
 
   &.labelUserForm {
     padding: 0;
-    margin-bottom: $spacing_xxs;
+    margin-bottom: $spacing-xxs;
+
+    font-size: $font-size-xxs;
+    line-height: $line-height-xxs;
     color: $gray;
-    font-size: $font_size_xxs;
-    line-height: $line_height_xxs;
-
-
   }
+}
+
+.validationError {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+
+  font-size: $font-size-xxxs;
+  font-weight: 400;
+
+  color: $red;
+  text-align: right;
+}
+
+.validationErrorUserForm {
+  bottom: -$spacing-l;
 }
 
 .fieldName {
