@@ -12,7 +12,6 @@ import { Message as MessageType } from '../../mocks/messages';
 import Message from '../../components/Message';
 import Button from '../../components/Button/Button';
 import chatStyles from './Chat.module.css';
-import { navigateToLinkId } from '../../utils/navigateToLinkId';
 
 class Chat extends Block {
   constructor(props: Props) {
@@ -41,11 +40,6 @@ const chatList = new ChatList({
   ...globalProps.chat.chatList,
   cards: cards.map((card: Card) => new ChatCard(card)),
   ChatInput: chatListInput,
-  events: {
-    click: (e: Event) => {
-      navigateToLinkId(e);
-    },
-  },
 });
 const chatTape = new ChatTape({
   ...globalProps.chat.chatTape,

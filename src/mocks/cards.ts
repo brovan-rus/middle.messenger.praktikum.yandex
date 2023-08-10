@@ -9,10 +9,13 @@ export type Card = {
   timeDay: string;
   active: boolean;
   styles: typeof chatCardStyles;
+  events?: Record<string, () => void>;
+  id?: number;
 };
 
 export const cards: Card[] = [
   {
+    id: 1,
     name: 'Андрей',
     text: 'Текст',
     image: false,
@@ -21,6 +24,11 @@ export const cards: Card[] = [
     timeDay: '12:00',
     styles: chatCardStyles,
     active: false,
+    events: {
+      click: () => {
+        console.log('change chat', cards[0].id);
+      },
+    },
   },
   {
     name: 'Константин',

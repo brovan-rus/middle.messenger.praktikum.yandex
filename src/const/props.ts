@@ -40,9 +40,9 @@ import {
   RegisterContext,
 } from '../types/contexts';
 import { ButtonType } from '../components/Button/Button';
-import { onNavigate } from './router';
 import { Path } from '../types/path';
 import { Props } from '../types/props';
+import Router from '../utils/Router';
 
 const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
@@ -81,16 +81,16 @@ export const props: GlobalProps = {
       fields: loginInputs,
       button: formButtonProps({
         text: 'Авторизоваться',
-        // events: {
-        //   click: () => onNavigate(Path.CHAT),
-        // },
+        events: {
+          click: () => Router.navigate(Path.CHAT),
+        },
       }),
       link: {
         text: 'Нет аккаунта?',
         styles: linkStyles,
         size: 'small',
         events: {
-          click: () => onNavigate(Path.REGISTER),
+          click: () => Router.navigate(Path.REGISTER),
         },
       },
     },
@@ -109,7 +109,7 @@ export const props: GlobalProps = {
         styles: linkStyles,
         size: 'small',
         events: {
-          click: () => onNavigate(Path.LOGIN),
+          click: () => Router.navigate(Path.LOGIN),
         },
       },
     },
@@ -197,7 +197,7 @@ export const props: GlobalProps = {
       size: 'small',
       color: 'blue',
       events: {
-        click: () => onNavigate(Path.CHAT),
+        click: () => Router.navigate(Path.CHAT),
       },
     },
   },
@@ -214,7 +214,7 @@ export const props: GlobalProps = {
       size: 'small',
       color: 'blue',
       events: {
-        click: () => onNavigate(Path.CHAT),
+        click: () => Router.navigate(Path.CHAT),
       },
     },
   },

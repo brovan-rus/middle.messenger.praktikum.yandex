@@ -1,6 +1,6 @@
 import profileLinkStyles from '../components/Link/Link.module.css';
-import { onNavigate } from '../const/router';
 import { Path } from '../types/path';
+import Router from '../utils/Router';
 
 export type ProfileLink = {
   text: string;
@@ -20,7 +20,7 @@ export const profileLinks: ProfileLink[] = [
     styles: profileLinkStyles,
     events: {
       click: () => {
-        onNavigate(Path.EDIT_PROFILE);
+        Router.navigate(Path.EDIT_PROFILE);
       },
     },
   },
@@ -31,7 +31,7 @@ export const profileLinks: ProfileLink[] = [
     styles: profileLinkStyles,
     events: {
       click: () => {
-        onNavigate(Path.EDIT_PASSWORD);
+        Router.navigate(Path.EDIT_PASSWORD);
       },
     },
   },
