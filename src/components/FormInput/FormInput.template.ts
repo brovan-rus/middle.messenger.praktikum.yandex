@@ -4,7 +4,7 @@ export default `
     <label
             for="{{name}}"
             class="
-                    {{styles.text}}
+                {{styles.text}}
                 {{styles.fieldName}}
                 {{#if userForm}} {{styles.labelUserForm}} {{/if}}"
     >
@@ -16,7 +16,7 @@ export default `
             type="{{type}}"
             value="{{value}}"
             class="
-                    {{styles.text}}
+                {{styles.text}}
                 {{styles.input}} {{#if userForm}} {{styles.inputUserForm}} {{/if}}"
             placeholder="{{fieldValue}}"
     >

@@ -15,7 +15,6 @@ class ChatTape extends Block {
       this.element,
       this.showValidation.bind(this),
     );
-    console.log(this.children);
     this.props.events = {
       ...this.props.events,
       ...validationEvents,
