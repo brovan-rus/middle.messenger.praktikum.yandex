@@ -1,6 +1,6 @@
 import profileLinkStyles from '../components/Link/Link.module.css';
 import { Path } from '../types/path';
-import Router from '../utils/Router';
+import Router from '../sevices/router/Router';
 
 export type ProfileLink = {
   text: string;

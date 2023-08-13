@@ -1,6 +1,6 @@
 import template from './ProfileForm.template';
 import profileFormStyles from './ProfileForm.module.css';
-import Form from '../../utils/Form';
+import Form from '../abstract/Form/Form';
 
 class ProfileForm extends Form {
   render() {
