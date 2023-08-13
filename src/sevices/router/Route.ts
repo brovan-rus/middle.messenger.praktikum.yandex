@@ -1,6 +1,6 @@
-import Block from './Block';
-import { renderDom } from './renderDom';
-import { rootContainer } from '../const/rootContainer';
+import Block from '../../utils/Block';
+import { renderDom } from '../../utils/renderDom';
+import { rootContainer } from '../../const/rootContainer';
 
 export class Route {
   public path: string;

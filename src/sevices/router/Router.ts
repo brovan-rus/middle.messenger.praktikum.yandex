@@ -1,4 +1,6 @@
 import { Route } from './Route';
+import { Path } from '../../types/path';
+import { getUserFromStore } from '../store/Actions';
 
 class Router {
   private routes: Route[] = [];
@@ -39,8 +41,10 @@ class Router {
   }
 
   private _onRoute(path: string) {
+    const initialPagePath =
+      Object.entries(getUserFromStore()).length > 0 ? Path.CHAT : Path.LOGIN;
     if (path === this.initialPath) {
-      this._findRoute(this.initialPath).go();
+      this.navigate(initialPagePath);
     } else {
       this._findRoute(path).go();
     }
