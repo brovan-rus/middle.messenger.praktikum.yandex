@@ -1,10 +1,12 @@
 import { assertIsDefined } from './assertIsDefined';
 import { collectFormData } from './collectFormData';
 import { validate } from './validate';
+import { Indexed } from '../types/Indexed';
 
-export const addValidationEvents = (
+export const addFormEvents = (
   element: HTMLElement,
   callback: (...args: Record<string, any>[]) => void,
+  submit?: (...args: Indexed[]) => void,
 ) => {
   return {
     focusout: () => {
@@ -16,8 +18,11 @@ export const addValidationEvents = (
       e.preventDefault();
       assertIsDefined(element);
       const formData = collectFormData(element);
-      console.log(formData);
-      callback(validate(formData), formData);
+      const validationErrors = validate(formData);
+      callback(validationErrors, formData);
+      if (Object.entries(validationErrors).length === 0 && submit) {
+        submit(formData);
+      }
     },
   };
 };

@@ -43,6 +43,7 @@ type UserFormContext = {
   button: ButtonContext;
   link: LinkContext;
   fields: FormInputProps[];
+  submit?: (data: never) => Promise<unknown>;
 };
 
 type LinkContext = {
@@ -63,6 +64,7 @@ type ChatListContext = {
   profileLinkText: string;
   chatInput: ChatInputContext;
   cards: Card[];
+  events?: Record<string, (e: Event) => void>;
 };
 
 type ChatInputContext = {

@@ -61,7 +61,7 @@ abstract class Block {
     return this._element;
   }
 
-  public setProps = (nextProps: object) => {
+  public setProps = (nextProps: Props) => {
     Object.assign(this.oldProps, this.props);
 
     if (!nextProps) {

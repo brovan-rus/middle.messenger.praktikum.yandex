@@ -2,7 +2,7 @@ import Block from '../../utils/Block';
 import template from './BackButton.template';
 import { Props } from '../../types/props';
 import backButtonStyles from './BackButton.module.css';
-import Router from '../../utils/Router';
+import Router from '../../sevices/router/Router';
 
 class BackButton extends Block {
   constructor(props: Props) {

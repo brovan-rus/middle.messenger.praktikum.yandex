@@ -3,7 +3,7 @@ import template from './ChatTape.template';
 import { Props } from '../../types/props';
 import chatTapeStyles from './ChatTape.module.css';
 import { assertIsDefined } from '../../utils/assertIsDefined';
-import { addValidationEvents } from '../../utils/addValidationEvents';
+import { addFormEvents } from '../../utils/addFormEvents';
 import { ValidationData } from '../../utils/validate';
 import { FormData } from '../../types/formData';
 
@@ -11,7 +11,7 @@ class ChatTape extends Block {
   constructor(props: Props) {
     super('section', props);
     assertIsDefined(this.element);
-    const validationEvents = addValidationEvents(
+    const validationEvents = addFormEvents(
       this.element,
       this.showValidation.bind(this),
     );

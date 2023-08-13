@@ -1,25 +1,32 @@
-import { Props } from '../types/props';
-import Block from './Block';
-import { assertIsDefined } from './assertIsDefined';
-import { addValidationEvents } from './addValidationEvents';
-import { ValidationData } from './validate';
-import { FormData } from '../types/formData';
+import { Props } from '../../../types/props';
+import Block from '../../../utils/Block';
+import { assertIsDefined } from '../../../utils/assertIsDefined';
+import { addFormEvents } from '../../../utils/addFormEvents';
+import { ValidationData } from '../../../utils/validate';
+import { FormData } from '../../../types/formData';
+import { Indexed } from '../../../types/Indexed';
 
-class Form extends Block {
+abstract class Form extends Block {
   constructor(props: Props) {
     super('form', props);
     assertIsDefined(this.element);
-    const validationEvents = addValidationEvents(
+    const formEvents = addFormEvents(
       this.element,
       this.showValidation.bind(this),
+      this.submit.bind(this),
     );
     this.props.events = {
       ...this.props.events,
-      ...validationEvents,
+      ...formEvents,
     };
   }
 
-  showValidation(validationData: ValidationData, formData: FormData) {
+  submit(data: Indexed) {
+    console.log(data);
+    throw new Error('Not implemented');
+  }
+
+  private showValidation(validationData: ValidationData, formData: FormData) {
     for (const field of this.children.fields) {
       if (validationData[field.props.name]) {
         field.setProps({

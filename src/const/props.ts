@@ -26,6 +26,7 @@ import registerStyles from '../pages/Register/Register.module.css';
 import error404Styles from '../pages/Error404/Error404.module.css';
 import error503Styles from '../pages/Error503/Error503.module.css';
 import ErrorStyles from '../components/Error/Error.module.css';
+import { login, registerUser } from '../controllers/authController';
 
 import {
   BackButtonContext,
@@ -42,7 +43,7 @@ import {
 import { ButtonType } from '../components/Button/Button';
 import { Path } from '../types/path';
 import { Props } from '../types/props';
-import Router from '../utils/Router';
+import Router from '../sevices/router/Router';
 
 const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
@@ -81,10 +82,8 @@ export const props: GlobalProps = {
       fields: loginInputs,
       button: formButtonProps({
         text: 'Авторизоваться',
-        events: {
-          click: () => Router.navigate(Path.CHAT),
-        },
       }),
+      submit: login,
       link: {
         text: 'Нет аккаунта?',
         styles: linkStyles,
@@ -104,6 +103,7 @@ export const props: GlobalProps = {
       button: formButtonProps({
         text: 'Зарегистрироваться',
       }),
+      submit: registerUser,
       link: {
         text: 'Войти?',
         styles: linkStyles,
@@ -143,6 +143,16 @@ export const props: GlobalProps = {
         searchBar: true,
         placeholder: 'Поиск',
         name: 'search',
+      },
+      events: {
+        click: e => {
+          e.preventDefault();
+          const target = e.target as Element;
+          const tag = target.tagName.toLowerCase();
+          if (tag === 'a') {
+            Router.navigate(`/${target.id}`);
+          }
+        },
       },
       cards,
     },

@@ -4,7 +4,7 @@ import Error503 from '../pages/Error503/Error503';
 import Register from '../pages/Register/Register';
 import Login from '../pages/Login/Login';
 import Error404 from '../pages/Error404/Error404';
-import Profile from '../pages/Profile/Profile';
+import Profile from '../pages/Profile';
 import EditProfile from '../pages/EditProfile/EditProfile';
 import EditPassword from '../pages/EidtPassword/EditPassword';
 import Block from '../utils/Block';

@@ -1,9 +1,10 @@
 import { isObject } from './isObject';
 
-const isObjectOrArray = (data: Record<string, any> | any[]): boolean =>
-  isObject(data) || Array.isArray(data);
+const isObjectOrArray = (
+  data: Record<string, any> | any[] | undefined,
+): boolean => isObject(data) || Array.isArray(data);
 
-export const queryStringify = (data: Record<string, any>): string => {
+export const queryStringify = (data?: Record<string, any>): string => {
   if (!data || Object.entries(data).length === 0) {
     return '';
   }
