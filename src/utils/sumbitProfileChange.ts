@@ -7,9 +7,9 @@ import {
 
 export const submitProfileChange = async (
   data: ProfileData,
-  form: HTMLFormElement,
+  form?: HTMLFormElement,
 ) => {
-  const avatarFileInput = form.querySelector(
+  const avatarFileInput = form?.querySelector(
     '[name = "avatar"]',
   ) as HTMLInputElement;
   assertIsNonNullable(avatarFileInput.files);

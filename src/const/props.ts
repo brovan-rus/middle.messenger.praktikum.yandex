@@ -46,6 +46,7 @@ import { Props } from '../types/props';
 import Router from '../sevices/router/Router';
 import { navigateToLinkId } from '../utils/navigateToLinkId';
 import { submitProfileChange } from '../utils/sumbitProfileChange';
+import { changePassword } from '../controllers/userController';
 
 const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
@@ -197,6 +198,7 @@ export const props: GlobalProps = {
         styles: editProfileFormStyles,
         fields: profilePasswordInputs,
         button: formButtonProps({}),
+        submit: changePassword,
       },
     },
   },

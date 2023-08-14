@@ -47,3 +47,13 @@ export const registerUser = async (data: RegisterData) => {
     alert(JSON.parse(res.response).reason);
   }
 };
+
+export const logout = async () => {
+  const res = (await authApi.logout()) as XMLHttpRequest;
+  if (res.status === 200) {
+    console.log('logout', res);
+    Router.navigate(Path.LOGIN);
+  } else {
+    alert(JSON.parse(res.response).reason);
+  }
+};

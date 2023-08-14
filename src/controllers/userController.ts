@@ -38,7 +38,6 @@ export const changeAvatar = async (data: FormData) => {
 export const changePassword = async (data: ChangePassword) => {
   const res = (await userApi.changePassword(data)) as XMLHttpRequest;
   if (res.status === 200) {
-    console.log(JSON.parse(res.response));
     alert('Пароль изменен!');
   } else {
     alert(JSON.parse(res.response).reason);

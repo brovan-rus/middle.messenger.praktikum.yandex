@@ -1,6 +1,7 @@
 import profileLinkStyles from '../components/Link/Link.module.css';
 import { Path } from '../types/path';
 import Router from '../sevices/router/Router';
+import { logout } from '../controllers/authController';
 
 export type ProfileLink = {
   text: string;
@@ -8,7 +9,7 @@ export type ProfileLink = {
   red: boolean;
   styles: typeof profileLinkStyles;
   events?: {
-    click: () => void;
+    click: (e?: Event) => void;
   };
 };
 
@@ -35,5 +36,16 @@ export const profileLinks: ProfileLink[] = [
       },
     },
   },
-  { text: 'Выйти', id: 'exit', red: true, styles: profileLinkStyles },
+  {
+    text: 'Выйти',
+    id: 'exit',
+    red: true,
+    styles: profileLinkStyles,
+    events: {
+      click: async (e?: Event) => {
+        e?.preventDefault();
+        await logout();
+      },
+    },
+  },
 ];

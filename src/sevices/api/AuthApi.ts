@@ -23,6 +23,10 @@ class AuthApi extends BaseApi {
   getUserInfo() {
     return authHttpInstance.get('user', {});
   }
+
+  logout() {
+    return authHttpInstance.post('logout', {});
+  }
 }
 
 export default new AuthApi();
