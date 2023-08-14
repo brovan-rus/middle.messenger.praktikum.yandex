@@ -24,6 +24,8 @@ import chatTapeStyles from '../components/ChatTape/ChatTape.module.css';
 import { ButtonType } from '../components/Button/Button';
 import { Message } from '../mocks/messages';
 
+type Events = Record<string, (e: Event) => void>;
+
 export type ButtonContext = {
   styles: typeof buttonStyles;
   backButton?: boolean;
@@ -51,7 +53,7 @@ type LinkContext = {
   text: string;
   size: string;
   color?: string;
-  events?: Record<string, () => void>;
+  events?: Events;
 };
 
 type PlaceholderContext = {
@@ -64,7 +66,7 @@ type ChatListContext = {
   profileLinkText: string;
   chatInput: ChatInputContext;
   cards: Card[];
-  events?: Record<string, (e: Event) => void>;
+  events?: Events;
 };
 
 type ChatInputContext = {
@@ -86,6 +88,7 @@ type ProfileTableContext = {
   links?: ProfileLink[];
   form: boolean;
   profileForm?: ProfileFormContext;
+  events?: Events;
 };
 
 type ErrorContext = {
@@ -98,6 +101,7 @@ export type ProfileContext = {
   styles: typeof profileStyles;
   backButton: BackButtonContext;
   profileTable: ProfileTableContext;
+  events?: Events;
 };
 
 export type EditProfileContext = {

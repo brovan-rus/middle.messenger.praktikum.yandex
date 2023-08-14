@@ -1,8 +1,8 @@
 // language=hbs
 export default `
     <div class="{{styles.table}}">
-        <div class="{{styles.avatarContainer}}">
-            <div class="{{styles.noAvatar}}"></div>
+        <div class="{{styles.avatarContainer}}{{#if form}} {{styles.changeAvatar}} {{/if}}">
+            <div class="{{styles.noAvatar}}" {{#if form }}data-action="changeAvatar"{{/if}}></div>
         </div>
         {{#if form}}
             {{{ProfileForm}}}

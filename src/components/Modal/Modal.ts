@@ -43,7 +43,6 @@ class Modal extends Block {
 
   open() {
     renderModalToDome(this.getContent());
-    this.dispatchComponentDidMount();
   }
 
   close() {

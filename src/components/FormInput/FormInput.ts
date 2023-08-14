@@ -6,6 +6,7 @@ import formInputStyles from './FormInput.module.css';
 class FormInput extends Block {
   constructor(props: Props) {
     super('div', props);
+
     this.props.events = {
       ...this.props.events,
       focusout: (e: InputEvent) => {
@@ -33,6 +34,8 @@ class FormInput extends Block {
   }
 
   componentDidUpdate(oldProps: Props, newProps: Props): boolean {
+    this.props.value = newProps.fieldValue;
+
     const attrRenewed = oldProps.userForm === newProps.userForm;
     if (attrRenewed) {
       const attr = this.getAttr(this.props);

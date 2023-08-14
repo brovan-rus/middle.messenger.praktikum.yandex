@@ -1,5 +1,5 @@
 export const renderModalToDome = (modal: Element) => {
-  const root = document.querySelector('body');
+  const root = document.querySelector('#app');
   if (!root) {
     throw new Error('invalid query');
   }

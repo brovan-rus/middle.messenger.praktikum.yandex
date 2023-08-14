@@ -44,6 +44,7 @@ import { ButtonType } from '../components/Button/Button';
 import { Path } from '../types/path';
 import { Props } from '../types/props';
 import Router from '../sevices/router/Router';
+import { navigateToLinkId } from '../utils/navigateToLinkId';
 
 const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
@@ -144,16 +145,7 @@ export const props: GlobalProps = {
         placeholder: 'Поиск',
         name: 'search',
       },
-      events: {
-        click: e => {
-          e.preventDefault();
-          const target = e.target as Element;
-          const tag = target.tagName.toLowerCase();
-          if (tag === 'a') {
-            Router.navigate(`/${target.id}`);
-          }
-        },
-      },
+      events: { click: navigateToLinkId },
       cards,
     },
   },
@@ -177,6 +169,18 @@ export const props: GlobalProps = {
         styles: editProfileFormStyles,
         fields: profileInputs,
         button: formButtonProps({}),
+      },
+      events: {
+        click: (e: Event) => {
+          const targetElement = e.target as HTMLElement;
+          const currentTarget = e.currentTarget as HTMLElement;
+          if (targetElement.dataset.action === 'changeAvatar') {
+            const inputFile = currentTarget.querySelector(
+              '[name="avatar"]',
+            ) as HTMLElement;
+            inputFile?.click();
+          }
+        },
       },
     },
   },

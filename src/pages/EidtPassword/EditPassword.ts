@@ -6,7 +6,7 @@ import BackButton from '../../components/BackButton';
 import Button from '../../components/Button/Button';
 import { props as globalProps } from '../../const/props';
 import ProfileTable from '../../components/ProfileTable';
-import ProfileForm from '../../components/ProfileForm/ProfileForm';
+import ProfileForm from '../../components/ProfileForm';
 import FormInput from '../../components/FormInput';
 
 class EditPassword extends Block {
