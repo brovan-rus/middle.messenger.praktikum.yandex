@@ -2,6 +2,7 @@ import authApi from '../sevices/api/AuthApi';
 import Router from '../sevices/router/Router';
 import { Path } from '../types/path';
 import { setUserToStore } from '../sevices/store/Actions';
+import { getAvatarPath } from '../utils/getAvatarPath';
 
 export type RegisterData = {
   first_name: string;
@@ -21,7 +22,9 @@ export const auth = async () => {
   const res = (await authApi.getUserInfo()) as XMLHttpRequest;
   if (res.status === 200) {
     console.log(JSON.parse(res.response));
-    setUserToStore(JSON.parse(res.response));
+    const user = JSON.parse(res.response);
+    user.avatar = getAvatarPath(user.avatar);
+    setUserToStore(user);
 
     // Router.navigate(Path.CHAT);
   } else {

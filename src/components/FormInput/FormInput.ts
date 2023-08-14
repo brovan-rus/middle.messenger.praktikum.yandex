@@ -34,8 +34,6 @@ class FormInput extends Block {
   }
 
   componentDidUpdate(oldProps: Props, newProps: Props): boolean {
-    this.props.value = newProps.fieldValue;
-
     const attrRenewed = oldProps.userForm === newProps.userForm;
     if (attrRenewed) {
       const attr = this.getAttr(this.props);

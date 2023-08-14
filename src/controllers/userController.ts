@@ -1,5 +1,6 @@
 import userApi from '../sevices/api/UserApi';
 import { setUserToStore } from '../sevices/store/Actions';
+import { getAvatarPath } from '../utils/getAvatarPath';
 
 export type ProfileData = {
   first_name: 'string';
@@ -29,7 +30,9 @@ export const changeAvatar = async (data: FormData) => {
   const res = (await userApi.changeAvatar(data)) as XMLHttpRequest;
   if (res.status === 200) {
     console.log(JSON.parse(res.response));
-    setUserToStore(JSON.parse(res.response));
+    const user = JSON.parse(res.response);
+    user.avatar = getAvatarPath(user.avatar);
+    setUserToStore(user);
   } else {
     alert(JSON.parse(res.response).reason);
   }

@@ -4,6 +4,13 @@
 $avatar-size: 140px;
 $table-width: 510px;
 
+.avatar {
+  width: $avatar-size;
+  height: $avatar-size;
+
+  border-radius: 50%;
+}
+
 .container {
   display: flex;
 
@@ -28,6 +35,8 @@ $table-width: 510px;
 }
 
 .avatarContainer {
+  display: block;
+
   width: $avatar-size;
   height: $avatar-size;
   margin-bottom: $spacing-6xl;

@@ -4,11 +4,12 @@ import ProfileForm from './ProfileForm';
 
 export default Connect(ProfileForm, state => {
   const { fields } = globalProps.profile.profileTable;
-  return {
-    fields: state.user
-      ? fields?.map(field => {
+  return state.user
+    ? {
+        avatar: state.user.avatar,
+        fields: fields?.map(field => {
           return { ...field, ['fieldValue']: state.user[field.name] };
-        })
-      : {},
-  };
+        }),
+      }
+    : { fields: [] };
 });

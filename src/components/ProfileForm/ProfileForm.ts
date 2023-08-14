@@ -5,6 +5,8 @@ import { Props } from '../../types/props';
 import ProfileField from '../ProfileField/ProfileField';
 import fromInputStyles from '../FormInput/FormInput.module.css';
 import { Indexed } from '../../types/Indexed';
+import { changeAvatar } from '../../controllers/userController';
+import { assertIsNonNullable } from '../../utils/assertIsNonNullable';
 
 class ProfileForm extends Form {
   render() {
@@ -19,8 +21,17 @@ class ProfileForm extends Form {
     this.renewAttributes(attr);
   }
 
-  submit(data: Indexed) {
-    console.log(data);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async submit(data: Indexed) {
+    const form = this.getContent() as HTMLFormElement;
+    const avatarFileInput = form.querySelector(
+      '[name = "avatar"]',
+    ) as HTMLInputElement;
+    assertIsNonNullable(avatarFileInput.files);
+    if (avatarFileInput.files[0]) {
+      const formData = new FormData(form);
+      await changeAvatar(formData);
+    }
   }
 
   componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
@@ -30,8 +41,7 @@ class ProfileForm extends Form {
       });
       currentChild?.setProps({ ...field, styles: fromInputStyles });
     }
-    console.log(_oldProps.fields);
-    console.log(newProps.fields);
+    console.log(newProps);
     return true;
   }
 }
