@@ -23,6 +23,7 @@ import error503Styles from '../pages/Error404/Error503.module.css';
 import chatTapeStyles from '../components/ChatTape/ChatTape.module.css';
 import { ButtonType } from '../components/Button/Button';
 import { Message } from '../mocks/messages';
+import { ProfileData } from '../controllers/userController';
 
 type Events = Record<string, (e: Event) => void>;
 
@@ -80,6 +81,7 @@ type ProfileFormContext = {
   styles: typeof profileFormStyles;
   fields: ProfileInfo[];
   button: ButtonContext;
+  submit: (data: ProfileData, form: HTMLFormElement) => Promise<void>;
 };
 
 type ProfileTableContext = {

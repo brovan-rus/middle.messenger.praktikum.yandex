@@ -7,10 +7,10 @@ export default `
             {{#if form}} {{styles.changeAvatar}} {{/if}}"
         >
             {{#if avatar}}
-                <img
-                        {{#if form }}data-action="changeAvatar"{{/if}}
-                        src="{{avatar}}"
-                        class="{{styles.avatar}}"
+                <img alt="avatar image"
+                     {{#if form }}data-action="changeAvatar"{{/if}}
+                     src="{{avatar}}"
+                     class="{{styles.avatar}}"
                 />
             {{else}}
                 <div class="{{styles.noAvatar}}"

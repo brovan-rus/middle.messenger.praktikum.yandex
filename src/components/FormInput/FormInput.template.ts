@@ -18,7 +18,7 @@ export default `
             class="
                 {{styles.text}}
                 {{styles.input}} {{#if userForm}} {{styles.inputUserForm}} {{/if}}"
-            placeholder="{{fieldValue}}"
+            placeholder="{{placeholder}}"
     >
     {{#if validationError}}
         <span class="

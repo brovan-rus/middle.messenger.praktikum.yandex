@@ -45,6 +45,7 @@ import { Path } from '../types/path';
 import { Props } from '../types/props';
 import Router from '../sevices/router/Router';
 import { navigateToLinkId } from '../utils/navigateToLinkId';
+import { submitProfileChange } from '../utils/sumbitProfileChange';
 
 const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
@@ -169,6 +170,7 @@ export const props: GlobalProps = {
         styles: editProfileFormStyles,
         fields: profileInputs,
         button: formButtonProps({}),
+        submit: submitProfileChange,
       },
       events: {
         click: (e: Event) => {
