@@ -5,7 +5,7 @@ export default `
             <div class="{{styles.avatar}}"></div>
             <h1 class="{{styles.title}}">{{chatName}}</h1>
         </div>
-        <button class="{{styles.headerButton}}"></button>
+        <button data-action="openChatMenu" class="{{styles.headerButton}}"></button>
     </header>
     <ul class="{{styles.messagesList}}">
         {{#each messages}}

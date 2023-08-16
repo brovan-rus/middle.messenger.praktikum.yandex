@@ -19,6 +19,7 @@ const enum EVENTS {
   FLOW_CDM = 'flow:component-did-mount',
   FLOW_RENDER = 'flow:component-render',
   FLOW_CDU = 'flow:component-did-update',
+  FLOW_GTU = 'flow:component-is-going-to-unmount',
 }
 
 abstract class Block {
@@ -113,6 +114,10 @@ abstract class Block {
     this._eventBus().emit(event);
   }
 
+  public dispatchComponentIsGoingToUnmount() {
+    this._componentIsGoingToUnmount();
+  }
+
   public dispatchComponentDidMount() {
     this._eventBus().emit(EVENTS.FLOW_CDM);
     for (const child of Object.values(this.children))
@@ -137,6 +142,10 @@ abstract class Block {
 
   public componentDidMount() {
     console.log('didMount');
+  }
+
+  public componentIsGoingToUnmount() {
+    console.log('going to unmount');
   }
 
   public render(): DocumentFragment | void {
@@ -212,6 +221,10 @@ abstract class Block {
     this._eventBus().on(EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     this._eventBus().on(EVENTS.FLOW_RENDER, this._render.bind(this));
     this._eventBus().on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    this._eventBus().on(
+      EVENTS.FLOW_GTU,
+      this._componentIsGoingToUnmount.bind(this),
+    );
   }
 
   private _makePropsProxy(props: object, eventBus: () => EventBus) {
@@ -252,6 +265,10 @@ abstract class Block {
   private _componentDidMount() {
     this._addEvents();
     this.componentDidMount();
+  }
+
+  private _componentIsGoingToUnmount() {
+    this.componentIsGoingToUnmount();
   }
 
   private _componentDidUpdate(oldProps: Props, newProps: Props) {

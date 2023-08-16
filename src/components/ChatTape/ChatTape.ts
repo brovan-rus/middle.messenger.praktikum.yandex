@@ -6,8 +6,17 @@ import { assertIsDefined } from '../../utils/assertIsDefined';
 import { addFormEvents } from '../../utils/addFormEvents';
 import { ValidationData } from '../../utils/validate';
 import { FormData } from '../../types/formData';
+import TooltipMenu from '../Tooltip/TooltipMenu';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import plus from '../../../images/icons/plus.svg?inline';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import iks from '../../../images/icons/iks.svg?inline';
 
 class ChatTape extends Block {
+  contextMenu: TooltipMenu | undefined = undefined;
+
   constructor(props: Props) {
     super('section', props);
     assertIsDefined(this.element);
@@ -18,6 +27,37 @@ class ChatTape extends Block {
     this.props.events = {
       ...this.props.events,
       ...validationEvents,
+      click: (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target.dataset.action === 'openChatMenu') {
+          if (!this.contextMenu) {
+            this.contextMenu = new TooltipMenu({
+              menuItems: [
+                {
+                  title: 'Добавить пользователя',
+                  icon: `${plus}`,
+                  action: () => {
+                    console.log('add user to chat');
+                  },
+                },
+                {
+                  title: 'Удалить пользователя',
+                  icon: `${iks}`,
+                  action: () => {
+                    console.log('delete user from chat');
+                  },
+                },
+              ],
+              targetElement: target,
+            });
+          }
+          if (this.contextMenu.opened) {
+            this.contextMenu.close();
+          } else {
+            this.contextMenu.open();
+          }
+        }
+      },
     };
   }
 

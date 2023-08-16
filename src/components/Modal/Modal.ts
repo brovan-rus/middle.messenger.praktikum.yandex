@@ -1,8 +1,6 @@
 import Block from '../../utils/Block';
 import styles from './Modal.module.css';
 import { removeModalFromDome, renderModalToDome } from '../../utils/modal';
-import { assertIsDefined } from '../../utils/assertIsDefined';
-import { assertIsNonNullable } from '../../utils/assertIsNonNullable';
 
 class Modal extends Block {
   constructor(Component: Block) {
@@ -42,14 +40,11 @@ class Modal extends Block {
   }
 
   open() {
-    renderModalToDome(this.getContent());
+    renderModalToDome(this);
   }
 
   close() {
-    const modalDataId = this.element?.getAttribute('data-id');
-    assertIsDefined(modalDataId);
-    assertIsNonNullable(modalDataId);
-    removeModalFromDome(modalDataId);
+    removeModalFromDome(this);
   }
 }
 
