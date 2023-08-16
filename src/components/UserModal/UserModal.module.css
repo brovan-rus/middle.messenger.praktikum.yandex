@@ -1,0 +1,21 @@
+@import url('../../styles/_colors.css');
+@import url('../../styles/_sizes.css');
+@import url('../../styles/_spacings.css');
+
+.container {
+    padding: $spacing-3xl $spacing-xxl;
+}
+
+.form {
+    input {
+        border: 0;
+    }
+}
+
+.title {
+    margin: 0 0 $spacing-4xl 0;
+
+    font-size: $title-font-size-l;
+    line-height: $title-line-height-l;
+    text-align: center;
+}

@@ -13,6 +13,30 @@ import plus from '../../../images/icons/plus.svg?inline';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import iks from '../../../images/icons/iks.svg?inline';
+import Modal from '../Modal/Modal';
+import UserModal from '../UserModal/UserModal';
+import { addUserModalProps, removeUserModalProps } from '../../const/props';
+import Button, { ButtonType } from '../Button/Button';
+import FormInput from '../FormInput';
+import formInputStyles from '../FormInput/FormInput.module.css';
+
+const userModal = (props: Props) =>
+  new UserModal({
+    title: props.title,
+    Button: new Button({
+      type: ButtonType.FORM_BUTTON,
+      text: props.buttonText,
+    }),
+    FormInput: new FormInput({
+      inputName: props.inputName,
+      fieldValue: '',
+      fieldName: props.fieldTitle,
+      styles: formInputStyles,
+      type: 'text',
+      userForm: true,
+    }),
+    styles: props.styles,
+  });
 
 class ChatTape extends Block {
   contextMenu: TooltipMenu | undefined = undefined;
@@ -37,14 +61,14 @@ class ChatTape extends Block {
                   title: 'Добавить пользователя',
                   icon: `${plus}`,
                   action: () => {
-                    console.log('add user to chat');
+                    new Modal(userModal(addUserModalProps)).open();
                   },
                 },
                 {
                   title: 'Удалить пользователя',
                   icon: `${iks}`,
                   action: () => {
-                    console.log('delete user from chat');
+                    new Modal(userModal(removeUserModalProps)).open();
                   },
                 },
               ],

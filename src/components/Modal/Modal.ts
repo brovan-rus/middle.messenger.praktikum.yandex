@@ -10,7 +10,7 @@ class Modal extends Block {
     });
 
     this.props.events = {
-      click: (e: Event) => {
+      mousedown: (e: Event) => {
         if (e.target === e.currentTarget) {
           this.close();
         }

@@ -27,6 +27,7 @@ import error404Styles from '../pages/Error404/Error404.module.css';
 import error503Styles from '../pages/Error503/Error503.module.css';
 import ErrorStyles from '../components/Error/Error.module.css';
 import { login, registerUser } from '../controllers/authController';
+import userModalStyles from '../components/UserModal/UserModal.module.css';
 
 import {
   BackButtonContext,
@@ -236,4 +237,20 @@ export const props: GlobalProps = {
       },
     },
   },
+};
+
+export const addUserModalProps = {
+  title: 'Добавить пользователя',
+  fieldTitle: 'Логин',
+  inputName: 'login',
+  buttonText: 'Добавать',
+  styles: userModalStyles,
+};
+
+export const removeUserModalProps = {
+  title: 'Удалить пользователя',
+  fieldTitle: 'Логин',
+  inputName: 'login',
+  buttonText: 'Удалить',
+  styles: userModalStyles,
 };
