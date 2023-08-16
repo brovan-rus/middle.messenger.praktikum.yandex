@@ -10,6 +10,6 @@ export const getUserFromStore = () => {
 export const setUserToStore = (state: Indexed) => {
   store.set('user', {
     ...state,
-    avatar: state.avatar ? getAvatarPath(state.avatar as string) : {},
+    avatar: state.avatar ? getAvatarPath(state.avatar as string) : undefined,
   });
 };

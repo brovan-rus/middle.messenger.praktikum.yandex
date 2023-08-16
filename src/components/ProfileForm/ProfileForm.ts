@@ -24,13 +24,19 @@ class ProfileForm extends Form {
   }
 
   componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
+    console.log(newProps);
     for (const field of newProps.fields) {
       const currentChild = this.children.fields?.find((child: ProfileField) => {
         return child.props.name === field.name;
       });
-      currentChild?.setProps({ ...field, styles: fromInputStyles });
+      this.props.value = newProps.fieldValue;
+      currentChild?.setProps({
+        ...field,
+        styles: fromInputStyles,
+        placeholder: '',
+        value: field.fieldValue,
+      });
     }
-    console.log(newProps);
     return true;
   }
 }

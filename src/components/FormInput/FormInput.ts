@@ -11,10 +11,6 @@ class FormInput extends Block {
 
     this.props.events = {
       ...this.props.events,
-      focusout: (e: InputEvent) => {
-        const target = e.target as HTMLInputElement;
-        this.props.fieldValue = target.value;
-      },
     };
   }
 
@@ -36,9 +32,6 @@ class FormInput extends Block {
   }
 
   componentDidUpdate(oldProps: Props, newProps: Props): boolean {
-    this.props.value = newProps.fieldValue;
-    this.props.placeholder = '';
-
     const attrRenewed = oldProps.userForm === newProps.userForm;
     if (attrRenewed) {
       const attr = this.getAttr(this.props);
