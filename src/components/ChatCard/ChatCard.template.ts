@@ -9,7 +9,7 @@ export default `
         {{/if}}
         <div class="{{styles.textContatiner}}">
             <h2 class="{{styles.title}}">{{title}}</h2>
-            <p class="{{styles.text}}">{{last_message}}</p>
+            <p class="{{styles.text}}">{{last_message.content}}</p>
         </div>
         <div class="{{styles.info}}">
             <p class="{{styles.dateTimeText}}">{{timeDay}}</p>

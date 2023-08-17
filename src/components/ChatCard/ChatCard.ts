@@ -5,6 +5,7 @@ import {
   getChatListFromStore,
   saveChatListToStore,
 } from '../../sevices/store/Actions';
+import { getFormattedTime } from '../../utils/getFormattedTime';
 
 class ChatCard extends Block {
   constructor(props: Props) {
@@ -19,6 +20,7 @@ class ChatCard extends Block {
         saveChatListToStore(updatedChatList);
       },
     };
+    this.props.timeDay = getFormattedTime(this.props.last_message.time);
   }
 
   render() {
@@ -30,6 +32,11 @@ class ChatCard extends Block {
       id: this.props.chatId,
     };
     this.renewAttributes(attr);
+  }
+
+  componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
+    this.props.timeDay = getFormattedTime(newProps.props.last_message.time);
+    return true;
   }
 }
 
