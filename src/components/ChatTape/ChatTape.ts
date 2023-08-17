@@ -35,6 +35,9 @@ const userModal = (props: Props) =>
       type: 'text',
       userForm: true,
     }),
+    events: {
+      submit: props.submit,
+    },
     styles: props.styles,
   });
 

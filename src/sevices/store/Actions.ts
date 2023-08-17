@@ -13,3 +13,12 @@ export const setUserToStore = (state: Indexed) => {
     avatar: state.avatar ? getAvatarPath(state.avatar as string) : undefined,
   });
 };
+
+export const saveChatListToStore = (state: Indexed[]) => {
+  store.set('chatList', state);
+};
+
+export const getChatListFromStore = () => {
+  const state = store.getState();
+  return state.chatList ?? {};
+};

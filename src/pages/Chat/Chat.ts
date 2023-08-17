@@ -12,6 +12,9 @@ import { Message as MessageType } from '../../mocks/messages';
 import Message from '../../components/Message';
 import Button from '../../components/Button/Button';
 import chatStyles from './Chat.module.css';
+import { Connect } from '../../sevices/store';
+import { getChatListFromStore } from '../../sevices/store/Actions';
+import chatCardStyles from '../..//components/ChatCard/ChatCard.module.css';
 
 class Chat extends Block {
   constructor(props: Props) {
@@ -28,17 +31,57 @@ class Chat extends Block {
     };
     this.renewAttributes(attr);
   }
+
+  componentDidUpdate(oldProps: Props, newProps: Props): boolean {
+    if (newProps.cards.length > 0) {
+      const chatListInput = new ChatInput(globalProps.chat.chatList.chatInput);
+      const renewedChatList = new ChatList({
+        ...globalProps.chat.chatList,
+        cards: newProps.cards.map(
+          (card: Card) =>
+            new ChatCard({ ...card, styles: chatCardStyles, chatId: card.id }),
+        ),
+        ChatInput: chatListInput,
+      });
+      this.children.ChatList = renewedChatList;
+      renewedChatList.dispatchComponentDidMount();
+      if (oldProps.cards.length > 0) {
+        const previousActiveChat = oldProps.cards.find(
+          (card: Card) => card.active,
+        );
+        if (
+          previousActiveChat &&
+          previousActiveChat.webSocketController.isConnected
+        ) {
+          previousActiveChat.webSocketController.disconnect();
+        }
+      }
+
+      if (newProps.cards.length > 0) {
+        const currentActiveChat = newProps.cards.find(
+          (card: Card) => card.active,
+        );
+        if (currentActiveChat) {
+          currentActiveChat.webSocketController.connect();
+        }
+      }
+    }
+    return true;
+  }
 }
 
-const { cards } = globalProps.chat.chatList;
 const { messages, chatInput, button } = globalProps.chat.chatTape;
 const placeholder = new Placeholder(globalProps.chat.placeholder);
 const chatListInput = new ChatInput(globalProps.chat.chatList.chatInput);
 const chatTapeInput = new ChatInput(chatInput);
 const chatTapeButton = new Button(button);
+const chats = getChatListFromStore().length > 0 ? getChatListFromStore() : [];
 const chatList = new ChatList({
   ...globalProps.chat.chatList,
-  cards: cards.map((card: Card) => new ChatCard(card)),
+  cards: chats.map(
+    (card: Card) =>
+      new ChatCard({ ...card, styles: chatCardStyles, chatId: card.id }),
+  ),
   ChatInput: chatListInput,
 });
 const chatTape = new ChatTape({
@@ -48,7 +91,11 @@ const chatTape = new ChatTape({
   Button: chatTapeButton,
 });
 
-export default new Chat({
+const ChatConnectedToStore = Connect(Chat, state => {
+  return state ? { cards: getChatListFromStore() } : [];
+});
+
+export default new ChatConnectedToStore({
   ...globalProps.chat,
   ChatList: chatList,
   Placeholder: placeholder,

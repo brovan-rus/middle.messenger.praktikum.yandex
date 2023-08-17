@@ -48,6 +48,8 @@ import Router from '../sevices/router/Router';
 import { navigateToLinkId } from '../utils/navigateToLinkId';
 import { submitProfileChange } from '../utils/sumbitProfileChange';
 import { changePassword } from '../controllers/userController';
+import { crateNewChat } from '../controllers/chatController';
+import { getUserFromStore } from '../sevices/store/Actions';
 
 const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
@@ -126,7 +128,7 @@ export const props: GlobalProps = {
       styles: PlaceholderStyles,
     },
     chatTape: {
-      chatName: 'Виктор',
+      chatName: '',
       chatInput: {
         styles: ChatInputStyles,
         searchBar: false,
@@ -245,6 +247,13 @@ export const addUserModalProps = {
   inputName: 'login',
   buttonText: 'Добавать',
   styles: userModalStyles,
+  submit: async (e: Event) => {
+    e.preventDefault();
+    console.log(e);
+    const user = getUserFromStore();
+    await crateNewChat(user.login);
+    // addUserToChat()
+  },
 };
 
 export const removeUserModalProps = {

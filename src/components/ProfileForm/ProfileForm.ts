@@ -24,7 +24,6 @@ class ProfileForm extends Form {
   }
 
   componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
-    console.log(newProps);
     for (const field of newProps.fields) {
       const currentChild = this.children.fields?.find((child: ProfileField) => {
         return child.props.name === field.name;
