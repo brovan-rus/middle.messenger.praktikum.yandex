@@ -19,6 +19,8 @@ import { addUserModalProps, removeUserModalProps } from '../../const/props';
 import Button, { ButtonType } from '../Button/Button';
 import FormInput from '../FormInput';
 import formInputStyles from '../FormInput/FormInput.module.css';
+import { getActiveChatFromStore } from '../../sevices/store/Actions';
+import { Indexed } from '../../types/Indexed';
 
 const userModal = (props: Props) =>
   new UserModal({
@@ -50,6 +52,7 @@ class ChatTape extends Block {
     const validationEvents = addFormEvents(
       this.element,
       this.showValidation.bind(this),
+      this.submit.bind(this),
     );
     this.props.events = {
       ...this.props.events,
@@ -103,6 +106,11 @@ class ChatTape extends Block {
         value: formData.message,
       });
     }
+  }
+
+  submit(data: Indexed) {
+    const currentActiveChat = getActiveChatFromStore();
+    currentActiveChat.webSocketController.emit('message', data.message);
   }
 
   render() {

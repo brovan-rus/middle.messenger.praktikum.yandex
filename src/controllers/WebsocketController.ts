@@ -1,6 +1,5 @@
 import { Callback } from '../types/callback';
 import { webSocketUrl } from '../const/api';
-import { Indexed } from '../types/Indexed';
 
 export default class WebsocketController {
   private socket: undefined | WebSocket;
@@ -29,22 +28,27 @@ export default class WebsocketController {
       await connectToSocket;
       for (const { listener, method } of this.listeners)
         if (this.socket) {
-          (this.socket as WebSocket).addEventListener(method, listener);
+          (this.socket as WebSocket).addEventListener('message', event => {
+            const { type } = JSON.parse(event.data);
+            if (type === method) {
+              listener(event.data);
+            }
+          });
         }
     }
     this.keepAlive(5000);
   }
 
-  emit(method: Indexed, data: Indexed | undefined) {
-    const message = `${JSON.stringify(method)} ${
-      data ? `${JSON.stringify(data)}` : ''
+  emit(method: string, data = '') {
+    const message = `{"type":"${method}"${
+      data ? `,"content":"${data}"}` : '}'
     }`;
     this.socket?.send(message);
   }
 
   keepAlive(interval: number) {
     setInterval(() => {
-      this.socket?.send(JSON.stringify({ type: 'ping' }));
+      this.emit('ping');
     }, interval);
   }
 
@@ -53,7 +57,12 @@ export default class WebsocketController {
       this.listeners.push({ method, listener });
       return;
     }
-    this.socket.addEventListener(method, listener);
+    this.socket.addEventListener('message', event => {
+      const { type } = JSON.parse(event.data);
+      if (type === method) {
+        listener(event.data);
+      }
+    });
   }
 
   isConnected(): boolean {

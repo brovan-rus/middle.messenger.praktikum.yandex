@@ -32,7 +32,7 @@ class Chat extends Block {
     this.renewAttributes(attr);
   }
 
-  componentDidUpdate(oldProps: Props, newProps: Props): boolean {
+  componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
     if (newProps.cards.length > 0) {
       const chatListInput = new ChatInput(globalProps.chat.chatList.chatInput);
       const renewedChatList = new ChatList({
@@ -45,26 +45,6 @@ class Chat extends Block {
       });
       this.children.ChatList = renewedChatList;
       renewedChatList.dispatchComponentDidMount();
-      if (oldProps.cards.length > 0) {
-        const previousActiveChat = oldProps.cards.find(
-          (card: Card) => card.active,
-        );
-        if (
-          previousActiveChat &&
-          previousActiveChat.webSocketController.isConnected
-        ) {
-          previousActiveChat.webSocketController.disconnect();
-        }
-      }
-
-      if (newProps.cards.length > 0) {
-        const currentActiveChat = newProps.cards.find(
-          (card: Card) => card.active,
-        );
-        if (currentActiveChat) {
-          currentActiveChat.webSocketController.connect();
-        }
-      }
     }
     return true;
   }
