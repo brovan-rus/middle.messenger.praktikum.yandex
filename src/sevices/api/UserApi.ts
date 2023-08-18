@@ -24,6 +24,13 @@ class UserApi extends BaseApi {
       data: password,
     });
   }
+
+  search(login: string) {
+    return userHttpInstance.post('search', {
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      data: { login },
+    });
+  }
 }
 
 export default new UserApi();

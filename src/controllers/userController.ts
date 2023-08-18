@@ -1,5 +1,6 @@
 import userApi from '../sevices/api/UserApi';
 import { setUserToStore } from '../sevices/store/Actions';
+import { Indexed } from '../types/Indexed';
 
 export type ProfileData = {
   first_name: 'string';
@@ -39,6 +40,18 @@ export const changePassword = async (data: ChangePassword) => {
   const res = (await userApi.changePassword(data)) as XMLHttpRequest;
   if (res.status === 200) {
     alert('Пароль изменен!');
+  } else {
+    alert(JSON.parse(res.response).reason);
+  }
+};
+
+export const findIdByLogin = async (login: string) => {
+  const res = (await userApi.search(login)) as XMLHttpRequest;
+  if (res.status === 200) {
+    console.log(JSON.parse(res.response));
+    return JSON.parse(res.response).find(
+      (item: Indexed) => item.login === login,
+    );
   } else {
     alert(JSON.parse(res.response).reason);
   }
