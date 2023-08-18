@@ -14,6 +14,10 @@ const isDateInThisWeek = (date: Date) => {
   return date >= firstDayOfWeek && date <= lastDayOfWeek;
 };
 
+const formatMinutes = (minutes: number) => {
+  return minutes < 9 ? `0${minutes}` : `${minutes}`;
+};
+
 export const getFormattedTime = (messageTime: string) => {
   const today = new Date();
   const date = new Date(messageTime);
@@ -35,7 +39,7 @@ export const getFormattedTime = (messageTime: string) => {
     'Декабря',
   ];
   if (dateIsToday) {
-    return `${date.getHours()}:${date.getMinutes()}`;
+    return `${date.getHours()}:${formatMinutes(date.getMinutes())}`;
   } else if (dateOnThisWeek) {
     return daysOfTheWeek[date.getDay()];
   } else {
