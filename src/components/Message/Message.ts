@@ -2,10 +2,14 @@ import Block from '../../utils/Block';
 import template from './Message.template';
 import { Props } from '../../types/props';
 import messageStyles from './Message.module.css';
+import { getFormattedTime } from '../../utils/getFormattedTime';
+import { getUserFromStore } from '../../sevices/store/Actions';
 
 class Message extends Block {
   constructor(props: Props) {
     super('li', props);
+    this.props.time = getFormattedTime(this.props.time);
+    this.props.sentByAuthor = getUserFromStore().id === this.props.user_id;
   }
 
   render() {

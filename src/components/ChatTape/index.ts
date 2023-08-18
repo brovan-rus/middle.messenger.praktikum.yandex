@@ -8,5 +8,9 @@ const getUserName = () => {
 };
 
 export default Connect(ChatTape, state => {
-  return state.user ? { chatName: getUserName() } : {};
+  console.log(state);
+  return {
+    chatName: state.user ? getUserName() : '',
+    messages: state.messages,
+  };
 });

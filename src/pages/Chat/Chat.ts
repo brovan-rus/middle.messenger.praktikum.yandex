@@ -8,13 +8,12 @@ import ChatList from '../../components/ChatList';
 import ChatCard from '../../components/ChatCard';
 import { Card } from '../../mocks/cards';
 import ChatTape from '../../components/ChatTape';
-import { Message as MessageType } from '../../mocks/messages';
-import Message from '../../components/Message';
 import Button from '../../components/Button/Button';
 import chatStyles from './Chat.module.css';
 import { Connect } from '../../sevices/store';
 import { getChatListFromStore } from '../../sevices/store/Actions';
 import chatCardStyles from '../..//components/ChatCard/ChatCard.module.css';
+import MessagesList from '../../components/MessagesList';
 
 class Chat extends Block {
   constructor(props: Props) {
@@ -50,7 +49,7 @@ class Chat extends Block {
   }
 }
 
-const { messages, chatInput, button } = globalProps.chat.chatTape;
+const { chatInput, button } = globalProps.chat.chatTape;
 const placeholder = new Placeholder(globalProps.chat.placeholder);
 const chatListInput = new ChatInput(globalProps.chat.chatList.chatInput);
 const chatTapeInput = new ChatInput(chatInput);
@@ -66,9 +65,9 @@ const chatList = new ChatList({
 });
 const chatTape = new ChatTape({
   ...globalProps.chat.chatTape,
-  messages: messages.map((message: MessageType) => new Message(message)),
   ChatInput: chatTapeInput,
   Button: chatTapeButton,
+  MessagesList: new MessagesList({ messages: [] }),
 });
 
 const ChatConnectedToStore = Connect(Chat, state => {

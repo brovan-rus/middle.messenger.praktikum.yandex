@@ -18,7 +18,7 @@ class ChatApi extends BaseApi {
   addUser(userId: string, chatId: string) {
     return chatHttpInstance.put('users', {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      data: { userId: [userId], chatId: chatId },
+      data: { users: [userId], chatId: chatId },
     });
   }
 

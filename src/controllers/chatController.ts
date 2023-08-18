@@ -34,16 +34,16 @@ export const getChatsList = async () => {
 export const addUserToChat = async (user: string, chat: string) => {
   const res = (await chatApi.addUser(user, chat)) as XMLHttpRequest;
   if (res.status === 200) {
-    console.log(JSON.parse(res.response));
+    console.log(res.response);
   } else {
     alert(JSON.parse(res.response).reason);
   }
 };
 
-export const crateNewChat = async (chatName: string) => {
+export const createNewChat = async (chatName: string) => {
   const res = (await chatApi.createChat(chatName)) as XMLHttpRequest;
   if (res.status === 200) {
-    console.log(JSON.parse(res.response));
+    return JSON.parse(res.response);
   } else {
     alert(JSON.parse(res.response).reason);
   }

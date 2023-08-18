@@ -20,7 +20,9 @@ class ChatCard extends Block {
         saveChatListToStore(updatedChatList);
       },
     };
-    this.props.timeDay = getFormattedTime(this.props.last_message.time);
+    this.props.timeDay = this.props.last_message
+      ? getFormattedTime(this.props.last_message.time)
+      : '';
   }
 
   render() {
