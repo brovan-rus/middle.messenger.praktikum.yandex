@@ -18,6 +18,9 @@ class Modal extends Block {
           this.close();
         }
       },
+      submit: () => {
+        this.close();
+      },
     };
   }
 
