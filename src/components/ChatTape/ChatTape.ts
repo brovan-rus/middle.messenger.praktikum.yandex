@@ -21,6 +21,8 @@ import FormInput from '../FormInput';
 import formInputStyles from '../FormInput/FormInput.module.css';
 import { getActiveChatFromStore } from '../../sevices/store/Actions';
 import { Indexed } from '../../types/Indexed';
+import Message from '../Message';
+import MessagesList from '../MessagesList';
 
 const userModal = (props: Props) =>
   new UserModal({
@@ -60,7 +62,9 @@ class ChatTape extends Block {
       click: (e: Event) => {
         const target = e.target as HTMLElement;
         if (target.dataset.action === 'openChatMenu') {
-          if (!this.contextMenu) {
+          if (this.contextMenu?.opened) {
+            this.contextMenu.close();
+          } else {
             this.contextMenu = new TooltipMenu({
               menuItems: [
                 {
@@ -80,10 +84,6 @@ class ChatTape extends Block {
               ],
               targetElement: target,
             });
-          }
-          if (this.contextMenu.opened) {
-            this.contextMenu.close();
-          } else {
             this.contextMenu.open();
           }
         }
@@ -122,6 +122,22 @@ class ChatTape extends Block {
       class: chatTapeStyles.container,
     };
     this.renewAttributes(attr);
+    console.log('mounted');
+  }
+
+  componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
+    if (newProps.messages?.length > 0) {
+      const messagesComponents = newProps.messages.map(
+        (messageProps: Props) => new Message(messageProps),
+      );
+      const renewedMessagesList = new MessagesList({
+        messages: messagesComponents,
+      });
+      this.children.MessagesList = renewedMessagesList;
+      renewedMessagesList.dispatchComponentDidMount();
+    }
+
+    return true;
   }
 }
 

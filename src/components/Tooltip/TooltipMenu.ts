@@ -32,7 +32,7 @@ class TooltipMenu extends Block {
       click: (e: Event) => {
         const target = e.target as HTMLElement;
         assertIsNonNullable(target);
-        this.props.menuItems[Number(target.dataset.action)].action();
+        this.props.menuItems[Number(target.dataset.action)]?.action();
       },
     };
   }
@@ -78,8 +78,6 @@ class TooltipMenu extends Block {
 
   open() {
     if (!this.opened) {
-      console.log('open');
-
       renderModalToDome(this);
       this.opened = true;
     }
@@ -87,8 +85,6 @@ class TooltipMenu extends Block {
 
   close() {
     if (this.opened) {
-      console.log('close');
-
       removeModalFromDome(this);
       this.opened = false;
     }
