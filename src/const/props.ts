@@ -47,9 +47,17 @@ import { Props } from '../types/props';
 import Router from '../sevices/router/Router';
 import { navigateToLinkId } from '../utils/navigateToLinkId';
 import { submitProfileChange } from '../utils/sumbitProfileChange';
-import { changePassword } from '../controllers/userController';
-import { crateNewChat } from '../controllers/chatController';
-import { getUserFromStore } from '../sevices/store/Actions';
+import { changePassword, findIdByLogin } from '../controllers/userController';
+import {
+  addUserToChat,
+  createNewChat,
+  getChatsList,
+} from '../controllers/chatController';
+import {
+  getActiveChatFromStore,
+  getUserFromStore,
+} from '../sevices/store/Actions';
+import { assertIsNonNullable } from '../utils/assertIsNonNullable';
 
 const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
@@ -249,10 +257,24 @@ export const addUserModalProps = {
   styles: userModalStyles,
   submit: async (e: Event) => {
     e.preventDefault();
-    console.log(e);
     const user = getUserFromStore();
-    await crateNewChat(user.login);
-    // addUserToChat()
+    const activeChat = getActiveChatFromStore();
+    const target = e.target as HTMLElement;
+    assertIsNonNullable(target);
+    const input = target.querySelector('input');
+    assertIsNonNullable(input);
+    if (activeChat) {
+      const userToAdd = await findIdByLogin(input.value);
+      if (userToAdd) {
+        await addUserToChat(userToAdd.id, activeChat.id);
+      } else {
+        alert('No user with this login');
+      }
+    } else {
+      const { id } = await createNewChat(user.login);
+      await addUserToChat(input.value, id);
+      await getChatsList();
+    }
   },
 };
 
