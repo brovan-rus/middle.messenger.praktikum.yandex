@@ -1,17 +1,24 @@
 import { Callback } from '../types/callback';
 import { webSocketUrl } from '../const/api';
 
+type Listener = (event: MessageEvent) => void;
 export default class WebsocketController {
   private socket: undefined | WebSocket;
 
-  private listeners: { listener: Callback; method: string }[];
+  private listeners: Listener[];
 
   private path: string;
+
+  private messagesStack: string[] = [];
 
   constructor(path: string) {
     this.socket = undefined;
     this.listeners = [];
     this.path = path;
+  }
+
+  get isConnected(): boolean {
+    return this.socket !== undefined && this.socket.readyState === 1;
   }
 
   async connect(url = webSocketUrl, path = this.path) {
@@ -26,15 +33,16 @@ export default class WebsocketController {
         this.socket.onerror = (error: Event) => reject(error);
       });
       await connectToSocket;
-      for (const { listener, method } of this.listeners)
+      for (const listener of this.listeners)
         if (this.socket) {
-          (this.socket as WebSocket).addEventListener('message', event => {
-            const { type } = JSON.parse(event.data);
-            if (type === method) {
-              listener(event.data);
-            }
-          });
+          (this.socket as WebSocket).addEventListener('message', listener);
         }
+      if (this.messagesStack.length > 0 && this.socket) {
+        for (const message of this.messagesStack) {
+          (this.socket as WebSocket).send(message);
+        }
+        this.messagesStack = [];
+      }
     }
     this.keepAlive(5000);
   }
@@ -43,7 +51,11 @@ export default class WebsocketController {
     const message = `{"type":"${method}"${
       data ? `,"content":"${data}"}` : '}'
     }`;
-    this.socket?.send(message);
+    if (this.isConnected) {
+      this.socket?.send(message);
+    } else {
+      this.messagesStack.push(message);
+    }
   }
 
   keepAlive(interval: number) {
@@ -53,30 +65,35 @@ export default class WebsocketController {
   }
 
   on(method: string, listener: Callback) {
-    if (!this.socket) {
-      this.listeners.push({ method, listener });
-      return;
-    }
-    this.socket.addEventListener('message', event => {
+    const eventListener = (event: MessageEvent) => {
       const { type } = JSON.parse(event.data);
       if (type === method) {
-        listener(event.data);
+        listener(JSON.parse(event.data));
+      } else if (method === '') {
+        listener(JSON.parse(event.data));
       }
-    });
+    };
+
+    if (!this.socket) {
+      this.listeners.push(eventListener);
+      return;
+    }
+    this.socket.addEventListener('message', eventListener);
+    this.listeners.push(eventListener);
   }
 
-  isConnected(): boolean {
-    return this.socket !== undefined && this.socket.readyState === 3;
+  removeAllListeners() {
+    for (const listener of this.listeners) {
+      this?.socket?.removeEventListener('message', listener);
+    }
+    this.listeners = [];
   }
 
   disconnect() {
     console.log('disconnecting');
     if (!this.socket) return;
-    for (const { listener, method } of this.listeners) {
-      this.socket.removeEventListener(method, listener);
-    }
-    this.listeners = [];
-    if (this.isConnected()) {
+    this.removeAllListeners();
+    if (this.isConnected) {
       this.socket.close(1000);
     }
     this.socket = undefined;
