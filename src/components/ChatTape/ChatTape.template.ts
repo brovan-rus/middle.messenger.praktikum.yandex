@@ -7,11 +7,7 @@ export default `
         </div>
         <button data-action="openChatMenu" class="{{styles.headerButton}}"></button>
     </header>
-    <ul class="{{styles.messagesList}}">
-        {{#each messages}}
-            {{{this}}}
-        {{/each}}
-    </ul>
+    {{{MessagesList}}}
     <footer class="{{styles.footer}}">
         <button class="{{styles.attachButton}}"></button>
         <form class="{{styles.form}}">

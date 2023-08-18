@@ -1,0 +1,16 @@
+@import url('../../styles/_colors.css');
+@import url('../../styles/_spacings.css');
+
+.container {
+    display: flex;
+
+    flex-direction: column;
+
+    padding: $spacing-xxl $spacing-m;
+    margin: 0;
+    overflow-y: scroll;
+
+    list-style: none;
+
+    border-bottom: 1px solid $medium-gray;
+}
