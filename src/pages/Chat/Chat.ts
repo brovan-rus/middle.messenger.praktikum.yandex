@@ -33,17 +33,11 @@ class Chat extends Block {
 
   componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
     if (newProps.cards.length > 0) {
-      const chatListInput = new ChatInput(globalProps.chat.chatList.chatInput);
-      const renewedChatList = new ChatList({
-        ...globalProps.chat.chatList,
-        cards: newProps.cards.map(
-          (card: Card) =>
-            new ChatCard({ ...card, styles: chatCardStyles, chatId: card.id }),
-        ),
-        ChatInput: chatListInput,
-      });
-      this.children.ChatList = renewedChatList;
-      renewedChatList.dispatchComponentDidMount();
+      const renewedChatCards = newProps.cards.map(
+        (card: Card) =>
+          new ChatCard({ ...card, styles: chatCardStyles, chatId: card.id }),
+      );
+      this.children.ChatList.setProps({ cards: renewedChatCards });
     }
     return true;
   }
