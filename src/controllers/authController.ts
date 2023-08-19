@@ -31,17 +31,17 @@ export const login = async (data: LoginData) => {
   if (res.status === 200) {
     await auth();
     Router.navigate(Path.CHAT);
-    console.log(JSON.parse(res.response));
     await getChatsList();
   } else {
     alert(JSON.parse(res.response).reason);
   }
 };
+
 export const registerUser = async (data: RegisterData) => {
   const res = (await authApi.createUser(data)) as XMLHttpRequest;
   if (res.status === 200) {
-    console.log(res);
-    await login({ login: data.login, password: data.password });
+    setUserToStore(data);
+    Router.navigate(Path.CHAT);
   } else {
     alert(JSON.parse(res.response).reason);
   }
