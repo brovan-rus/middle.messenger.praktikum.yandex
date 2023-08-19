@@ -36,7 +36,7 @@ const clearMessages = () => {
 
 export const getChatListFromStore = () => {
   const state = store.getState();
-  return state.chatList ?? {};
+  return state.chatList ?? [];
 };
 
 const renewChatLastMessage = (chatId: string, message: Indexed) => {

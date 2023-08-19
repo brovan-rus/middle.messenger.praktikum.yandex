@@ -1,5 +1,5 @@
 import userFormStyles from '../components/UserFrom/UserForm.module.css';
-import { FormInputProps } from '../mocks/userForm';
+import { FormInputProps } from '../const/userForm';
 import buttonStyles from '../components/Button/Button.module.css';
 import backButtonStyles from '../components/BackButton/BackButton.module.css';
 import linkStyles from '../components/Link/Link.module.css';
@@ -8,11 +8,10 @@ import registerStyles from '../pages/Register/Register.module.css';
 import placeholderStyles from '../components/Placeholder/Placeholder.module.css';
 import chatInputStyles from '../components/ChatInput/ChatInput.module.css';
 import chatListStyles from '../components/ChatList/ChatList.module.css';
-import { Card } from '../mocks/cards';
 import chatStyles from '../pages/Chat/Chat.module.css';
 import profileTableStyles from '../components/ProfileTable/ProfileTable.module.css';
-import { ProfileInfo } from '../mocks/profile';
-import { ProfileLink } from '../mocks/profileLinks';
+import { ProfileInfo } from '../const/profile';
+import { ProfileLink } from '../const/profileLinks';
 import profileFormStyles from '../components/ProfileForm/ProfileForm.module.css';
 import editProfileStyles from '../pages/EditProfile/EditProfile.module.css';
 import profileStyles from '../pages/Profile/Profile.module.css';
@@ -22,7 +21,6 @@ import error404Styles from '../pages/Error404/Error404.module.css';
 import error503Styles from '../pages/Error404/Error503.module.css';
 import chatTapeStyles from '../components/ChatTape/ChatTape.module.css';
 import { ButtonType } from '../components/Button/Button';
-import { Message } from '../mocks/messages';
 
 type Events = Record<string, (e: Event) => void>;
 
@@ -65,7 +63,6 @@ type ChatListContext = {
   styles: typeof chatListStyles;
   profileLinkText: string;
   chatInput: ChatInputContext;
-  cards: Card[];
   events?: Events;
 };
 
@@ -137,7 +134,6 @@ export type ChatContext = {
     styles: typeof chatTapeStyles;
     chatInput: ChatInputContext;
     button: ButtonContext;
-    messages: Message[];
   };
   placeholder: PlaceholderContext;
   chatList: ChatListContext;

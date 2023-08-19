@@ -6,7 +6,6 @@ import Placeholder from '../../components/Placeholder';
 import ChatInput from '../../components/ChatInput';
 import ChatList from '../../components/ChatList';
 import ChatCard from '../../components/ChatCard';
-import { Card } from '../../mocks/cards';
 import ChatTape from '../../components/ChatTape';
 import Button from '../../components/Button/Button';
 import chatStyles from './Chat.module.css';
@@ -14,6 +13,7 @@ import { Connect } from '../../sevices/store';
 import { getChatListFromStore } from '../../sevices/store/Actions';
 import chatCardStyles from '../..//components/ChatCard/ChatCard.module.css';
 import MessagesList from '../../components/MessagesList';
+import { Indexed } from '../../types/Indexed';
 
 class Chat extends Block {
   constructor(props: Props) {
@@ -34,7 +34,7 @@ class Chat extends Block {
   componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
     if (newProps.cards.length > 0) {
       const renewedChatCards = newProps.cards.map(
-        (card: Card) =>
+        (card: Indexed) =>
           new ChatCard({ ...card, styles: chatCardStyles, chatId: card.id }),
       );
       this.children.ChatList.setProps({ cards: renewedChatCards });
@@ -48,13 +48,8 @@ const placeholder = new Placeholder(globalProps.chat.placeholder);
 const chatListInput = new ChatInput(globalProps.chat.chatList.chatInput);
 const chatTapeInput = new ChatInput(chatInput);
 const chatTapeButton = new Button(button);
-const chats = getChatListFromStore().length > 0 ? getChatListFromStore() : [];
 const chatList = new ChatList({
   ...globalProps.chat.chatList,
-  cards: chats.map(
-    (card: Card) =>
-      new ChatCard({ ...card, styles: chatCardStyles, chatId: card.id }),
-  ),
   ChatInput: chatListInput,
 });
 const chatTape = new ChatTape({

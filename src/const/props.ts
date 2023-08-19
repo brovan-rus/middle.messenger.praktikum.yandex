@@ -1,12 +1,6 @@
-import { cards } from '../mocks/cards';
-import { messages } from '../mocks/messages';
-import {
-  profile,
-  profileInputs,
-  profilePasswordInputs,
-} from '../mocks/profile';
-import { profileLinks } from '../mocks/profileLinks';
-import { loginInputs, registerInputs } from '../mocks/userForm';
+import { profile, profileInputs, profilePasswordInputs } from './profile';
+import { profileLinks } from './profileLinks';
+import { loginInputs, registerInputs } from './userForm';
 import loginStyles from '../pages/Login/Login.module.css';
 import chatStyles from '../pages/Chat/Chat.module.css';
 import PlaceholderStyles from '../components/Placeholder/Placeholder.module.css';
@@ -147,7 +141,6 @@ export const props: GlobalProps = {
         type: ButtonType.SEND_BUTTON,
       },
       styles: chatTapeStyles,
-      messages,
     },
     chatList: {
       styles: chatListStyles,
@@ -159,7 +152,6 @@ export const props: GlobalProps = {
         name: 'search',
       },
       events: { click: navigateToLinkId },
-      cards,
     },
   },
   profile: {
