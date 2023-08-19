@@ -4,7 +4,7 @@ This project is part of my education on middle frontend developer curses of Yand
 Frontend part of chat application. In first version pages are made with handlebars templating library and vite for
 project roll up. Made js routing and express server for static.
 
-Project is deployed with **netlify** and available by adress https://deploy--starlit-jalebi-c3e624.netlify.app/
+Project is deployed with **netlify** and available by address https://deploy--starlit-jalebi-c3e624.netlify.app/
 
 ## Sprint_1
 
@@ -31,6 +31,16 @@ Pages
 * Added custom fetch class over XMLHttpRequest
 * Added chat tape component
 * Refactored code
+
+## Sprint_3
+
+* Connected project to api
+* Deleted mock data
+* Added authorization and routes protection
+* Chat service is working on WebSocket
+* Refactored code
+* Made reactive class work with arrays of children
+* Made profile management function including user avatar uploading
 
 ## Commands
 
