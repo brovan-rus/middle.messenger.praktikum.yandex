@@ -22,7 +22,6 @@ import formInputStyles from '../FormInput/FormInput.module.css';
 import { getActiveChatFromStore } from '../../sevices/store/Actions';
 import { Indexed } from '../../types/Indexed';
 import Message from '../Message';
-import MessagesList from '../MessagesList';
 
 const userModal = (props: Props) =>
   new UserModal({
@@ -130,11 +129,21 @@ class ChatTape extends Block {
       const messagesComponents = newProps.messages.map(
         (messageProps: Props) => new Message(messageProps),
       );
-      const renewedMessagesList = new MessagesList({
+      this.children.MessagesList.setProps({
         messages: messagesComponents,
       });
-      this.children.MessagesList = renewedMessagesList;
-      renewedMessagesList.dispatchComponentDidMount();
+
+      //Used setTimeout to emulate nextTick to be sure component is rendered
+      setTimeout(
+        () =>
+          (this.children.MessagesList.element.scrollTop =
+            this.children.MessagesList.element.scrollHeight),
+        0,
+      );
+    } else {
+      this.children.MessagesList.setProps({
+        messages: [],
+      });
     }
 
     return true;
