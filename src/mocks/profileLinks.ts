@@ -20,7 +20,8 @@ export const profileLinks: ProfileLink[] = [
     red: false,
     styles: profileLinkStyles,
     events: {
-      click: () => {
+      click: e => {
+        e?.preventDefault();
         Router.navigate(Path.EDIT_PROFILE);
       },
     },
@@ -31,7 +32,8 @@ export const profileLinks: ProfileLink[] = [
     red: false,
     styles: profileLinkStyles,
     events: {
-      click: () => {
+      click: e => {
+        e?.preventDefault();
         Router.navigate(Path.EDIT_PASSWORD);
       },
     },
