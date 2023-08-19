@@ -48,7 +48,7 @@ class Router {
     this.history.forward();
   }
 
-  private async _onRoute(path: string) {
+  private _onRoute(path: string) {
     const initialPagePath = this.userAuthorized ? Path.CHAT : Path.LOGIN;
     if (path === this.initialPath) {
       this.navigate(initialPagePath);
