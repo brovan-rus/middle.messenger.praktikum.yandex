@@ -44,12 +44,13 @@ export const saveChatListToStore = (state: Indexed[]) => {
         chat.webSocketController.removeAllListeners();
         chat.webSocketController.on('message', (data: Indexed) => {
           addMessageToStore(data);
+          chat.lastMessage = '';
         });
         getMessages(chat.webSocketController);
       } else {
         chat.webSocketController.removeAllListeners();
         chat.webSocketController.on('message', (data: string) => {
-          console.log('renewLastMessage', data);
+          // renewLastMessage(chat, data);
         });
       }
       return { ...chat, active: chat.active || false };

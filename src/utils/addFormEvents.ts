@@ -2,6 +2,7 @@ import { assertIsDefined } from './assertIsDefined';
 import { collectFormData } from './collectFormData';
 import { validate } from './validate';
 import { Indexed } from '../types/Indexed';
+import { resetInputs } from './resetInputs';
 
 export const addFormEvents = (
   element: HTMLElement,
@@ -23,6 +24,7 @@ export const addFormEvents = (
       if (Object.entries(validationErrors).length === 0 && submit) {
         submit(formData);
       }
+      resetInputs(element);
     },
   };
 };

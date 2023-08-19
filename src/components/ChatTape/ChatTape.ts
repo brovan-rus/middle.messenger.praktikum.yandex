@@ -138,7 +138,6 @@ class ChatTape extends Block {
         () =>
           (this.children.MessagesList.element.scrollTop =
             this.children.MessagesList.element.scrollHeight),
-        0,
       );
     } else {
       this.children.MessagesList.setProps({
