@@ -12,7 +12,9 @@ type Meta = {
 
 type DocumentElement = HTMLElement & HTMLTemplateElement;
 
-type Event = { [key: string]: Callback };
+type Event = {
+  [key: string]: Callback;
+};
 
 const enum EVENTS {
   INIT = 'init',
@@ -80,6 +82,13 @@ abstract class Block {
 
   public compile(template: string, props: Props) {
     const propsAndStubs = { ...props };
+    const newChildren = this._detectChildren(props).children;
+    if (newChildren) {
+      for (const [key, value] of Object.entries(newChildren)) {
+        this.children[key] = value;
+        for (const child of value) child.dispatchComponentDidMount();
+      }
+    }
     for (const [key, child] of Object.entries(this.children)) {
       propsAndStubs[key] = isArray(child)
         ? child.map((item: Block) => `<div data-id="${item._id}"></div>`)
@@ -229,7 +238,13 @@ abstract class Block {
 
   private _makePropsProxy(props: object, eventBus: () => EventBus) {
     return new Proxy(props, {
-      set(target: { [key: string]: unknown }, prop: string, newValue) {
+      set(
+        target: {
+          [key: string]: unknown;
+        },
+        prop: string,
+        newValue,
+      ) {
         const oldValue = target[prop];
         if (oldValue === newValue) {
           return true;
