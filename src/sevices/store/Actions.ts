@@ -34,6 +34,18 @@ const clearMessages = () => {
   store.set('messages', []);
 };
 
+export const getChatListFromStore = () => {
+  const state = store.getState();
+  return state.chatList ?? {};
+};
+
+const renewChatLastMessage = (chatId: string, message: Indexed) => {
+  const chatList = getChatListFromStore();
+  const currentChat = chatList.find((chat: Indexed) => chat.id === chatId);
+  currentChat.last_message = message;
+  store.set('chatList', chatList);
+};
+
 export const saveChatListToStore = (state: Indexed[]) => {
   store.set(
     'chatList',
@@ -44,23 +56,19 @@ export const saveChatListToStore = (state: Indexed[]) => {
         chat.webSocketController.removeAllListeners();
         chat.webSocketController.on('message', (data: Indexed) => {
           addMessageToStore(data);
-          chat.lastMessage = '';
+          renewChatLastMessage(chat.id, data);
+          console.log(chat);
         });
         getMessages(chat.webSocketController);
       } else {
         chat.webSocketController.removeAllListeners();
-        chat.webSocketController.on('message', (data: string) => {
-          // renewLastMessage(chat, data);
+        chat.webSocketController.on('message', (data: Indexed) => {
+          renewChatLastMessage(chat.id, data);
         });
       }
       return { ...chat, active: chat.active || false };
     }),
   );
-};
-
-export const getChatListFromStore = () => {
-  const state = store.getState();
-  return state.chatList ?? {};
 };
 
 export const getActiveChatFromStore = () => {
