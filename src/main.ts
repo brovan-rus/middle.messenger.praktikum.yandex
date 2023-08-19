@@ -7,11 +7,12 @@ import { getChatsList } from './controllers/chatController';
 
 document.addEventListener('DOMContentLoaded', async () => {
   await auth();
-  if (getUserFromStore()) {
+
+  if (Object.entries(getUserFromStore()).length > 0) {
     await getChatsList();
   }
-  for (const [path, page] of Object.entries(routes)) {
-    Router.addRoute(new Route(path, page));
+  for (const route of routes) {
+    Router.addRoute(new Route(route.path, route.page, route.isProtected));
   }
   Router.enableRouting();
 });

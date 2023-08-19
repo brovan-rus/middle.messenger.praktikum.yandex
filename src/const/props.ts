@@ -97,7 +97,10 @@ export const props: GlobalProps = {
         styles: linkStyles,
         size: 'small',
         events: {
-          click: () => Router.navigate(Path.REGISTER),
+          click: (e: Event) => {
+            e.preventDefault();
+            Router.navigate(Path.REGISTER);
+          },
         },
       },
     },
@@ -117,7 +120,10 @@ export const props: GlobalProps = {
         styles: linkStyles,
         size: 'small',
         events: {
-          click: () => Router.navigate(Path.LOGIN),
+          click: (e: Event) => {
+            e.preventDefault();
+            Router.navigate(Path.LOGIN);
+          },
         },
       },
     },

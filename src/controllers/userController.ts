@@ -48,7 +48,6 @@ export const changePassword = async (data: ChangePassword) => {
 export const findIdByLogin = async (login: string) => {
   const res = (await userApi.search(login)) as XMLHttpRequest;
   if (res.status === 200) {
-    console.log(JSON.parse(res.response));
     return JSON.parse(res.response).find(
       (item: Indexed) => item.login === login,
     );

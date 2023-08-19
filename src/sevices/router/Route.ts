@@ -7,9 +7,12 @@ export class Route {
 
   public page: Block;
 
-  constructor(path: string, page: Block) {
+  public isProtected: boolean;
+
+  constructor(path: string, page: Block, isProtected = false) {
     this.path = path;
     this.page = page;
+    this.isProtected = isProtected;
   }
 
   public go() {

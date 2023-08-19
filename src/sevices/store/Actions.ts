@@ -10,10 +10,14 @@ export const getUserFromStore = () => {
 };
 
 export const setUserToStore = (state: Indexed) => {
-  store.set('user', {
-    ...state,
-    avatar: state.avatar ? getAvatarPath(state.avatar as string) : undefined,
-  });
+  if (state?.id) {
+    store.set('user', {
+      ...state,
+      avatar: state.avatar ? getAvatarPath(state.avatar as string) : undefined,
+    });
+  } else {
+    store.set('user', state);
+  }
 };
 
 export const getMessagesFromStore = () => {

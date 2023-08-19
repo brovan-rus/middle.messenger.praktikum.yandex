@@ -15,13 +15,21 @@ class Router {
     this.history = window.history;
   }
 
+  get userAuthorized() {
+    return Object.entries(getUserFromStore()).length > 0;
+  }
+
+  get initialPagePath() {
+    return this.userAuthorized ? Path.CHAT : Path.LOGIN;
+  }
+
   public addRoute(route: Route) {
     this.routes.push(route);
   }
 
   public navigate(path: string) {
     this.history.pushState({}, path, window.location.origin + path);
-    this._findRoute(path).go();
+    this._findRoute(path)?.go();
   }
 
   public enableRouting() {
@@ -40,13 +48,12 @@ class Router {
     this.history.forward();
   }
 
-  private _onRoute(path: string) {
-    const initialPagePath =
-      Object.entries(getUserFromStore()).length > 0 ? Path.CHAT : Path.LOGIN;
+  private async _onRoute(path: string) {
+    const initialPagePath = this.userAuthorized ? Path.CHAT : Path.LOGIN;
     if (path === this.initialPath) {
       this.navigate(initialPagePath);
     } else {
-      this._findRoute(path).go();
+      this._findRoute(path)?.go();
     }
   }
 
@@ -61,6 +68,12 @@ class Router {
       } else {
         throw new Error('Error 404 route not registered');
       }
+    } else if (foundRoute.isProtected && !this.userAuthorized) {
+      this.navigate(this.initialPagePath);
+      return;
+    } else if (!foundRoute.isProtected && this.userAuthorized) {
+      this.navigate(this.initialPagePath);
+      return;
     }
     return foundRoute;
   }

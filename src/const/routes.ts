@@ -7,16 +7,14 @@ import Error404 from '../pages/Error404/Error404';
 import Profile from '../pages/Profile';
 import EditProfile from '../pages/EditProfile/EditProfile';
 import EditPassword from '../pages/EidtPassword/EditPassword';
-import Block from '../utils/Block';
 
-type Route = { [key in Path]: Block };
-export const routes: Route = {
-  [Path.CHAT]: Chat,
-  [Path.ERROR_503]: Error503,
-  [Path.REGISTER]: Register,
-  [Path.LOGIN]: Login,
-  [Path.ERROR_404]: Error404,
-  [Path.PROFILE]: Profile,
-  [Path.EDIT_PROFILE]: EditProfile,
-  [Path.EDIT_PASSWORD]: EditPassword,
-};
+export const routes = [
+  { path: Path.CHAT, page: Chat, isProtected: true },
+  { path: Path.ERROR_503, page: Error503, isProtected: false },
+  { path: Path.REGISTER, page: Register, isProtected: false },
+  { path: Path.LOGIN, page: Login, isProtected: false },
+  { path: Path.ERROR_404, page: Error404, isProtected: false },
+  { path: Path.PROFILE, page: Profile, isProtected: true },
+  { path: Path.EDIT_PROFILE, page: EditProfile, isProtected: true },
+  { path: Path.EDIT_PASSWORD, page: EditPassword, isProtected: true },
+];
