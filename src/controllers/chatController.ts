@@ -40,6 +40,15 @@ export const addUserToChat = async (user: string, chat: string) => {
   }
 };
 
+export const removeUserFromChat = async (user: string, chat: string) => {
+  const res = (await chatApi.removeUser(user, chat)) as XMLHttpRequest;
+  if (res.status === 200) {
+    console.log(res.response);
+  } else {
+    alert(JSON.parse(res.response).reason);
+  }
+};
+
 export const createNewChat = async (chatName: string) => {
   const res = (await chatApi.createChat(chatName)) as XMLHttpRequest;
   if (res.status === 200) {

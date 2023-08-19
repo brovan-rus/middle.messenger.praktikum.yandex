@@ -25,7 +25,7 @@ class ChatApi extends BaseApi {
   removeUser(userId: string, chatId: string) {
     return chatHttpInstance.delete('users', {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      data: { userId: [userId], chatId: chatId },
+      data: { users: [userId], chatId: chatId },
     });
   }
 

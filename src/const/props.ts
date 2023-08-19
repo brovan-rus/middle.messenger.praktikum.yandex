@@ -46,12 +46,14 @@ import {
   addUserToChat,
   createNewChat,
   getChatsList,
+  removeUserFromChat,
 } from '../controllers/chatController';
 import {
   getActiveChatFromStore,
   getUserFromStore,
 } from '../sevices/store/Actions';
 import { assertIsNonNullable } from '../utils/assertIsNonNullable';
+import { Indexed } from '../types/Indexed';
 
 const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
@@ -282,4 +284,21 @@ export const removeUserModalProps = {
   inputName: 'login',
   buttonText: 'Удалить',
   styles: userModalStyles,
+  submit: async (e: Event) => {
+    e.preventDefault();
+    const target = e.target as HTMLElement;
+    assertIsNonNullable(target);
+    const input = target.querySelector('input');
+    assertIsNonNullable(input);
+    const activeChat = getActiveChatFromStore();
+    const chatUsers = activeChat.users;
+    console.log(chatUsers);
+    const userToRemove = chatUsers.find(
+      (user: Indexed) => user.login === input.value,
+    );
+    if (!userToRemove) {
+      alert('No user with this login in chat');
+    }
+    await removeUserFromChat(userToRemove.id, activeChat.id);
+  },
 };
