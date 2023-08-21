@@ -10,7 +10,10 @@ import ChatTape from '../../components/ChatTape';
 import Button from '../../components/Button/Button';
 import chatStyles from './Chat.module.css';
 import { Connect } from '../../sevices/store';
-import { getChatListFromStore } from '../../sevices/store/Actions';
+import {
+  getActiveChatFromStore,
+  getChatListFromStore,
+} from '../../sevices/store/Actions';
 import chatCardStyles from '../..//components/ChatCard/ChatCard.module.css';
 import MessagesList from '../../components/MessagesList';
 import { Indexed } from '../../types/Indexed';
@@ -62,7 +65,12 @@ const chatTape = new ChatTape({
 });
 
 const ChatConnectedToStore = Connect(Chat, state => {
-  return state ? { cards: getChatListFromStore() } : [];
+  return state
+    ? {
+        cards: getChatListFromStore(),
+        chatSelected: !!getActiveChatFromStore(),
+      }
+    : [];
 });
 
 export default new ChatConnectedToStore({

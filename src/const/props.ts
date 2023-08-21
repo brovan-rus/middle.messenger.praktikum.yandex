@@ -156,7 +156,7 @@ export const props: GlobalProps = {
   },
   chat: {
     styles: chatStyles,
-    chatSelected: true,
+    chatSelected: !!getActiveChatFromStore(),
     placeholder: {
       text: 'Выберите чат чтобы отправить сообщение',
       styles: PlaceholderStyles,

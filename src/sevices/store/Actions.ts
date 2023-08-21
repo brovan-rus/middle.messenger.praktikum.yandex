@@ -85,7 +85,7 @@ export const saveChatListToStore = (state: Indexed[]) => {
 
 export const getActiveChatFromStore = () => {
   const chatList = store.getState().chatList;
-  return chatList.length === 0
+  return !chatList || chatList.length === 0
     ? false
     : chatList.find((chat: Indexed) => chat.active);
 };
