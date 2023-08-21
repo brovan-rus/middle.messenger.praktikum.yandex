@@ -11,7 +11,7 @@ enum METHODS {
 type Options = {
   headers?: Record<string, string>;
   timeout?: number;
-  data?: Record<string, any>;
+  data?: Record<string, never>;
 };
 
 type FetchMethod = (url: URL | string, options: Options) => Promise<unknown>;
