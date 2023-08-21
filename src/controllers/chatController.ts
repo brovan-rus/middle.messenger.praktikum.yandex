@@ -7,8 +7,8 @@ import WebsocketController from './WebsocketController';
 import { checkResponse } from './getDataFromResponse';
 
 export const getChatsList = async () => {
-  const chatListRes = (await chatApi.getChats()) as XMLHttpRequest;
   try {
+    const chatListRes = (await chatApi.getChats()) as XMLHttpRequest;
     let chatList = [];
     chatList = JSON.parse(checkResponse(chatListRes));
     for (const chat of chatList) {
@@ -25,6 +25,7 @@ export const getChatsList = async () => {
         `${currentUser.id}/${chat.id}/${chat.wsToken.token}`,
       );
     }
+    console.log(chatList);
     saveChatListToStore(chatList);
   } catch (error) {
     console.log(error);
@@ -53,6 +54,15 @@ export const createNewChat = async (chatName: string) => {
   try {
     const res = (await chatApi.createChat(chatName)) as XMLHttpRequest;
     return JSON.parse(checkResponse(res));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteChat = async (chatId: string) => {
+  try {
+    const res = (await chatApi.removeChat(chatId)) as XMLHttpRequest;
+    checkResponse(res);
   } catch (error) {
     console.log(error);
   }

@@ -46,10 +46,12 @@ import { changePassword, findIdByLogin } from '../controllers/userController';
 import {
   addUserToChat,
   createNewChat,
+  deleteChat,
   getChatsList,
   removeUserFromChat,
 } from '../controllers/chatController';
 import {
+  deleteChatFromChatList,
   getActiveChatFromStore,
   getUserFromStore,
 } from '../sevices/store/Actions';
@@ -310,6 +312,9 @@ export const removeChatModalProps = {
   styles: warnModalStyles,
   submit: async (e: Event) => {
     e.preventDefault();
+    const activeChatId = getActiveChatFromStore().id;
+    await deleteChat(activeChatId);
+    deleteChatFromChatList(activeChatId);
 
     // const target = e.target as HTMLElement;
     // assertIsNonNullable(target);

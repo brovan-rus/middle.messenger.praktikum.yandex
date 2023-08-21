@@ -20,6 +20,14 @@ export const setUserToStore = (state: Indexed) => {
   }
 };
 
+export const deleteChatFromChatList = (chatId: string) => {
+  const chatList = store.getState().chatList;
+  store.set(
+    'chatList',
+    chatList.filter((chat: Indexed) => chat.id !== chatId),
+  );
+};
+
 export const getMessagesFromStore = () => {
   const state = store.getState();
   return state.messages ?? [];
