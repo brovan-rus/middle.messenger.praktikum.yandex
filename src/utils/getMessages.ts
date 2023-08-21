@@ -17,6 +17,5 @@ export const getMessages = (socket: WebsocketController, offset = '0') => {
       ...new Set([...messages, ...getMessagesFromStore()]),
     ];
     saveMessagesToStore(newMessagesArray.reverse());
-    console.log(getMessagesFromStore());
   });
 };
