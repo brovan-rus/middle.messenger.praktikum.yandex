@@ -30,6 +30,13 @@ class ChatApi extends BaseApi {
     });
   }
 
+  removeChat(chatId: string) {
+    return chatHttpInstance.delete('', {
+      headers: jsonHeader,
+      data: { chatId },
+    });
+  }
+
   getChatUsers(chatId: string) {
     return chatHttpInstance.get(`${chatId}/users`, {});
   }

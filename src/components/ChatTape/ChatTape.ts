@@ -147,7 +147,6 @@ class ChatTape extends Block {
       class: chatTapeStyles.container,
     };
     this.renewAttributes(attr);
-    console.log('mounted');
   }
 
   componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
@@ -158,19 +157,11 @@ class ChatTape extends Block {
       this.children.MessagesList.setProps({
         messages: messagesComponents,
       });
-
-      //Used setTimeout to emulate nextTick to be sure component is rendered
-      setTimeout(
-        () =>
-          (this.children.MessagesList.element.scrollTop =
-            this.children.MessagesList.element.scrollHeight),
-      );
     } else {
       this.children.MessagesList.setProps({
         messages: [],
       });
     }
-
     return true;
   }
 }

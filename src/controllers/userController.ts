@@ -1,6 +1,7 @@
 import userApi from '../sevices/api/UserApi';
 import { setUserToStore } from '../sevices/store/Actions';
 import { Indexed } from '../types/Indexed';
+import { checkResponse } from './getDataFromResponse';
 
 export type ProfileData = {
   first_name: 'string';
@@ -17,41 +18,40 @@ export type ChangePassword = {
 };
 
 export const changeProfileInfo = async (data: ProfileData) => {
-  const res = (await userApi.changeProfileInfo(data)) as XMLHttpRequest;
-  if (res.status === 200) {
-    console.log(JSON.parse(res.response));
-    setUserToStore(JSON.parse(res.response));
-  } else {
-    alert(JSON.parse(res.response).reason);
+  try {
+    const res = (await userApi.changeProfileInfo(data)) as XMLHttpRequest;
+    setUserToStore(JSON.parse(checkResponse(res)));
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const changeAvatar = async (data: FormData) => {
-  const res = (await userApi.changeAvatar(data)) as XMLHttpRequest;
-  if (res.status === 200) {
-    console.log(JSON.parse(res.response));
-    setUserToStore(JSON.parse(res.response));
-  } else {
-    alert(JSON.parse(res.response).reason);
+  try {
+    const res = (await userApi.changeAvatar(data)) as XMLHttpRequest;
+    setUserToStore(JSON.parse(checkResponse(res)));
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const changePassword = async (data: ChangePassword) => {
-  const res = (await userApi.changePassword(data)) as XMLHttpRequest;
-  if (res.status === 200) {
-    alert('Пароль изменен!');
-  } else {
-    alert(JSON.parse(res.response).reason);
+  try {
+    const res = (await userApi.changePassword(data)) as XMLHttpRequest;
+    checkResponse(res);
+    alert('Password changed');
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const findIdByLogin = async (login: string) => {
-  const res = (await userApi.search(login)) as XMLHttpRequest;
-  if (res.status === 200) {
-    return JSON.parse(res.response).find(
+  try {
+    const res = (await userApi.search(login)) as XMLHttpRequest;
+    return JSON.parse(checkResponse(res)).find(
       (item: Indexed) => item.login === login,
     );
-  } else {
-    alert(JSON.parse(res.response).reason);
+  } catch (error) {
+    console.log(error);
   }
 };

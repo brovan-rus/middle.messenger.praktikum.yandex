@@ -3,6 +3,7 @@ import Router from '../sevices/router/Router';
 import { Path } from '../types/path';
 import { setUserToStore } from '../sevices/store/Actions';
 import { getChatsList } from './chatController';
+import { checkResponse } from './getDataFromResponse';
 
 export type RegisterData = {
   first_name: string;
@@ -19,40 +20,44 @@ export type LoginData = {
   password: string;
 };
 export const auth = async () => {
-  const res = (await authApi.getUserInfo()) as XMLHttpRequest;
-  if (res.status === 200) {
-    setUserToStore(JSON.parse(res.response));
-  } else {
+  try {
+    setUserToStore(
+      JSON.parse(
+        checkResponse((await authApi.getUserInfo()) as XMLHttpRequest),
+      ),
+    );
+  } catch (error) {
     setUserToStore({});
+    console.log(error);
   }
 };
 export const login = async (data: LoginData) => {
-  const res = (await authApi.login(data)) as XMLHttpRequest;
-  if (res.status === 200) {
+  try {
+    checkResponse((await authApi.login(data)) as XMLHttpRequest);
     await auth();
     Router.navigate(Path.CHAT);
     await getChatsList();
-  } else {
-    alert(JSON.parse(res.response).reason);
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const registerUser = async (data: RegisterData) => {
-  const res = (await authApi.createUser(data)) as XMLHttpRequest;
-  if (res.status === 200) {
+  try {
+    checkResponse((await authApi.createUser(data)) as XMLHttpRequest);
     setUserToStore(data);
     Router.navigate(Path.CHAT);
-  } else {
-    alert(JSON.parse(res.response).reason);
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const logout = async () => {
-  const res = (await authApi.logout()) as XMLHttpRequest;
-  if (res.status === 200) {
+  try {
+    checkResponse((await authApi.logout()) as XMLHttpRequest);
     setUserToStore({});
     Router.navigate(Path.LOGIN);
-  } else {
-    alert(JSON.parse(res.response).reason);
+  } catch (error) {
+    console.log(error);
   }
 };
