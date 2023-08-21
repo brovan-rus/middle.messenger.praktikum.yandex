@@ -1,5 +1,6 @@
 import { BaseApi } from './BaseApi';
 import HTTP from '../../utils/HTTP';
+import { jsonHeader } from './addJosnHeader';
 
 const chatHttpInstance = new HTTP('chats', true);
 
@@ -10,21 +11,21 @@ class ChatApi extends BaseApi {
 
   createChat(title: string) {
     return chatHttpInstance.post('', {
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      headers: jsonHeader,
       data: { title },
     });
   }
 
   addUser(userId: string, chatId: string) {
     return chatHttpInstance.put('users', {
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      headers: jsonHeader,
       data: { users: [userId], chatId: chatId },
     });
   }
 
   removeUser(userId: string, chatId: string) {
     return chatHttpInstance.delete('users', {
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      headers: jsonHeader,
       data: { users: [userId], chatId: chatId },
     });
   }
