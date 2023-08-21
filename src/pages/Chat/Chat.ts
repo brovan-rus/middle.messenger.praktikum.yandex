@@ -46,11 +46,13 @@ class Chat extends Block {
 const { chatInput, button } = globalProps.chat.chatTape;
 const placeholder = new Placeholder(globalProps.chat.placeholder);
 const chatListInput = new ChatInput(globalProps.chat.chatList.chatInput);
+const chatListButton = new Button(globalProps.chat.chatList.button);
 const chatTapeInput = new ChatInput(chatInput);
 const chatTapeButton = new Button(button);
 const chatList = new ChatList({
   ...globalProps.chat.chatList,
   ChatInput: chatListInput,
+  Button: chatListButton,
 });
 const chatTape = new ChatTape({
   ...globalProps.chat.chatTape,

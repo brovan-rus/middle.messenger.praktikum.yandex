@@ -2,6 +2,9 @@ import Block from '../../utils/Block';
 import template from './UserModal.template';
 import { Props } from '../../types/props';
 import styles from './UserModal.module.css';
+import Button, { ButtonType } from '../Button/Button';
+import FormInput from '../FormInput';
+import formInputStyles from '../FormInput/FormInput.module.css';
 
 class UserModal extends Block {
   constructor(props: Props) {
@@ -20,4 +23,23 @@ class UserModal extends Block {
   }
 }
 
-export default UserModal;
+export const userModal = (props: Props) =>
+  new UserModal({
+    title: props.title,
+    Button: new Button({
+      type: ButtonType.FORM_BUTTON,
+      text: props.buttonText,
+    }),
+    FormInput: new FormInput({
+      inputName: props.inputName,
+      fieldValue: '',
+      fieldName: props.fieldTitle,
+      styles: formInputStyles,
+      type: 'text',
+      userForm: true,
+    }),
+    events: {
+      submit: props.submit,
+    },
+    styles: props.styles,
+  });

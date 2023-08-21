@@ -9,8 +9,7 @@ import { checkResponse } from './getDataFromResponse';
 export const getChatsList = async () => {
   try {
     const chatListRes = (await chatApi.getChats()) as XMLHttpRequest;
-    let chatList = [];
-    chatList = JSON.parse(checkResponse(chatListRes));
+    const chatList = JSON.parse(checkResponse(chatListRes));
     for (const chat of chatList) {
       const chatUsersRes = (await chatApi.getChatUsers(
         chat.id as string,
@@ -25,7 +24,6 @@ export const getChatsList = async () => {
         `${currentUser.id}/${chat.id}/${chat.wsToken.token}`,
       );
     }
-    console.log(chatList);
     saveChatListToStore(chatList);
   } catch (error) {
     console.log(error);

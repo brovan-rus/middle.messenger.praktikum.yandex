@@ -57,12 +57,33 @@ import {
 } from '../sevices/store/Actions';
 import { assertIsNonNullable } from '../utils/assertIsNonNullable';
 import { Indexed } from '../types/Indexed';
+import Modal from '../components/Modal/Modal';
+import { userModal } from '../components/UserModal/UserModal';
 
 const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
   button: {
     styles: buttonStyles,
     type: ButtonType.BACK_BUTTON,
+  },
+};
+
+export const addChatModalProps = {
+  title: 'Новый чат',
+  fieldTitle: 'Название чата',
+  inputName: 'title',
+  buttonText: 'Создать',
+  styles: userModalStyles,
+  submit: async (e: Event) => {
+    e.preventDefault();
+    const user = getUserFromStore();
+    const target = e.target as HTMLElement;
+    assertIsNonNullable(target);
+    const input = target.querySelector('input');
+    assertIsNonNullable(input);
+    const chatToAdd = input.value ?? user.login;
+    await createNewChat(chatToAdd);
+    await getChatsList();
   },
 };
 
@@ -162,6 +183,12 @@ export const props: GlobalProps = {
         placeholder: 'Поиск',
         name: 'search',
       },
+      button: formButtonProps({
+        text: 'Создать новый чат',
+        events: {
+          click: () => new Modal(userModal(addChatModalProps)).open(),
+        },
+      }),
       events: { click: navigateToLinkId },
     },
   },

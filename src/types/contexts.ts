@@ -64,6 +64,7 @@ type ChatListContext = {
   profileLinkText: string;
   chatInput: ChatInputContext;
   events?: Events;
+  button: ButtonContext;
 };
 
 type ChatInputContext = {

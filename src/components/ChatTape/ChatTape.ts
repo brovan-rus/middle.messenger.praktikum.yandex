@@ -14,54 +14,16 @@ import plus from '../../../images/icons/plus.svg?inline';
 // @ts-ignore
 import iks from '../../../images/icons/iks.svg?inline';
 import Modal from '../Modal/Modal';
-import UserModal from '../UserModal/UserModal';
 import {
   addUserModalProps,
   removeChatModalProps,
   removeUserModalProps,
 } from '../../const/props';
-import Button, { ButtonType } from '../Button/Button';
-import FormInput from '../FormInput';
-import formInputStyles from '../FormInput/FormInput.module.css';
 import { getActiveChatFromStore } from '../../sevices/store/Actions';
 import { Indexed } from '../../types/Indexed';
 import Message from '../Message';
-import WarnModal from '../WarnModal/WarnModal';
-
-const userModal = (props: Props) =>
-  new UserModal({
-    title: props.title,
-    Button: new Button({
-      type: ButtonType.FORM_BUTTON,
-      text: props.buttonText,
-    }),
-    FormInput: new FormInput({
-      inputName: props.inputName,
-      fieldValue: '',
-      fieldName: props.fieldTitle,
-      styles: formInputStyles,
-      type: 'text',
-      userForm: true,
-    }),
-    events: {
-      submit: props.submit,
-    },
-    styles: props.styles,
-  });
-
-const warnModal = (props: Props) =>
-  new WarnModal({
-    title: props.title,
-    text: props.text,
-    Button: new Button({
-      type: ButtonType.FORM_BUTTON,
-      text: props.buttonText,
-    }),
-    events: {
-      submit: props.submit,
-    },
-    styles: props.styles,
-  });
+import { userModal } from '../UserModal/UserModal';
+import { warnModal } from '../WarnModal/WarnModal';
 
 class ChatTape extends Block {
   contextMenu: TooltipMenu | undefined = undefined;
