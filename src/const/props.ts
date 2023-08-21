@@ -22,6 +22,7 @@ import error503Styles from '../pages/Error503/Error503.module.css';
 import ErrorStyles from '../components/Error/Error.module.css';
 import { login, registerUser } from '../controllers/authController';
 import userModalStyles from '../components/UserModal/UserModal.module.css';
+import warnModalStyles from '../components/WarnModal/WarnModal.module.css';
 
 import {
   BackButtonContext,
@@ -292,7 +293,6 @@ export const removeUserModalProps = {
     assertIsNonNullable(input);
     const activeChat = getActiveChatFromStore();
     const chatUsers = activeChat.users;
-    console.log(chatUsers);
     const userToRemove = chatUsers.find(
       (user: Indexed) => user.login === input.value,
     );
@@ -300,5 +300,29 @@ export const removeUserModalProps = {
       alert('No user with this login in chat');
     }
     await removeUserFromChat(userToRemove.id, activeChat.id);
+  },
+};
+
+export const removeChatModalProps = {
+  title: 'Удалить чат',
+  text: 'Чат будет удалён для всех пользователей',
+  buttonText: 'Удалить',
+  styles: warnModalStyles,
+  submit: async (e: Event) => {
+    e.preventDefault();
+
+    // const target = e.target as HTMLElement;
+    // assertIsNonNullable(target);
+    // const input = target.querySelector('input');
+    // assertIsNonNullable(input);
+    // const activeChat = getActiveChatFromStore();
+    // const chatUsers = activeChat.users;
+    // const userToRemove = chatUsers.find(
+    //   (user: Indexed) => user.login === input.value,
+    // );
+    // if (!userToRemove) {
+    //   alert('No user with this login in chat');
+    // }
+    // await removeUserFromChat(userToRemove.id, activeChat.id);
   },
 };

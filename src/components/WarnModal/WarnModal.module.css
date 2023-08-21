@@ -1,0 +1,31 @@
+@import url('../../styles/_colors.css');
+@import url('../../styles/_sizes.css');
+@import url('../../styles/_spacings.css');
+
+.container {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: $spacing-l;
+
+    justify-content: center;
+
+    padding: $spacing-3xl $spacing-xxl $spacing-xxl $spacing-xxl;
+}
+
+.text {
+    padding: 0;
+    margin: 0;
+
+    font-size: $font-size-m;
+    text-align: center;
+}
+
+.title {
+    margin: 0;
+
+    font-size: $title-font-size-l;
+    line-height: $title-line-height-l;
+    text-align: center;
+}

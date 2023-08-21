@@ -15,13 +15,18 @@ import plus from '../../../images/icons/plus.svg?inline';
 import iks from '../../../images/icons/iks.svg?inline';
 import Modal from '../Modal/Modal';
 import UserModal from '../UserModal/UserModal';
-import { addUserModalProps, removeUserModalProps } from '../../const/props';
+import {
+  addUserModalProps,
+  removeChatModalProps,
+  removeUserModalProps,
+} from '../../const/props';
 import Button, { ButtonType } from '../Button/Button';
 import FormInput from '../FormInput';
 import formInputStyles from '../FormInput/FormInput.module.css';
 import { getActiveChatFromStore } from '../../sevices/store/Actions';
 import { Indexed } from '../../types/Indexed';
 import Message from '../Message';
+import WarnModal from '../WarnModal/WarnModal';
 
 const userModal = (props: Props) =>
   new UserModal({
@@ -37,6 +42,20 @@ const userModal = (props: Props) =>
       styles: formInputStyles,
       type: 'text',
       userForm: true,
+    }),
+    events: {
+      submit: props.submit,
+    },
+    styles: props.styles,
+  });
+
+const warnModal = (props: Props) =>
+  new WarnModal({
+    title: props.title,
+    text: props.text,
+    Button: new Button({
+      type: ButtonType.FORM_BUTTON,
+      text: props.buttonText,
     }),
     events: {
       submit: props.submit,
@@ -78,6 +97,13 @@ class ChatTape extends Block {
                   icon: `${iks}`,
                   action: () => {
                     new Modal(userModal(removeUserModalProps)).open();
+                  },
+                },
+                {
+                  title: 'Удалить чат',
+                  icon: `${iks}`,
+                  action: () => {
+                    new Modal(warnModal(removeChatModalProps)).open();
                   },
                 },
               ],
