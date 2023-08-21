@@ -6,6 +6,9 @@ export default `
         </a>
         {{{ChatInput}}}
     </header>
+    <div class="{{styles.buttonContainer}}">
+        {{{Button}}}
+    </div>
     <ul class="{{styles.chatList}}">
         {{#each cards}}
             {{{this}}}

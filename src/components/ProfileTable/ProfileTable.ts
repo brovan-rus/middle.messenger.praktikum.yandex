@@ -2,6 +2,7 @@ import Block from '../../utils/Block';
 import template from './ProfileTable.template';
 import { Props } from '../../types/props';
 import profileTableStyles from './ProfileTable.module.css';
+import ProfileField from '../ProfileField/ProfileField';
 
 class ProfileTable extends Block {
   constructor(props: Props) {
@@ -17,6 +18,16 @@ class ProfileTable extends Block {
       class: profileTableStyles.container,
     };
     this.renewAttributes(attr);
+  }
+
+  componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
+    for (const field of newProps.fields) {
+      const currentChild = this.children.fields?.find((child: ProfileField) => {
+        return child.props.name === field.name;
+      });
+      currentChild?.setProps(field);
+    }
+    return true;
   }
 }
 

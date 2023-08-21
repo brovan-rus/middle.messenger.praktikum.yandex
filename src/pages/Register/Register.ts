@@ -32,6 +32,7 @@ const {
   styles: formStyles,
   fields,
   title: userFormTitle,
+  submit,
 } = userForm;
 
 const buttonComponent = new Button(button);
@@ -44,6 +45,7 @@ const userFormComponent = new UserForm({
   ),
   Button: buttonComponent,
   Link: linkComponent,
+  submit,
 });
 
 export default new Register({

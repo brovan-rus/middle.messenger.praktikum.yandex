@@ -1,18 +1,10 @@
-import { isObjectKey } from './isObjectKey';
-import { props } from '../const/props';
-import { isEnumValue } from './isEnumValue';
-import { Path } from '../types/path';
-import { onNavigate } from '../const/router';
+import Router from '../sevices/router/Router';
 
 export const navigateToLinkId = (e: Event) => {
-  const target = e.target as HTMLElement;
-  if (target.tagName.toLowerCase() === 'a') {
-    const pageName = target.id;
-    const path = `/${pageName}`;
-    e.preventDefault();
-    if (!isObjectKey(pageName, props) || !isEnumValue(path, Path)) {
-      return;
-    }
-    onNavigate(path);
+  e.preventDefault();
+  const target = e.target as Element;
+  const tag = target.tagName.toLowerCase();
+  if (tag === 'a') {
+    Router.navigate(`/${target.id}`);
   }
 };

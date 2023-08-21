@@ -3,71 +3,78 @@
 @import url("../../styles/_sizes.css");
 
 .container {
-  box-sizing: border-box;
+    box-sizing: border-box;
 
-  width: 100%;
-  height: 100%;
-  padding: $spacing-l 0 0 0;
+    width: 100%;
+    height: 100%;
+    padding: $spacing-l 0 0 0;
 
-  background: $light-gray;
-  border-right: 1px solid $medium-gray;
+    background: $light-gray;
+    border-right: 1px solid $medium-gray;
 }
 
 
 .profileLink {
-  display: flex;
+    display: flex;
 
-  flex-direction: row;
+    flex-direction: row;
 
-  align-self: flex-end;
-  justify-content: right;
+    align-self: flex-end;
+    justify-content: right;
 
-  width: max-content;
-  margin-bottom: $spacing-xl;
+    width: max-content;
+    margin-bottom: $spacing-xl;
 
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .profileLinkText {
-  display: flex;
+    display: flex;
 
-  gap: $spacing-xs;
+    gap: $spacing-xs;
 
-  align-items: center;
-  justify-content: center;
+    align-items: center;
+    justify-content: center;
 
-  font-size: $font-size-s;
-  line-height: $line-height-s;
-  color: $gray;
+    font-size: $font-size-s;
+    line-height: $line-height-s;
+    color: $gray;
 
-  pointer-events: none;
+    pointer-events: none;
 
-  &::after {
-    width: 12px;
-    height: 8px;
+    &::after {
+        width: 12px;
+        height: 8px;
 
-    content: '';
+        content: '';
 
-    background: url("../../../images/icons/arrow_right.svg") no-repeat center;
-    background-size: cover;
-    outline: none;
-  }
+        background: url("../../../images/icons/arrow_right.svg") no-repeat center;
+        background-size: cover;
+        outline: none;
+    }
 }
 
 .chatListHeader {
-  display: flex;
+    display: flex;
 
-  flex-direction: column;
+    flex-direction: column;
 
-  padding: 0 $spacing-s;
-  margin-bottom: $spacing-ml;
+    padding: 0 $spacing-s;
+    margin-bottom: $spacing-ml;
 }
 
 .chatList {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 
-  list-style: none;
+    list-style: none;
 }
 
+.buttonContainer {
+    display: flex;
+
+    align-items: center;
+
+    padding: $spacing-m;
+}
 

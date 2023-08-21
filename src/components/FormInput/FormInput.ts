@@ -6,12 +6,11 @@ import formInputStyles from './FormInput.module.css';
 class FormInput extends Block {
   constructor(props: Props) {
     super('div', props);
+
+    this.props.placeholder = this.props.fieldValue;
+
     this.props.events = {
       ...this.props.events,
-      focusout: (e: InputEvent) => {
-        const target = e.target as HTMLInputElement;
-        this.props.value = target.value;
-      },
     };
   }
 

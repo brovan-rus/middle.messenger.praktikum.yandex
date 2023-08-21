@@ -12,13 +12,16 @@ type Meta = {
 
 type DocumentElement = HTMLElement & HTMLTemplateElement;
 
-type Event = { [key: string]: Callback };
+type Event = {
+  [key: string]: Callback;
+};
 
 const enum EVENTS {
   INIT = 'init',
   FLOW_CDM = 'flow:component-did-mount',
   FLOW_RENDER = 'flow:component-render',
   FLOW_CDU = 'flow:component-did-update',
+  FLOW_GTU = 'flow:component-is-going-to-unmount',
 }
 
 abstract class Block {
@@ -61,7 +64,7 @@ abstract class Block {
     return this._element;
   }
 
-  public setProps = (nextProps: object) => {
+  public setProps = (nextProps: Props) => {
     Object.assign(this.oldProps, this.props);
 
     if (!nextProps) {
@@ -79,6 +82,13 @@ abstract class Block {
 
   public compile(template: string, props: Props) {
     const propsAndStubs = { ...props };
+    const newChildren = this._detectChildren(props).children;
+    if (newChildren) {
+      for (const [key, value] of Object.entries(newChildren)) {
+        this.children[key] = value;
+        for (const child of value) child.dispatchComponentDidMount();
+      }
+    }
     for (const [key, child] of Object.entries(this.children)) {
       propsAndStubs[key] = isArray(child)
         ? child.map((item: Block) => `<div data-id="${item._id}"></div>`)
@@ -113,6 +123,10 @@ abstract class Block {
     this._eventBus().emit(event);
   }
 
+  public dispatchComponentIsGoingToUnmount() {
+    this._componentIsGoingToUnmount();
+  }
+
   public dispatchComponentDidMount() {
     this._eventBus().emit(EVENTS.FLOW_CDM);
     for (const child of Object.values(this.children))
@@ -137,6 +151,10 @@ abstract class Block {
 
   public componentDidMount() {
     console.log('didMount');
+  }
+
+  public componentIsGoingToUnmount() {
+    console.log('going to unmount');
   }
 
   public render(): DocumentFragment | void {
@@ -212,11 +230,21 @@ abstract class Block {
     this._eventBus().on(EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     this._eventBus().on(EVENTS.FLOW_RENDER, this._render.bind(this));
     this._eventBus().on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    this._eventBus().on(
+      EVENTS.FLOW_GTU,
+      this._componentIsGoingToUnmount.bind(this),
+    );
   }
 
   private _makePropsProxy(props: object, eventBus: () => EventBus) {
     return new Proxy(props, {
-      set(target: { [key: string]: unknown }, prop: string, newValue) {
+      set(
+        target: {
+          [key: string]: unknown;
+        },
+        prop: string,
+        newValue,
+      ) {
         const oldValue = target[prop];
         if (oldValue === newValue) {
           return true;
@@ -252,6 +280,10 @@ abstract class Block {
   private _componentDidMount() {
     this._addEvents();
     this.componentDidMount();
+  }
+
+  private _componentIsGoingToUnmount() {
+    this.componentIsGoingToUnmount();
   }
 
   private _componentDidUpdate(oldProps: Props, newProps: Props) {

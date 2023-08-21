@@ -1,6 +1,7 @@
-import Form from '../../utils/Form';
+import Form from '../abstract/Form/Form';
 import template from './UserForm.template';
 import userFormStyles from './UserForm.module.css';
+import { Indexed } from '../../types/Indexed';
 
 class UserForm extends Form {
   render() {
@@ -13,6 +14,10 @@ class UserForm extends Form {
       novalidate: true,
     };
     this.renewAttributes(attr);
+  }
+
+  async submit(data: Indexed) {
+    await this.props.submit(data);
   }
 }
 

@@ -9,7 +9,7 @@ import ProfileTable from '../../components/ProfileTable';
 import ProfileField from '../../components/ProfileField/ProfileField';
 import Link from '../../components/Link';
 
-class Profile extends Block {
+export class Profile extends Block {
   constructor(props: Props) {
     super('div', props);
   }

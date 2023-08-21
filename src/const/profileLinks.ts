@@ -1,6 +1,7 @@
 import profileLinkStyles from '../components/Link/Link.module.css';
-import { onNavigate } from '../const/router';
 import { Path } from '../types/path';
+import Router from '../sevices/router/Router';
+import { logout } from '../controllers/authController';
 
 export type ProfileLink = {
   text: string;
@@ -8,7 +9,7 @@ export type ProfileLink = {
   red: boolean;
   styles: typeof profileLinkStyles;
   events?: {
-    click: () => void;
+    click: (e?: Event) => void;
   };
 };
 
@@ -19,8 +20,9 @@ export const profileLinks: ProfileLink[] = [
     red: false,
     styles: profileLinkStyles,
     events: {
-      click: () => {
-        onNavigate(Path.EDIT_PROFILE);
+      click: e => {
+        e?.preventDefault();
+        Router.navigate(Path.EDIT_PROFILE);
       },
     },
   },
@@ -30,10 +32,22 @@ export const profileLinks: ProfileLink[] = [
     red: false,
     styles: profileLinkStyles,
     events: {
-      click: () => {
-        onNavigate(Path.EDIT_PASSWORD);
+      click: e => {
+        e?.preventDefault();
+        Router.navigate(Path.EDIT_PASSWORD);
       },
     },
   },
-  { text: 'Выйти', id: 'exit', red: true, styles: profileLinkStyles },
+  {
+    text: 'Выйти',
+    id: 'exit',
+    red: true,
+    styles: profileLinkStyles,
+    events: {
+      click: async (e?: Event) => {
+        e?.preventDefault();
+        await logout();
+      },
+    },
+  },
 ];

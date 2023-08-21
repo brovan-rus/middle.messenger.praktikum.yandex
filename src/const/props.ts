@@ -1,12 +1,6 @@
-import { cards } from '../mocks/cards';
-import { messages } from '../mocks/messages';
-import {
-  profile,
-  profileInputs,
-  profilePasswordInputs,
-} from '../mocks/profile';
-import { profileLinks } from '../mocks/profileLinks';
-import { loginInputs, registerInputs } from '../mocks/userForm';
+import { profile, profileInputs, profilePasswordInputs } from './profile';
+import { profileLinks } from './profileLinks';
+import { loginInputs, registerInputs } from './userForm';
 import loginStyles from '../pages/Login/Login.module.css';
 import chatStyles from '../pages/Chat/Chat.module.css';
 import PlaceholderStyles from '../components/Placeholder/Placeholder.module.css';
@@ -26,6 +20,9 @@ import registerStyles from '../pages/Register/Register.module.css';
 import error404Styles from '../pages/Error404/Error404.module.css';
 import error503Styles from '../pages/Error503/Error503.module.css';
 import ErrorStyles from '../components/Error/Error.module.css';
+import { login, registerUser } from '../controllers/authController';
+import userModalStyles from '../components/UserModal/UserModal.module.css';
+import warnModalStyles from '../components/WarnModal/WarnModal.module.css';
 
 import {
   BackButtonContext,
@@ -40,15 +37,54 @@ import {
   RegisterContext,
 } from '../types/contexts';
 import { ButtonType } from '../components/Button/Button';
-import { onNavigate } from './router';
 import { Path } from '../types/path';
 import { Props } from '../types/props';
+import Router from '../sevices/router/Router';
+import { navigateToLinkId } from '../utils/navigateToLinkId';
+import { submitProfileChange } from '../utils/sumbitProfileChange';
+import { changePassword, findIdByLogin } from '../controllers/userController';
+import {
+  addUserToChat,
+  createNewChat,
+  deleteChat,
+  getChatsList,
+  removeUserFromChat,
+  updateChatAvatar,
+} from '../controllers/chatController';
+import {
+  deleteChatFromChatList,
+  getActiveChatFromStore,
+  getUserFromStore,
+} from '../sevices/store/Actions';
+import { assertIsNonNullable } from '../utils/assertIsNonNullable';
+import { Indexed } from '../types/Indexed';
+import Modal from '../components/Modal/Modal';
+import { userModal } from '../components/UserModal/UserModal';
 
 const profileBackButtonProps: BackButtonContext = {
   styles: backButtonStyles,
   button: {
     styles: buttonStyles,
     type: ButtonType.BACK_BUTTON,
+  },
+};
+
+export const addChatModalProps = {
+  title: 'Новый чат',
+  fieldTitle: 'Название чата',
+  inputName: 'title',
+  buttonText: 'Создать',
+  styles: userModalStyles,
+  submit: async (e: Event) => {
+    e.preventDefault();
+    const user = getUserFromStore();
+    const target = e.target as HTMLElement;
+    assertIsNonNullable(target);
+    const input = target.querySelector('input');
+    assertIsNonNullable(input);
+    const chatToAdd = input.value ?? user.login;
+    await createNewChat(chatToAdd);
+    await getChatsList();
   },
 };
 
@@ -81,16 +117,17 @@ export const props: GlobalProps = {
       fields: loginInputs,
       button: formButtonProps({
         text: 'Авторизоваться',
-        // events: {
-        //   click: () => onNavigate(Path.CHAT),
-        // },
       }),
+      submit: login,
       link: {
         text: 'Нет аккаунта?',
         styles: linkStyles,
         size: 'small',
         events: {
-          click: () => onNavigate(Path.REGISTER),
+          click: (e: Event) => {
+            e.preventDefault();
+            Router.navigate(Path.REGISTER);
+          },
         },
       },
     },
@@ -104,25 +141,29 @@ export const props: GlobalProps = {
       button: formButtonProps({
         text: 'Зарегистрироваться',
       }),
+      submit: registerUser,
       link: {
         text: 'Войти?',
         styles: linkStyles,
         size: 'small',
         events: {
-          click: () => onNavigate(Path.LOGIN),
+          click: (e: Event) => {
+            e.preventDefault();
+            Router.navigate(Path.LOGIN);
+          },
         },
       },
     },
   },
   chat: {
     styles: chatStyles,
-    chatSelected: true,
+    chatSelected: !!getActiveChatFromStore(),
     placeholder: {
       text: 'Выберите чат чтобы отправить сообщение',
       styles: PlaceholderStyles,
     },
     chatTape: {
-      chatName: 'Виктор',
+      chatName: '',
       chatInput: {
         styles: ChatInputStyles,
         searchBar: false,
@@ -133,7 +174,6 @@ export const props: GlobalProps = {
         type: ButtonType.SEND_BUTTON,
       },
       styles: chatTapeStyles,
-      messages,
     },
     chatList: {
       styles: chatListStyles,
@@ -144,7 +184,13 @@ export const props: GlobalProps = {
         placeholder: 'Поиск',
         name: 'search',
       },
-      cards,
+      button: formButtonProps({
+        text: 'Создать новый чат',
+        events: {
+          click: () => new Modal(userModal(addChatModalProps)).open(),
+        },
+      }),
+      events: { click: navigateToLinkId },
     },
   },
   profile: {
@@ -167,6 +213,19 @@ export const props: GlobalProps = {
         styles: editProfileFormStyles,
         fields: profileInputs,
         button: formButtonProps({}),
+        submit: submitProfileChange,
+      },
+      events: {
+        click: (e: Event) => {
+          const targetElement = e.target as HTMLElement;
+          const currentTarget = e.currentTarget as HTMLElement;
+          if (targetElement.dataset.action === 'changeAvatar') {
+            const inputFile = currentTarget.querySelector(
+              '[name="avatar"]',
+            ) as HTMLElement;
+            inputFile?.click();
+          }
+        },
       },
     },
   },
@@ -181,6 +240,7 @@ export const props: GlobalProps = {
         styles: editProfileFormStyles,
         fields: profilePasswordInputs,
         button: formButtonProps({}),
+        submit: changePassword,
       },
     },
   },
@@ -197,7 +257,7 @@ export const props: GlobalProps = {
       size: 'small',
       color: 'blue',
       events: {
-        click: () => onNavigate(Path.CHAT),
+        click: () => Router.navigate(Path.CHAT),
       },
     },
   },
@@ -214,8 +274,95 @@ export const props: GlobalProps = {
       size: 'small',
       color: 'blue',
       events: {
-        click: () => onNavigate(Path.CHAT),
+        click: () => Router.navigate(Path.CHAT),
       },
     },
+  },
+};
+
+const getMpdalInput = (target: HTMLElement) => {
+  assertIsNonNullable(target);
+  const input = target.querySelector('input');
+  assertIsNonNullable(input);
+  return input;
+};
+
+export const addUserModalProps = {
+  title: 'Добавить пользователя',
+  fieldTitle: 'Логин',
+  inputName: 'login',
+  buttonText: 'Добавать',
+  styles: userModalStyles,
+  submit: async (e: Event) => {
+    e.preventDefault();
+    const user = getUserFromStore();
+    const activeChat = getActiveChatFromStore();
+    const input = getMpdalInput(e.target as HTMLElement);
+    if (activeChat) {
+      const userToAdd = await findIdByLogin(input.value);
+      if (userToAdd) {
+        await addUserToChat(userToAdd.id, activeChat.id);
+      } else {
+        alert('No user with this login');
+      }
+    } else {
+      const { id } = await createNewChat(user.login);
+      await addUserToChat(input.value, id);
+      await getChatsList();
+    }
+  },
+};
+
+export const removeUserModalProps = {
+  title: 'Удалить пользователя',
+  fieldTitle: 'Логин',
+  inputName: 'login',
+  buttonText: 'Удалить',
+  styles: userModalStyles,
+  submit: async (e: Event) => {
+    e.preventDefault();
+    const input = getMpdalInput(e.target as HTMLElement);
+    const activeChat = getActiveChatFromStore();
+    const chatUsers = activeChat.users;
+    const userToRemove = chatUsers.find(
+      (user: Indexed) => user.login === input.value,
+    );
+    if (!userToRemove) {
+      alert('No user with this login in chat');
+    }
+    await removeUserFromChat(userToRemove.id, activeChat.id);
+  },
+};
+
+export const removeChatModalProps = {
+  title: 'Удалить чат',
+  text: 'Чат будет удалён для всех пользователей',
+  buttonText: 'Удалить',
+  styles: warnModalStyles,
+  submit: async (e: Event) => {
+    e.preventDefault();
+    const activeChatId = getActiveChatFromStore().id;
+    await deleteChat(activeChatId);
+    deleteChatFromChatList(activeChatId);
+  },
+};
+
+export const addChatAvatar = {
+  title: 'Добавить аватар чата',
+  fieldTitle: 'Файл',
+  inputName: 'avatar',
+  inputType: 'file',
+  buttonText: 'Отправить',
+  styles: userModalStyles,
+  submit: async (e: Event) => {
+    e.preventDefault();
+    const currentChat = getActiveChatFromStore();
+    const input = getMpdalInput(e.target as HTMLElement);
+    const formData = new FormData();
+    assertIsNonNullable(input.files);
+    formData.append('avatar', input.files[0]);
+    formData.append('chatId', currentChat.id);
+    await updateChatAvatar(formData);
+    await getChatsList();
   },
 };
