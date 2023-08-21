@@ -66,11 +66,15 @@ export default class WebsocketController {
 
   on(method: string, listener: Callback) {
     const eventListener = (event: MessageEvent) => {
-      const { type } = JSON.parse(event.data);
-      if (type === method) {
-        listener(JSON.parse(event.data));
-      } else if (method === '') {
-        listener(JSON.parse(event.data));
+      try {
+        const { type } = JSON.parse(event.data);
+        if (type === method) {
+          listener(JSON.parse(event.data));
+        } else if (method === '') {
+          listener(JSON.parse(event.data));
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
 
