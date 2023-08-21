@@ -78,7 +78,11 @@ export const saveChatListToStore = (state: Indexed[]) => {
           renewChatLastMessage(chat.id, data);
         });
       }
-      return { ...chat, active: chat.active || false };
+      return {
+        ...chat,
+        active: chat.active || false,
+        avatar: chat.avatar ? getAvatarPath(chat.avatar) : undefined,
+      };
     }),
   );
 };

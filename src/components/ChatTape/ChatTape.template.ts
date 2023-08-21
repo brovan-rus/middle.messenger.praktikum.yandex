@@ -2,7 +2,11 @@
 export default `
     <header class="{{styles.header}}">
         <div class="{{styles.profileContainer}}">
-            <div class="{{styles.avatar}}"></div>
+            {{#if avatar}}
+                <img src="{{avatar}}" class="{{styles.avatar}}" alt=" chat avatar"/>
+            {{else}}
+                <div class="{{styles.avatar}}"></div>
+            {{/if}}
             <h1 class="{{styles.title}}">{{chatName}}</h1>
         </div>
         <button data-action="openChatMenu" class="{{styles.headerButton}}"></button>

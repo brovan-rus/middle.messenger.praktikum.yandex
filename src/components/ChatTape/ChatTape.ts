@@ -15,6 +15,7 @@ import plus from '../../../images/icons/plus.svg?inline';
 import iks from '../../../images/icons/iks.svg?inline';
 import Modal from '../Modal/Modal';
 import {
+  addChatAvatar,
   addUserModalProps,
   removeChatModalProps,
   removeUserModalProps,
@@ -66,6 +67,13 @@ class ChatTape extends Block {
                   icon: `${iks}`,
                   action: () => {
                     new Modal(warnModal(removeChatModalProps)).open();
+                  },
+                },
+                {
+                  title: 'Добавить автар чата',
+                  icon: `${plus}`,
+                  action: () => {
+                    new Modal(userModal(addChatAvatar)).open();
                   },
                 },
               ],

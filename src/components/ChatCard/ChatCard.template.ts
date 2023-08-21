@@ -3,7 +3,7 @@ export default `
     <div class="{{styles.line}}"></div>
     <div class="{{styles.container}} {{#if active}}{{styles.containerActive}}{{/if}}">
         {{#if avatar}}
-            <img class="{{styles.avater}}" alt="avatar" src="{{avatar}}"/>
+            <img class="{{styles.avatar}}" alt="avatar" src="{{avatar}}"/>
         {{else}}
             <div class="{{styles.noAvatar}} {{styles.avatar}}"></div>
         {{/if}}

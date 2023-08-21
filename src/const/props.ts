@@ -49,6 +49,7 @@ import {
   deleteChat,
   getChatsList,
   removeUserFromChat,
+  updateChatAvatar,
 } from '../controllers/chatController';
 import {
   deleteChatFromChatList,
@@ -279,6 +280,13 @@ export const props: GlobalProps = {
   },
 };
 
+const getMpdalInput = (target: HTMLElement) => {
+  assertIsNonNullable(target);
+  const input = target.querySelector('input');
+  assertIsNonNullable(input);
+  return input;
+};
+
 export const addUserModalProps = {
   title: 'Добавить пользователя',
   fieldTitle: 'Логин',
@@ -289,10 +297,7 @@ export const addUserModalProps = {
     e.preventDefault();
     const user = getUserFromStore();
     const activeChat = getActiveChatFromStore();
-    const target = e.target as HTMLElement;
-    assertIsNonNullable(target);
-    const input = target.querySelector('input');
-    assertIsNonNullable(input);
+    const input = getMpdalInput(e.target as HTMLElement);
     if (activeChat) {
       const userToAdd = await findIdByLogin(input.value);
       if (userToAdd) {
@@ -316,10 +321,7 @@ export const removeUserModalProps = {
   styles: userModalStyles,
   submit: async (e: Event) => {
     e.preventDefault();
-    const target = e.target as HTMLElement;
-    assertIsNonNullable(target);
-    const input = target.querySelector('input');
-    assertIsNonNullable(input);
+    const input = getMpdalInput(e.target as HTMLElement);
     const activeChat = getActiveChatFromStore();
     const chatUsers = activeChat.users;
     const userToRemove = chatUsers.find(
@@ -342,19 +344,25 @@ export const removeChatModalProps = {
     const activeChatId = getActiveChatFromStore().id;
     await deleteChat(activeChatId);
     deleteChatFromChatList(activeChatId);
+  },
+};
 
-    // const target = e.target as HTMLElement;
-    // assertIsNonNullable(target);
-    // const input = target.querySelector('input');
-    // assertIsNonNullable(input);
-    // const activeChat = getActiveChatFromStore();
-    // const chatUsers = activeChat.users;
-    // const userToRemove = chatUsers.find(
-    //   (user: Indexed) => user.login === input.value,
-    // );
-    // if (!userToRemove) {
-    //   alert('No user with this login in chat');
-    // }
-    // await removeUserFromChat(userToRemove.id, activeChat.id);
+export const addChatAvatar = {
+  title: 'Добавить аватар чата',
+  fieldTitle: 'Файл',
+  inputName: 'avatar',
+  inputType: 'file',
+  buttonText: 'Отправить',
+  styles: userModalStyles,
+  submit: async (e: Event) => {
+    e.preventDefault();
+    const currentChat = getActiveChatFromStore();
+    const input = getMpdalInput(e.target as HTMLElement);
+    const formData = new FormData();
+    assertIsNonNullable(input.files);
+    formData.append('avatar', input.files[0]);
+    formData.append('chatId', currentChat.id);
+    await updateChatAvatar(formData);
+    await getChatsList();
   },
 };

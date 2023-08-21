@@ -44,6 +44,10 @@ class ChatApi extends BaseApi {
   getWsToken(chatId: string) {
     return chatHttpInstance.post(`/token/${chatId}/`, {});
   }
+
+  updateChatAvatar(form: FormData) {
+    return chatHttpInstance.put('avatar', { data: form });
+  }
 }
 
 export default new ChatApi();

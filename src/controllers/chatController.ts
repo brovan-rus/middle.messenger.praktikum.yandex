@@ -24,6 +24,7 @@ export const getChatsList = async () => {
         `${currentUser.id}/${chat.id}/${chat.wsToken.token}`,
       );
     }
+    console.log(chatList);
     saveChatListToStore(chatList);
   } catch (error) {
     console.log(error);
@@ -60,6 +61,15 @@ export const createNewChat = async (chatName: string) => {
 export const deleteChat = async (chatId: string) => {
   try {
     const res = (await chatApi.removeChat(chatId)) as XMLHttpRequest;
+    checkResponse(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateChatAvatar = async (form: FormData) => {
+  try {
+    const res = (await chatApi.updateChatAvatar(form)) as XMLHttpRequest;
     checkResponse(res);
   } catch (error) {
     console.log(error);

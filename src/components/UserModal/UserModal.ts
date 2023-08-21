@@ -35,7 +35,7 @@ export const userModal = (props: Props) =>
       fieldValue: '',
       fieldName: props.fieldTitle,
       styles: formInputStyles,
-      type: 'text',
+      type: props.inputType ?? 'text',
       userForm: true,
     }),
     events: {
