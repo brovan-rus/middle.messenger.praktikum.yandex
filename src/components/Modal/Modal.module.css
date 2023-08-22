@@ -1,0 +1,66 @@
+@import url('../../styles/_colors.css');
+@import url('../../styles/_sizes.css');
+@import url('../../styles/_spacings.css');
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+
+    height: 100vh;
+
+    background-color: $gray-matte-transparent;
+}
+
+.content {
+    position: relative;
+    z-index: 999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 20%;
+
+    min-height: 20%;
+
+    background-color: $white;
+
+    border-radius: 12px;
+
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    cursor: pointer;
+
+    background-color: $black;
+    border: 0;
+    border-radius: 50%;
+
+    &::after {
+        font-size: $title-font-size-l;
+        color: $white;
+
+        content: "\00d7";
+    }
+}

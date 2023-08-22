@@ -6,13 +6,17 @@ import Placeholder from '../../components/Placeholder';
 import ChatInput from '../../components/ChatInput';
 import ChatList from '../../components/ChatList';
 import ChatCard from '../../components/ChatCard';
-import { Card } from '../../mocks/cards';
 import ChatTape from '../../components/ChatTape';
-import { Message as MessageType } from '../../mocks/messages';
-import Message from '../../components/Message';
 import Button from '../../components/Button/Button';
 import chatStyles from './Chat.module.css';
-import { navigateToLinkId } from '../../utils/navigateToLinkId';
+import { Connect } from '../../sevices/store';
+import {
+  getActiveChatFromStore,
+  getChatListFromStore,
+} from '../../sevices/store/Actions';
+import chatCardStyles from '../..//components/ChatCard/ChatCard.module.css';
+import MessagesList from '../../components/MessagesList';
+import { Indexed } from '../../types/Indexed';
 
 class Chat extends Block {
   constructor(props: Props) {
@@ -29,32 +33,47 @@ class Chat extends Block {
     };
     this.renewAttributes(attr);
   }
+
+  componentDidUpdate(_oldProps: Props, newProps: Props): boolean {
+    if (newProps.cards.length > 0) {
+      const renewedChatCards = newProps.cards.map(
+        (card: Indexed) =>
+          new ChatCard({ ...card, styles: chatCardStyles, chatId: card.id }),
+      );
+      this.children.ChatList.setProps({ cards: renewedChatCards });
+    }
+    return true;
+  }
 }
 
-const { cards } = globalProps.chat.chatList;
-const { messages, chatInput, button } = globalProps.chat.chatTape;
+const { chatInput, button } = globalProps.chat.chatTape;
 const placeholder = new Placeholder(globalProps.chat.placeholder);
 const chatListInput = new ChatInput(globalProps.chat.chatList.chatInput);
+const chatListButton = new Button(globalProps.chat.chatList.button);
 const chatTapeInput = new ChatInput(chatInput);
 const chatTapeButton = new Button(button);
 const chatList = new ChatList({
   ...globalProps.chat.chatList,
-  cards: cards.map((card: Card) => new ChatCard(card)),
   ChatInput: chatListInput,
-  events: {
-    click: (e: Event) => {
-      navigateToLinkId(e);
-    },
-  },
+  Button: chatListButton,
 });
 const chatTape = new ChatTape({
   ...globalProps.chat.chatTape,
-  messages: messages.map((message: MessageType) => new Message(message)),
   ChatInput: chatTapeInput,
   Button: chatTapeButton,
+  MessagesList: new MessagesList({ messages: [] }),
 });
 
-export default new Chat({
+const ChatConnectedToStore = Connect(Chat, state => {
+  return state
+    ? {
+        cards: getChatListFromStore(),
+        chatSelected: !!getActiveChatFromStore(),
+      }
+    : [];
+});
+
+export default new ChatConnectedToStore({
   ...globalProps.chat,
   ChatList: chatList,
   Placeholder: placeholder,

@@ -11,108 +11,112 @@ $notification-size: 20px;
 $line-width: 290px;
 
 .line {
-  width: $line-width;
-  height: 1px;
-  margin: $spacing-4xs $spacing-s $spacing-4xs $spacing-s;
+    width: $line-width;
+    height: 1px;
+    margin: $spacing-4xs $spacing-s $spacing-4xs $spacing-s;
 
-  background: $medium-gray;
+    background: $medium-gray;
 }
 
 .container {
-  display: grid;
+    display: grid;
 
-  grid-template-rows: 100%;
-  grid-template-columns: $avatar-width  $text-width $info-width;
+    grid-template-rows: 100%;
+    grid-template-columns: $avatar-width  $text-width $info-width;
 
-  column-gap: $spacing-s;
+    column-gap: $spacing-s;
 
-  width: $card-with;
-  padding: $spacing-m $spacing-s;
+    width: $card-with;
+    padding: $spacing-m $spacing-s;
 
-  cursor: pointer;
+    cursor: pointer;
 
 }
 
 .containerActive {
-  background-color: $light-blue;
+    background-color: $light-blue;
 }
 
 .textContainer {
-  display: flex;
+    display: flex;
 
-  flex-direction: column;
+    flex-direction: column;
 }
 
 .title {
-  padding: 0;
-  margin: 0 0 $spacing-3xs 0;
+    padding: 0;
+    margin: 0 0 $spacing-3xs 0;
 
-  font-size: $font-size-m;
-  font-style: normal;
-  font-weight: 600;
-  line-height: $title-line-height-s;
-  color: $black;
+    font-size: $font-size-m;
+    font-style: normal;
+    font-weight: 600;
+    line-height: $title-line-height-s;
+    color: $black;
 }
 
 .text {
-  display: -webkit-box;
+    display: -webkit-box;
 
-  max-width: $text-width;
-  height: $text-height;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
+    max-width: $text-width;
+    height: $text-height;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
 
-  font-size: $font-size-s;
-  line-height: $line-height-m;
-  color: $gray;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+    font-size: $font-size-s;
+    line-height: $line-height-m;
+    color: $gray;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 
 }
 
 .info {
-  display: flex;
+    display: flex;
 
-  flex-direction: column;
+    flex-direction: column;
 }
 
 .dateTimeText {
-  display: flex;
+    display: flex;
 
-  justify-content: flex-end;
+    justify-content: flex-end;
 
-  padding: 0;
-  margin: 0 0 $spacing-ml 0;
+    padding: 0;
+    margin: 0 0 $spacing-ml 0;
 
-  font-size: $font-size-xxs;
-  line-height: $title-line-height-s;
-  color: $gray;
-  white-space: nowrap;
+    font-size: $font-size-xxs;
+    line-height: $title-line-height-s;
+    color: $gray;
+    white-space: nowrap;
 }
 
 .notification {
-  width: $notification-size;
-  height: $notification-size;
-  padding: $spacing-3xs;
+    width: $notification-size;
+    height: $notification-size;
+    padding: $spacing-3xs;
 
-  background: $blue;
-  border-radius: 50%;
+    background: $blue;
+    border-radius: 50%;
 }
 
 .notificationText {
-  font-size: $font-size-xs;
-  line-height: $line-height-s;
-  color: $white;
-  text-align: center;
+    font-size: $font-size-xs;
+    line-height: $line-height-s;
+    color: $white;
+    text-align: center;
 }
 
-.avatar {
-  width: $avatar-width;
-  height: $avatar-width;
+.noAvatar {
+    background-color: $dark-gray;
+}
 
-  background-color: $dark-gray;
-  border-radius: 50%;
+
+.avatar {
+    width: $avatar-width;
+    height: $avatar-width;
+
+    border-radius: 50%;
 }
 

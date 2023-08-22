@@ -1,5 +1,6 @@
 // language=hbs
 export default `
+
     <div class="{{styles.chatListContainer}}">
         {{{ChatList}}}
     </div>

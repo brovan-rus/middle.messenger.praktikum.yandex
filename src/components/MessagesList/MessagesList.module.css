@@ -1,0 +1,26 @@
+@import url('../../styles/_colors.css');
+@import url('../../styles/_spacings.css');
+
+.container {
+    display: flex;
+
+    flex-direction: column;
+
+    padding: $spacing-xxl $spacing-m;
+    margin: 0;
+    overflow-y: auto;
+
+
+    list-style: none;
+
+    border-bottom: 1px solid $medium-gray;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $gray;
+        border-radius: 5px;
+    }
+}
