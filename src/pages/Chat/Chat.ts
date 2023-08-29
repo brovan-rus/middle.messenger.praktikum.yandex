@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './Chat.template';
 import { Props } from '../../types/props';
 import { props as globalProps } from '../../const/props';

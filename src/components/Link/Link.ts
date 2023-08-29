@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './Link.template';
 import { Props } from '../../types/props';
 import linkStyles from './Link.module.css';

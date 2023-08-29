@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './EditProfile.template';
 import { Props } from '../../types/props';
 import editProfileStyles from './EditProfile.module.css';

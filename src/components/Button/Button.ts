@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './Button.template';
 import { Props } from '../../types/props';
 import buttonStyles from './Button.module.css';

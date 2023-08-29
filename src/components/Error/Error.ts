@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './Error.template';
 import { Props } from '../../types/props';
 import errorStyles from './Error.module.css';

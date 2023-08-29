@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './BackButton.template';
 import { Props } from '../../types/props';
 import backButtonStyles from './BackButton.module.css';

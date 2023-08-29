@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './ChatTape.template';
 import { Props } from '../../types/props';
 import chatTapeStyles from './ChatTape.module.css';

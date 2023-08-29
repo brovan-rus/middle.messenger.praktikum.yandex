@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import { Props } from '../../types/props';
 import template from './Login.template';
 import FormInput from '../../components/FormInput';

@@ -1,5 +1,5 @@
 import { Props } from '../../../types/props';
-import Block from '../../../utils/Block';
+import Block from '../../../abstracts/Block';
 import { assertIsDefined } from '../../../utils/assertIsDefined';
 import { addFormEvents } from '../../../utils/addFormEvents';
 import { ValidationData } from '../../../utils/validate';

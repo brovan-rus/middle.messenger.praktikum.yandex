@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './EditPassword.template';
 import { Props } from '../../types/props';
 import editPasswordStyles from './EditPassword.module.css';

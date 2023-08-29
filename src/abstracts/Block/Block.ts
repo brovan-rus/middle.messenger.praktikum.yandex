@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
-import EventBus from './EventBus';
-import { Callback } from '../types/callback';
-import { Props } from '../types/props';
+import EventBus from '../../utils/EventBus';
+import { Callback } from '../../types/callback';
+import { Props } from '../../types/props';
 import { v4 } from 'uuid';
 import isArray = Handlebars.Utils.isArray;
 

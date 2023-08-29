@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block/Block';
 import template from './Profile.template';
 import { Props } from '../../types/props';
 import profileStyles from './Profile.module.css';
