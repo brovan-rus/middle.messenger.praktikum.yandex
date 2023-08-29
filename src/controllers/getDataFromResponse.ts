@@ -1,9 +1,10 @@
 export const checkResponse = (xhr: XMLHttpRequest) => {
-  return xhr.status === 200
-    ? xhr.response
-    : new Error(
-        `Server answered with code ${xhr.status}, ${JSON.parse(
-          xhr.response.reason,
-        )}`,
-      );
+  if (xhr.status !== 200) {
+    throw new Error(
+      `Server answered with code ${xhr.status}${
+        xhr.response.reason ? `, ${JSON.parse(xhr.response.reason)}` : ''
+      }.`,
+    );
+  }
+  return xhr.response;
 };
