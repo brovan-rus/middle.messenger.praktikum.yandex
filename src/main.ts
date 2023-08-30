@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     await getChatsList();
   }
   for (const route of routes) {
-    Router.addRoute(new Route(route.path, route.page, route.isProtected));
+    Router.addRoute(
+      new Route(route.path, route.page as typeof Block, route.isProtected),
+    );
   }
   Router.enableRouting();
 });

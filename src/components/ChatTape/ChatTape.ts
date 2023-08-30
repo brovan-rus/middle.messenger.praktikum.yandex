@@ -29,8 +29,8 @@ import { warnModal } from '../WarnModal/WarnModal';
 class ChatTape extends Block {
   contextMenu: TooltipMenu | undefined = undefined;
 
-  constructor(props: Props) {
-    super('section', props);
+  constructor(tagName: string, props: Props) {
+    super(tagName, props);
     assertIsDefined(this.element);
     const validationEvents = addFormEvents(
       this.element,

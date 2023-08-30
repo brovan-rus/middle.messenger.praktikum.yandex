@@ -5,10 +5,6 @@ import profileTableStyles from './ProfileTable.module.css';
 import ProfileField from '../ProfileField/ProfileField';
 
 class ProfileTable extends Block {
-  constructor(props: Props) {
-    super('div', props);
-  }
-
   render() {
     return this.compile(template, this.props);
   }

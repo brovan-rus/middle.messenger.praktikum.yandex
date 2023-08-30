@@ -3,9 +3,9 @@ import { Props } from '../../types/props';
 
 const connect = (Component: any, mapStateToProps: (arg: Props) => Props) => {
   return class extends Component {
-    constructor(tagName = 'div', props = {}) {
+    constructor(props = {}, tagName = 'div') {
       const renewedProps = mapStateToProps(store.getState());
-      super(tagName, { ...props, ...renewedProps });
+      super(tagName, { ...renewedProps, ...props });
       store.on(StoreEvents.Updated, () => {
         this.setProps(mapStateToProps(store.getState()));
       });

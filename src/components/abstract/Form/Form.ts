@@ -7,8 +7,8 @@ import { FormData } from '../../../types/formData';
 import { Indexed } from '../../../types/Indexed';
 
 abstract class Form extends Block {
-  constructor(props: Props) {
-    super('form', props);
+  constructor(tagName = 'form', props: Props = {}) {
+    super(tagName, props);
     assertIsDefined(this.element);
     const formEvents = addFormEvents(
       this.element,

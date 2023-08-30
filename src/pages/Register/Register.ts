@@ -37,7 +37,7 @@ const {
 
 const buttonComponent = new Button(button);
 const linkComponent = new Link(link);
-const userFormComponent = new UserForm({
+const userFormComponent = new UserForm('form', {
   title: userFormTitle,
   styles: formStyles,
   fields: fields.map(

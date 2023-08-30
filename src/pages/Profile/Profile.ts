@@ -11,7 +11,7 @@ import Link from '../../components/Link';
 
 export class Profile extends Block {
   constructor(props: Props) {
-    super('div', props);
+    super('sting', props);
   }
 
   render() {
@@ -33,11 +33,14 @@ const backButton = new BackButton({
 
 const { fields, links } = globalProps.profile.profileTable;
 
-const profileTable = new ProfileTable({
-  ...globalProps.profile.profileTable,
-  fields: fields?.map(field => new ProfileField(field)),
-  links: links?.map(link => new Link(link)),
-});
+const profileTable = new ProfileTable(
+  {
+    ...globalProps.profile.profileTable,
+    fields: fields?.map(field => new ProfileField(field)),
+    links: links?.map(link => new Link(link)),
+  },
+  'div',
+);
 
 export default new Profile({
   BackButton: backButton,
