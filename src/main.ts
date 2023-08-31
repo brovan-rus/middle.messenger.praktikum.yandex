@@ -4,6 +4,7 @@ import { Route } from './sevices/router/Route';
 import { auth } from './controllers/authController';
 import { getUserFromStore } from './sevices/store/Actions';
 import { getChatsList } from './controllers/chatController';
+import Block from './abstracts/Block';
 
 document.addEventListener('DOMContentLoaded', async () => {
   await auth();
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   for (const route of routes) {
     Router.addRoute(
-      new Route(route.path, route.page as typeof Block, route.isProtected),
+      new Route(route.path, route.page as Block, route.isProtected),
     );
   }
   Router.enableRouting();
