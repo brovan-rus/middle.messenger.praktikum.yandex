@@ -3,8 +3,9 @@
   "private": true,
   "version": "0.0.4",
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run prepare && vite",
     "build": "npm run prebuild && vite build --emptyOutDir",
+    "prepare": "husky install",
     "prebuild": "tsc --noEmit",
     "start": "npm run build && node src/server/server.js",
     "lint": "eslint --fix --ext .js,.jsx .",
@@ -32,6 +33,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-unicorn": "^47.0.0",
+    "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "mocha": "^10.2.0",
     "postcss": "^8.4.24",
