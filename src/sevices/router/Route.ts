@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block/Block';
 import { renderDom } from '../../utils/renderDom';
 import { rootContainer } from '../../const/rootContainer';
 

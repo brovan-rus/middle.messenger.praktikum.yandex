@@ -2,3 +2,4 @@
 /node_modules
 stylelint.config.js
 postcss.config.ts
+/test/

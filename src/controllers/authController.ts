@@ -1,5 +1,5 @@
 import authApi from '../sevices/api/AuthApi';
-import Router from '../sevices/router/Router';
+import { router } from '../sevices/router/Router';
 import { Path } from '../types/path';
 import { setUserToStore } from '../sevices/store/Actions';
 import { getChatsList } from './chatController';
@@ -35,7 +35,7 @@ export const login = async (data: LoginData) => {
   try {
     checkResponse((await authApi.login(data)) as XMLHttpRequest);
     await auth();
-    Router.navigate(Path.CHAT);
+    router.navigate(Path.CHAT);
     await getChatsList();
   } catch (error) {
     console.log(error);
@@ -46,7 +46,7 @@ export const registerUser = async (data: RegisterData) => {
   try {
     checkResponse((await authApi.createUser(data)) as XMLHttpRequest);
     setUserToStore(data);
-    Router.navigate(Path.CHAT);
+    router.navigate(Path.CHAT);
   } catch (error) {
     console.log(error);
   }
@@ -56,7 +56,7 @@ export const logout = async () => {
   try {
     checkResponse((await authApi.logout()) as XMLHttpRequest);
     setUserToStore({});
-    Router.navigate(Path.LOGIN);
+    router.navigate(Path.LOGIN);
   } catch (error) {
     console.log(error);
   }

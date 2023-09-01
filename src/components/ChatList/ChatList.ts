@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './ChatList.template';
 import { Props } from '../../types/props';
 import chatListStyles from './ChatList.module.css';

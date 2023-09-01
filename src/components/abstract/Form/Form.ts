@@ -1,5 +1,5 @@
 import { Props } from '../../../types/props';
-import Block from '../../../utils/Block';
+import Block from '../../../abstracts/Block';
 import { assertIsDefined } from '../../../utils/assertIsDefined';
 import { addFormEvents } from '../../../utils/addFormEvents';
 import { ValidationData } from '../../../utils/validate';
@@ -7,8 +7,8 @@ import { FormData } from '../../../types/formData';
 import { Indexed } from '../../../types/Indexed';
 
 abstract class Form extends Block {
-  constructor(props: Props) {
-    super('form', props);
+  constructor(tagName = 'form', props: Props = {}) {
+    super(tagName, props);
     assertIsDefined(this.element);
     const formEvents = addFormEvents(
       this.element,

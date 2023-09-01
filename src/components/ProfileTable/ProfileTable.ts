@@ -1,14 +1,10 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block/Block';
 import template from './ProfileTable.template';
 import { Props } from '../../types/props';
 import profileTableStyles from './ProfileTable.module.css';
 import ProfileField from '../ProfileField/ProfileField';
 
 class ProfileTable extends Block {
-  constructor(props: Props) {
-    super('div', props);
-  }
-
   render() {
     return this.compile(template, this.props);
   }

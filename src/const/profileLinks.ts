@@ -1,6 +1,6 @@
 import profileLinkStyles from '../components/Link/Link.module.css';
 import { Path } from '../types/path';
-import Router from '../sevices/router/Router';
+import { router } from '../sevices/router/Router';
 import { logout } from '../controllers/authController';
 
 export type ProfileLink = {
@@ -22,7 +22,7 @@ export const profileLinks: ProfileLink[] = [
     events: {
       click: e => {
         e?.preventDefault();
-        Router.navigate(Path.EDIT_PROFILE);
+        router.navigate(Path.EDIT_PROFILE);
       },
     },
   },
@@ -34,7 +34,7 @@ export const profileLinks: ProfileLink[] = [
     events: {
       click: e => {
         e?.preventDefault();
-        Router.navigate(Path.EDIT_PASSWORD);
+        router.navigate(Path.EDIT_PASSWORD);
       },
     },
   },

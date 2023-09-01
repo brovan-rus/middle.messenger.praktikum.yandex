@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './Chat.template';
 import { Props } from '../../types/props';
 import { props as globalProps } from '../../const/props';
@@ -19,10 +19,6 @@ import MessagesList from '../../components/MessagesList';
 import { Indexed } from '../../types/Indexed';
 
 class Chat extends Block {
-  constructor(props: Props) {
-    super('div', props);
-  }
-
   render() {
     return this.compile(template, this.props);
   }
@@ -57,12 +53,15 @@ const chatList = new ChatList({
   ChatInput: chatListInput,
   Button: chatListButton,
 });
-const chatTape = new ChatTape({
-  ...globalProps.chat.chatTape,
-  ChatInput: chatTapeInput,
-  Button: chatTapeButton,
-  MessagesList: new MessagesList({ messages: [] }),
-});
+const chatTape = new ChatTape(
+  {
+    ...globalProps.chat.chatTape,
+    ChatInput: chatTapeInput,
+    Button: chatTapeButton,
+    MessagesList: new MessagesList({ messages: [] }),
+  },
+  'section',
+);
 
 const ChatConnectedToStore = Connect(Chat, state => {
   return state
@@ -73,9 +72,12 @@ const ChatConnectedToStore = Connect(Chat, state => {
     : [];
 });
 
-export default new ChatConnectedToStore({
-  ...globalProps.chat,
-  ChatList: chatList,
-  Placeholder: placeholder,
-  ChatTape: chatTape,
-});
+export default new ChatConnectedToStore(
+  {
+    ...globalProps.chat,
+    ChatList: chatList,
+    Placeholder: placeholder,
+    ChatTape: chatTape,
+  },
+  'div',
+);

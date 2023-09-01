@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import { Props } from '../../types/props';
 import template from './Login.template';
 import FormInput from '../../components/FormInput';
@@ -37,7 +37,7 @@ const {
 
 const buttonComponent = new Button(button);
 const linkComponent = new Link(link);
-const userFormComponent = new UserForm({
+const userFormComponent = new UserForm('form', {
   title: userFormTitle,
   styles: formStyles,
   fields: fields.map(

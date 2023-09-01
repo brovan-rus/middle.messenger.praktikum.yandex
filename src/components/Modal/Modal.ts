@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import styles from './Modal.module.css';
 import { removeModalFromDome, renderModalToDome } from '../../utils/modal';
 
@@ -18,9 +18,9 @@ class Modal extends Block {
           this.close();
         }
       },
-      // submit: () => {
-      //   this.close();
-      // },
+      submit: () => {
+        this.close();
+      },
     };
   }
 

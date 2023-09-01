@@ -1,8 +1,8 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './BackButton.template';
 import { Props } from '../../types/props';
 import backButtonStyles from './BackButton.module.css';
-import Router from '../../sevices/router/Router';
+import { router } from '../../sevices/router/Router';
 
 class BackButton extends Block {
   constructor(props: Props) {
@@ -10,7 +10,7 @@ class BackButton extends Block {
     this.children.Button.props.events = {
       click: (e: Event) => {
         e.preventDefault();
-        Router.back();
+        router.back();
       },
       ...this.children.Button.props.events,
     };

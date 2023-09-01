@@ -2,16 +2,16 @@ import { queryStringify } from './queryStringify';
 import { baseUrl } from '../const/api';
 
 enum METHODS {
-  GET = 'Get',
-  POST = 'Post',
-  PUT = 'Put',
-  DELETE = 'Delete',
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
 }
 
 type Options = {
   headers?: Record<string, string>;
   timeout?: number;
-  data?: Record<string, any>;
+  data?: Record<string, unknown> | FormData;
 };
 
 type FetchMethod = (url: URL | string, options: Options) => Promise<unknown>;
