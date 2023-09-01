@@ -1,7 +1,4 @@
-const { JSDOM } = require('jsdom');
-const jsdom = new JSDOM(`<!DOCTYPE html><body></body>`, {
-  url: 'https://www.example.com',
-});
+const { jsdom } = require('../utils/jsdom');
 
 global.window = jsdom.window;
 global.document = jsdom.window.document;
