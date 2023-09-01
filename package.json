@@ -8,8 +8,8 @@
     "prepare": "husky install",
     "prebuild": "tsc --noEmit",
     "start": "npm run build && node src/server/server.js",
-    "lint": "eslint --fix --ext .js,.jsx .",
-    "test": "TS_NODE_PROJECT='tsconfig.commonjs.json' mocha"
+    "lint": "eslint --fix --ext .js,.jsx && stylelint 'src/**/*.css'",
+    "test": "cross-env TS_NODE_PROJECT='./tsconfig.commonjs.json' nyc mocha"
   },
   "engines": {
     "node": ">=12.0.0"
@@ -36,6 +36,7 @@
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
     "postcss": "^8.4.24",
     "postcss-import": "^15.1.0",
     "postcss-nesting": "^11.2.2",
