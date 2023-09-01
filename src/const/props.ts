@@ -39,7 +39,7 @@ import {
 import { ButtonType } from '../components/Button/Button';
 import { Path } from '../types/path';
 import { Props } from '../types/props';
-import Router from '../sevices/router/Router';
+import { router } from '../sevices/router/Router';
 import { navigateToLinkId } from '../utils/navigateToLinkId';
 import { submitProfileChange } from '../utils/sumbitProfileChange';
 import { changePassword, findIdByLogin } from '../controllers/userController';
@@ -126,7 +126,7 @@ export const props: GlobalProps = {
         events: {
           click: (e: Event) => {
             e.preventDefault();
-            Router.navigate(Path.REGISTER);
+            router.navigate(Path.REGISTER);
           },
         },
       },
@@ -149,7 +149,7 @@ export const props: GlobalProps = {
         events: {
           click: (e: Event) => {
             e.preventDefault();
-            Router.navigate(Path.LOGIN);
+            router.navigate(Path.LOGIN);
           },
         },
       },
@@ -257,7 +257,7 @@ export const props: GlobalProps = {
       size: 'small',
       color: 'blue',
       events: {
-        click: () => Router.navigate(Path.CHAT),
+        click: () => router.navigate(Path.CHAT),
       },
     },
   },
@@ -274,7 +274,7 @@ export const props: GlobalProps = {
       size: 'small',
       color: 'blue',
       events: {
-        click: () => Router.navigate(Path.CHAT),
+        click: () => router.navigate(Path.CHAT),
       },
     },
   },
