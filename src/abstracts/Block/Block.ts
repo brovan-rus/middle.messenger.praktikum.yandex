@@ -149,13 +149,9 @@ abstract class Block {
     this.emit(EVENTS.FLOW_RENDER);
   }
 
-  public componentDidMount() {
-    console.log('didMount');
-  }
+  public componentDidMount() {}
 
-  public componentIsGoingToUnmount() {
-    console.log('going to unmount');
-  }
+  public componentIsGoingToUnmount() {}
 
   public render(): DocumentFragment | void {
     console.log('render');
