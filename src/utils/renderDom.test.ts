@@ -4,7 +4,7 @@ import makeComponent from '../../test/utils/makeComponent';
 import { expect } from 'chai';
 import Block from '../abstracts/Block';
 import sinon from 'sinon';
-import { makeTemplate } from '../../test/utils/makeTemplate';
+import getTemplate from '../../test/utils/getTemplate';
 
 const makeContainer = (query = 'query', tagName = 'div') => {
   const container = document.createElement(tagName);
@@ -12,10 +12,10 @@ const makeContainer = (query = 'query', tagName = 'div') => {
   return container;
 };
 
-describe('render dom', () => {
+describe('renderDom', () => {
   it('renders component to query', () => {
     const container = makeContainer('query');
-    const template = makeTemplate({ id: 'test' });
+    const template = getTemplate();
     const component = makeComponent('div', {}, template);
 
     document.body.append(container);
@@ -29,7 +29,7 @@ describe('render dom', () => {
 
   it('clears container from previous content', () => {
     const container = makeContainer('query');
-    const component = makeComponent('div', {}, makeTemplate({ id: 'test' }));
+    const component = makeComponent('div', {}, getTemplate());
     const previousContent = document.createElement('div');
     previousContent.id = 'previousContent';
     container.append(previousContent);
@@ -41,7 +41,7 @@ describe('render dom', () => {
 
   it('dispatches component did mount after rendering component', () => {
     const container = makeContainer('query');
-    const component = makeComponent('div', {}, makeTemplate({ id: 'test' }));
+    const component = makeComponent('div', {}, getTemplate());
     const dispatchComponentDidMountStub = sinon.stub(
       component,
       'dispatchComponentDidMount',
