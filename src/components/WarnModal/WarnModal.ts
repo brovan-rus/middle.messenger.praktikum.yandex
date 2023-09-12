@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './WarnModal.temlate';
 import { Props } from '../../types/props';
 import styles from './WarnModal.module.css';

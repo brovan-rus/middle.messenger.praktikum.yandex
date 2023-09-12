@@ -28,11 +28,10 @@ export const queryStringify = (data?: Record<string, any>): string => {
   };
 
   for (const [key, value] of Object.entries(data)) {
-    console.log([key, value]);
     if (isObjectOrArray(value)) {
       handleObject(key, value);
     } else {
-      keys.push(`${key}=${value}`);
+      keys.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
     }
   }
 

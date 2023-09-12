@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './ChatTape.template';
 import { Props } from '../../types/props';
 import chatTapeStyles from './ChatTape.module.css';
@@ -29,8 +29,8 @@ import { warnModal } from '../WarnModal/WarnModal';
 class ChatTape extends Block {
   contextMenu: TooltipMenu | undefined = undefined;
 
-  constructor(props: Props) {
-    super('section', props);
+  constructor(tagName: string, props: Props) {
+    super(tagName, props);
     assertIsDefined(this.element);
     const validationEvents = addFormEvents(
       this.element,

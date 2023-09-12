@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './MessagesList.template';
 import { Props } from '../../types/props';
 import styles from './MessagesList.module.css';

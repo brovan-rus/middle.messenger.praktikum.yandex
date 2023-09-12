@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
-import EventBus from './EventBus';
-import { Callback } from '../types/callback';
-import { Props } from '../types/props';
+import EventBus from '../../utils/EventBus';
+import { Callback } from '../../types/callback';
+import { Props } from '../../types/props';
 import { v4 } from 'uuid';
 import isArray = Handlebars.Utils.isArray;
 
@@ -149,13 +149,9 @@ abstract class Block {
     this.emit(EVENTS.FLOW_RENDER);
   }
 
-  public componentDidMount() {
-    console.log('didMount');
-  }
+  public componentDidMount() {}
 
-  public componentIsGoingToUnmount() {
-    console.log('going to unmount');
-  }
+  public componentIsGoingToUnmount() {}
 
   public render(): DocumentFragment | void {
     console.log('render');

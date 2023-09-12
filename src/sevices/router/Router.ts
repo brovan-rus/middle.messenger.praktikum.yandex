@@ -2,7 +2,7 @@ import { Route } from './Route';
 import { Path } from '../../types/path';
 import { getUserFromStore } from '../store/Actions';
 
-class Router {
+export class Router {
   private routes: Route[] = [];
 
   private readonly initialPath = '/';
@@ -28,7 +28,7 @@ class Router {
   }
 
   public navigate(path: string) {
-    this.history.pushState({}, path, window.location.origin + path);
+    this.history.pushState({}, '', path);
     this._findRoute(path)?.go();
   }
 
@@ -49,11 +49,15 @@ class Router {
   }
 
   private _onRoute(path: string) {
-    const initialPagePath = this.userAuthorized ? Path.CHAT : Path.LOGIN;
     if (path === this.initialPath) {
-      this.navigate(initialPagePath);
+      this.navigate(this.initialPagePath);
     } else {
-      this._findRoute(path)?.go();
+      const route = this._findRoute(path);
+      if (route?.path === this.error404Path) {
+        this.history.pushState({}, '', this.error404Path);
+      } else {
+        this._findRoute(path)?.go();
+      }
     }
   }
 
@@ -79,4 +83,4 @@ class Router {
   }
 }
 
-export default new Router();
+export const router = new Router();

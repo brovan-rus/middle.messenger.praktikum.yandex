@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './ChatInput.template';
 import { Props } from '../../types/props';
 import chatInputStyles from './ChatInput.module.css';

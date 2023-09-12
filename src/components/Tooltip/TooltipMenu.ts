@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block/Block';
 import styles from './Tooltip.module.css';
 import { Props } from '../../types/props';
 import { Callback } from '../../types/callback';
@@ -63,9 +63,9 @@ class TooltipMenu extends Block {
     const template = this.props.menuItems
       .map(
         (item: MenuItem, i: number) => `
-              <div data-action=${i} class="${styles.lineContainer}">
+              <div data-action="${i}" class="${styles.lineContainer}">
               <div
-                class=${styles.iconContainer}
+                class="${styles.iconContainer}"
                 style="background: no-repeat center url(${item.icon})"
                 ></div>
                <span class="${styles.text}">${item.title}</span>

@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../abstracts/Block';
 import template from './Placeholder.template';
 import { Props } from '../../types/props';
 import placeholder from './Placeholder.module.css';

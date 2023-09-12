@@ -1,4 +1,4 @@
-import Block from './Block';
+import Block from '../abstracts/Block';
 
 export const renderModalToDome = (modal: Block) => {
   const root = document.querySelector('#app');
